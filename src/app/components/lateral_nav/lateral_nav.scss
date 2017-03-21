@@ -1,0 +1,5 @@
+.lateral_nav {
+    @include absolute($nav_size, auto, 0, 0);
+    width: $nav_size;
+    background: yellow;
+}

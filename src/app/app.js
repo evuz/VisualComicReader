@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './app.scss';
 import { Layout } from './components';
 
 class App extends Component {

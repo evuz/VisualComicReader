@@ -1,0 +1,6 @@
+.header_nav{
+    @include absolute(0, 0, auto, 0);
+    width: 100%;
+    height: $nav_size;
+    background: gray;
+}

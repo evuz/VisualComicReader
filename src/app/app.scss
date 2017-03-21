@@ -1,0 +1,13 @@
+$nav_size: 50px;
+
+@mixin absolute($top, $right, $bottom, $left) {
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+@import './components/header_nav/header_nav';
+@import './components/lateral_nav/lateral_nav';
+@import './components/layout/layout';
