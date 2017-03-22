@@ -1,6 +1,6 @@
 .layout {
     .container {
         @include absolute($nav_size, 0, 0, $nav_size);
-        background: red;
+        background: rgb(30, 30, 30);
     }
 }
