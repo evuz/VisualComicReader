@@ -3,13 +3,14 @@ import {
     LateralNav,
     HeaderNav
 } from '../';
-import { FaAndroid } from 'react-icons/lib/fa';
 
-const Layout = () => (
+const Layout = (props) => (
     <div className='layout'>
         <HeaderNav />
         <LateralNav />
-        <div className='container'><FaAndroid /></div>
+        <div className='container'>
+            {props.children}
+        </div>
     </div>
 );
 
