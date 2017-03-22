@@ -17,6 +17,7 @@
     "electron": "^1.6.2",
     "eslint": "^3.18.0",
     "node-sass": "^4.5.1",
+    "npm-run-all": "^4.0.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.14.1",
     "webpack": "^2.2.1",
@@ -24,6 +25,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm-run-all -p -r server electron",
     "server": "webpack-dev-server",
     "electron": "electron electron-main.js"
   },
