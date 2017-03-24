@@ -1,6 +1,7 @@
 module.exports = {
     context: __dirname + '/src',
     entry: './index.js',
+    target: 'electron-main',
     output: {
         path: __dirname + '/dist',
         filename: 'bundle.js'

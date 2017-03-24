@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "node-unrar": "^0.1.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-icons": "^2.2.3"
@@ -27,7 +28,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm-run-all -p -r server electron",
     "server": "webpack-dev-server",
-    "electron": "electron electron-main.js"
+    "electron": "electron ./src/electron/main.js"
   },
   "keywords": [],
   "author": "",
