@@ -21,13 +21,12 @@
     "npm-run-all": "^4.0.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.14.1",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.2"
+    "webpack": "^2.2.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm-run-all -p -r server electron",
-    "server": "webpack-dev-server",
+    "start": "npm-run-all -p -r webpack electron",
+    "webpack": "webpack --watch",
     "electron": "electron ./src/electron/main.js"
   },
   "keywords": [],

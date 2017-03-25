@@ -6,9 +6,6 @@ module.exports = {
         path: __dirname + '/dist',
         filename: 'bundle.js'
     },
-    devServer: {
-        contentBase: __dirname + '/dist'
-    },
     devtool: 'source-map',
     module: {
         loaders: [

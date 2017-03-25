@@ -13,8 +13,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600 })
 
   mainWindow.loadURL(url.format({
-    pathname: 'localhost:8080',
-    protocol: 'http',
+    pathname: __dirname + '/../../dist/index.html',
+    protocol: 'file',
     slashes: true
   }))
 
