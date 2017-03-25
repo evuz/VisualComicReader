@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './app.scss';
-import { Layout } from './components';
+import { Layout, Reader } from './components';
 import { ipcRenderer } from 'electron';
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
   componentDidMount() {
     ipcRenderer.on('file-extracted', (event, data) => {
       this.setState({
-        workingDirectory: data.tmpFolder
+        workingDirectory: data.tmpFolder + '/'
       });
       event.sender.send('read-directory', this.state.workingDirectory);
     });
@@ -38,7 +38,12 @@ class App extends Component {
 
   render() {
     return (
-      <Layout />
+      <Layout>
+        <Reader 
+          dir={this.state.workingDirectory}
+          files={this.state.files}
+        />
+      </Layout>
     );
   }
 }
