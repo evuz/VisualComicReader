@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import MiniaturePage from './miniature_page/miniature_page';
 
-const LateralNav = () => (
-    <div className='lateral_nav'>
-    
-    </div>
-);
+class LateralNav extends Component {
+    constructor(props) {
+        super(props)
 
-export default LateralNav;
+    }
+
+    render() {
+        const { files, directory } = this.props;
+        const imgShow = files.map((file, index) => {
+            return <MiniaturePage src={directory + file} key={index} page={index} />
+        })
+        return (
+            <div className='lateral_nav'>
+                {imgShow}
+            </div>
+        )
+    }
+}
+
+const mapStateToProps = state => {
+    const { reader: { directory, files } } = state
+    return {
+        directory,
+        files
+    }
+}
+
+export default connect(mapStateToProps)(LateralNav);
