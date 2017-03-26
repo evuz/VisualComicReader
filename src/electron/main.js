@@ -41,6 +41,7 @@ app.on('activate', function () {
 })
 
 ipc.on('open-file', event => {
+  removeTmpFolder();
   openFile((err, req) => {
     if (err) {
       console.log(err);
