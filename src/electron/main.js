@@ -5,7 +5,7 @@ const ipc = electron.ipcMain;
 
 const url = require('url');
 const openFile = require('./files').openFile;
-const { readDirectory } = require('./directory');
+const { readDirectory, removeTmpFolder } = require('./directory');
 
 let mainWindow
 
@@ -28,6 +28,7 @@ function createWindow() {
 app.on('ready', createWindow)
 
 app.on('window-all-closed', function () {
+  removeTmpFolder();
   if (process.platform !== 'darwin') {
     app.quit()
   }
