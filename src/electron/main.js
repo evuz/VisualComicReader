@@ -28,8 +28,8 @@ function createWindow() {
 app.on('ready', createWindow)
 
 app.on('window-all-closed', function () {
-  removeTmpFolder();
   if (process.platform !== 'darwin') {
+    removeTmpFolder();
     app.quit()
   }
 })
