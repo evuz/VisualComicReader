@@ -1,11 +1,13 @@
 import React from 'react';
 import {
-    HeaderNav
+    HeaderNav,
+    LateralNav
 } from '../';
 
 const Layout = (props) => (
     <div className='layout'>
         <HeaderNav />
+        <LateralNav />
         <div className='container'>
             {props.children}
         </div>

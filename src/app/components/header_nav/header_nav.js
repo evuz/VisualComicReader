@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setPage } from '../../reducers/reader';
-import { FaFolderOpenO, FaAngleLeft, FaAngleRight } from 'react-icons/lib/fa'
+import { 
+    FaFolderOpenO, 
+    FaAngleLeft, 
+    FaAngleRight
+} from 'react-icons/lib/fa'
 
 import { ipcRenderer } from 'electron';
 
