@@ -16,7 +16,7 @@ function reader(state = {
             return Object.assign({}, state, { directory })
         case SET_FILES:
             const { files } = action;
-            return Object.assign({}, state, { files })
+            return Object.assign({}, state, { files, page: 0 })
         case SET_PAGE:
             const { page } = action;
             return Object.assign({}, state, { page })
