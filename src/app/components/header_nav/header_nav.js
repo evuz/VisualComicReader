@@ -15,7 +15,7 @@ class HeaderNav extends Component {
     }
 
     newFile() {
-        ipcRenderer.send('open-file-dialog');
+        ipcRenderer.send('open-file');
     }
 
     plusPage() {

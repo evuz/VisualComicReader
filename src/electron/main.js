@@ -40,7 +40,7 @@ app.on('activate', function () {
   }
 })
 
-ipc.on('open-file-dialog', event => {
+ipc.on('open-file', event => {
   openFile((err, req) => {
     if (err) {
       console.log(err);

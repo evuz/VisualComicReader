@@ -6,7 +6,6 @@ function readDirectory(dir, cb) {
 
 function removeTmpFolder() {
     const tmpFolder = __dirname + '/../../tmp';
-    console.log(fs.existsSync(tmpFolder) + '\n' + tmpFolder)
     deleteFolderRecursive(tmpFolder);
 }
 
