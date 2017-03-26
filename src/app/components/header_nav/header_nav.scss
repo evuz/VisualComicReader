@@ -4,11 +4,18 @@
     height: $nav_size;
     background: rgb(37, 37, 38);
 
-    .iconsLeft {
+    .icons {
         height: 50px;
-        margin-left: 10px; 
         color: white;
         font-size: 30px;
+        .left {
+            float: left;
+            margin-left: 10px; 
+        }
+        .right {
+            float: right;
+            margin-right: 10px;
+        }
     }
 
     svg {
