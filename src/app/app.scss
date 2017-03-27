@@ -1,4 +1,5 @@
 $nav_size: 50px;
+$lateral_nav_size: 125px;
 
 @mixin absolute($top, $right, $bottom, $left) {
     position: absolute;
@@ -11,3 +12,4 @@ $nav_size: 50px;
 @import './components/header_nav/header_nav';
 @import './components/lateral_nav/lateral_nav';
 @import './components/layout/layout';
+@import './components/reader/reader';

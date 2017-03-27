@@ -6,39 +6,39 @@ const Unrar = require('node-unrar');
 
 function openFile(cb) {
     dialog.showOpenDialog({
-        properties: ['openFile', 'openDirectory'],
+        properties: ['openFile'],
         filters: [{
-        name: 'Comic Files',
-        extensions: ['cbr', 'cbz', 'pdf']
+            name: 'Comic Files',
+            extensions: ['cbr', 'cbz', 'pdf']
         }]
     }, files => {
         if (!files) {
             const err = 'Archivo no válido';
-            cb({err});
+            cb({ err });
             return;
         }
         const file = files[0]
         createTmpFolder(file);
         let rar = new Unrar(file);
-        let tmpFolder = '/Users/jesgombel/Documents/projects/React/electron/tmp/' + file.split('/').pop();
+        let tmpFolder = __dirname + '/../../tmp/' + file.split('/').pop();
         rar.extract(tmpFolder, null, err => {
             if (err) {
                 cb(err);
                 return;
             }
-            cb(null, {file, tmpFolder});
+            cb(null, { file, tmpFolder });
         });
     })
 }
 
 function createTmpFolder(pathFile) {
-    let folder = '/Users/jesgombel/Documents/projects/React/electron/tmp/';
-    if(!fs.existsSync(folder)) { 
-        fs.mkdirSync(folder);           
+    let folder = __dirname + '/../../tmp/';
+    if (!fs.existsSync(folder)) {
+        fs.mkdirSync(folder);
     }
     folder = folder + pathFile.split('/').pop();
-    if(!fs.existsSync(folder)) { 
-        fs.mkdirSync(folder);           
+    if (!fs.existsSync(folder)) {
+        fs.mkdirSync(folder);
     }
 }
 

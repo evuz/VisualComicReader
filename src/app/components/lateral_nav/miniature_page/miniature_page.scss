@@ -1,0 +1,13 @@
+.miniature-page {
+    text-align: center;
+    color: white;
+    padding: 10px;
+    padding-bottom: 0;
+    img {
+        width: 100%;
+    }
+
+    &.active {
+        background: #484854;
+    }
+}

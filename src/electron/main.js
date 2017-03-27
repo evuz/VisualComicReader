@@ -5,15 +5,16 @@ const ipc = electron.ipcMain;
 
 const url = require('url');
 const openFile = require('./files').openFile;
+const { readDirectory, removeTmpFolder } = require('./directory');
 
 let mainWindow
 
-function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+function createWindow() {
+  mainWindow = new BrowserWindow({ width: 800, height: 600 })
 
   mainWindow.loadURL(url.format({
-    pathname: 'localhost:8080',
-    protocol: 'http',
+    pathname: __dirname + '/../../dist/index.html',
+    protocol: 'file',
     slashes: true
   }))
 
@@ -28,6 +29,7 @@ app.on('ready', createWindow)
 
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
+    removeTmpFolder();
     app.quit()
   }
 })
@@ -38,11 +40,21 @@ app.on('activate', function () {
   }
 })
 
-ipc.on('open-file-dialog', event => {
+ipc.on('open-file', event => {
+  removeTmpFolder();
   openFile((err, req) => {
-    if(err) {
+    if (err) {
       console.log(err);
     }
     event.sender.send('file-extracted', req)
   });
+})
+
+ipc.on('read-directory', (event, data) => {
+  readDirectory(data, (err, files) => {
+    if(err) {
+      event.sender.send('list-files', {err})
+    }
+    event.sender.send('list-files', {files})
+  })
 })

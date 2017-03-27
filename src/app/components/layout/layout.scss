@@ -1,6 +1,11 @@
 .layout {
     .container {
-        @include absolute($nav_size, 0, 0, $nav_size);
+        @include absolute($nav_size, 0, 0, $lateral_nav_size);
+        overflow: auto;
         background: rgb(30, 30, 30);
+        &.lateral_nav {
+            left: $nav_size;
+            width: auto;
+        }
     }
 }
