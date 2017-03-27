@@ -1,0 +1,3 @@
+export const SET_FULL_WIDTH = 'SET_FULL_WIDTH';
+export const SET_FULL_HEIGHT = 'SET_FULL_HEIGHT';
+export const SET_SIZE_PERCENT = 'SET_SIZE_PERCENT';
