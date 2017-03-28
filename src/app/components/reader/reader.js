@@ -23,6 +23,7 @@ class Reader extends Component {
 
     render() {
         const { files, directory, page } = this.props.reader;
+        const { twoColumns } = this.props.options;
         const { height, width } = this.imgSize();
 
         const imgShow = files.map((file, index) => {
@@ -38,7 +39,12 @@ class Reader extends Component {
         });
         return (
             <div className="reader" >
-                {imgShow[page]}
+                {twoColumns ?
+                    <div>
+                        <div className="pageLeft"> {imgShow[page]}</div>
+                        <div className="pageRight"> {imgShow[page + 1]}</div>
+                    </div>
+                    : imgShow[page]}
             </div>
         );
     }

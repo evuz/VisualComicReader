@@ -4,7 +4,8 @@ import { setPage } from '../../reducers/reader';
 import {
     setFullHeight,
     setFullWidth,
-    setPercentSize
+    setPercentSize,
+    setTwoColumns
 } from '../../reducers/options';
 import {
     FaFolderOpenO,
@@ -30,6 +31,7 @@ class HeaderNav extends Component {
         this.setFullWidth = this.setFullWidth.bind(this);
         this.minusZoom = this.minusZoom.bind(this);
         this.plusZoom = this.plusZoom.bind(this);
+        this.setTwoColumns = this.setTwoColumns.bind(this);
     }
 
     newFile() {
@@ -55,16 +57,22 @@ class HeaderNav extends Component {
     }
 
     plusZoom() {
-        const { percentSize } = this.props.options;
+        const { percentSize } = this.props;
         this.props.setPercentSize(percentSize + 10);
     }
 
     minusZoom() {
-        const { percentSize } = this.props.options;
+        const { percentSize } = this.props;
         this.props.setPercentSize(percentSize - 10);
     }
 
+    setTwoColumns() {
+        const { setTwoColumns, twoColumns } = this.props;
+        setTwoColumns(!twoColumns);
+    }
+
     render() {
+        const { twoColumns } = this.props;
         return (
             <div className='header_nav'>
                 <div className='icons'>
@@ -72,11 +80,14 @@ class HeaderNav extends Component {
                         <FaFolderOpenO onClick={this.newFile} />
                     </div>
                     <div className='right'>
-                        <FaMinus onClick={this.minusZoom}/>
-                        <FaPlus onClick={this.plusZoom}/>
+                        <FaMinus onClick={this.minusZoom} />
+                        <FaPlus onClick={this.plusZoom} />
                         <FaArrowsH onClick={this.setFullWidth} />
                         <FaArrowsV onClick={this.setFullHeight} />
-                        <FaColumns />
+                        <FaColumns
+                            onClick={this.setTwoColumns}
+                            className={ twoColumns ? 'active' : ''}
+                        />
                         <FaAngleLeft onClick={this.minusPage} />
                         <FaAngleRight onClick={this.plusPage} />
                     </div>
@@ -90,11 +101,15 @@ const mapStateToProps = state => {
     const { reader: {
         page,
         files
-    }, options } = state;
+    }, options: {
+        percentSize,
+            twoColumns
+    } } = state;
     return {
         page,
         filesLength: files.length,
-        options
+        percentSize,
+        twoColumns
     }
 }
 
@@ -102,7 +117,8 @@ const mapDispatchToProps = {
     setPage,
     setFullHeight,
     setFullWidth,
-    setPercentSize
+    setPercentSize,
+    setTwoColumns
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);
