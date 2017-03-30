@@ -23,30 +23,39 @@ class Reader extends Component {
 
     render() {
         const { files, directory, page } = this.props.reader;
-        const { twoColumns } = this.props.options;
-        const { height, width } = this.imgSize();
+        const { twoColumns, percentSize } = this.props.options;
+        const { height, width } = twoColumns ? { height: percentSize + '%' } : this.imgSize();
 
-        const imgShow = files.map((file, index) => {
-            return <img
-                key={index}
-                src={directory + file}
-                alt=""
-                style={{
-                    height: height,
-                    width: width
-                }}
-            />
-        });
-        return (
+        return files.length ? (
             <div className="reader" >
                 {twoColumns ?
-                    <div>
-                        <div className="pageLeft"> {imgShow[page]}</div>
-                        <div className="pageRight"> {imgShow[page + 1]}</div>
+                    <div className="doblePage"
+                        style={{
+                            height
+                        }}
+                    >
+                        <img
+                            className="left"
+                            src={directory + files[page]}
+                            alt=""
+                        />
+                        <img
+                            className="right"
+                            src={directory + files[page + 1]}
+                            alt=""
+                        />
                     </div>
-                    : imgShow[page]}
+                    : <img
+                        src={directory + files[page]}
+                        alt=""
+                        style={{
+                            height: height,
+                            width: width
+                        }}
+                    />
+                }
             </div>
-        );
+        ) : null;
     }
 }
 
