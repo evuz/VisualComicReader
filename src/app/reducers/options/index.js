@@ -1,13 +1,15 @@
 import {
     SET_FULL_HEIGHT,
     SET_FULL_WIDTH,
-    SET_SIZE_PERCENT
+    SET_SIZE_PERCENT,
+    SET_TWO_COLUMNS
 } from './actionTypes';
 export * from './actions';
 
 function options(state = {
     fullHeight: true,
     fullWidth: false,
+    twoColumns: false,
     percentSize: 100
 }, action) {
     switch (action.type) {
@@ -28,6 +30,14 @@ function options(state = {
             return Object.assign({}, state, { 
                 percentSize
             });
+        case SET_TWO_COLUMNS:
+            const { twoColumns } = action;
+            return Object.assign({}, state, {
+                fullHeight: true,
+                fullWidth: false,
+                twoColumns,
+                percentSize: 100
+            })
         default:
             return state;
     }
