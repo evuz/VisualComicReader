@@ -39,13 +39,16 @@ class HeaderNav extends Component {
     }
 
     plusPage() {
-        const { page, setPage, filesLength } = this.props;
-        if (page < filesLength - 1) setPage(page + 1);
+        const { page, setPage, filesLength,twoColumns } = this.props;
+        const newPage = twoColumns ? page + 2 : page + 1;
+        if (newPage < filesLength - 1) setPage(newPage);
     }
 
     minusPage() {
-        const { page, setPage } = this.props;
-        if (page > 0) setPage(page - 1);
+        const { page, setPage, twoColumns } = this.props;
+        const newPage = twoColumns ? page - 2 : page - 1;
+        if (newPage > 0) setPage(newPage);
+        else setPage(0);
     }
 
     setFullWidth() {
