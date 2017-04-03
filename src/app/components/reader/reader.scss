@@ -1,6 +1,7 @@
 .reader {
     height: 100%;
     width: 100%;
+    overflow: auto;
     .doblePage {
         display: flex;
         img {
@@ -16,5 +17,9 @@
     img {
         display: block;
         margin: 0 auto;
+        cursor: -webkit-grab;
+        &.drag {
+            cursor: -webkit-grabbing;
+        }
     }
 }
