@@ -14,19 +14,34 @@ class LateralNav extends Component {
         this.props.setPage(index);
     }
 
+    scrollPosition() {
+        const { lateralNav } = this.refs;
+        if (lateralNav) {
+            const {page, files } = this.props;
+            const {clientHeight, scrollHeight} = lateralNav;
+            const filesLength = files.length;
+
+            const imageHeight = scrollHeight / filesLength;            
+            
+            lateralNav.scrollTop = imageHeight*( page - 2)
+        }
+    }
+
     render() {
         const { files, directory, page } = this.props;
+        this.scrollPosition()
+
         const imgShow = files.map((file, index) => {
             return <MiniaturePage
                 src={directory + file}
                 key={index}
                 page={index}
                 handleClick={this.goToPage}
-                active={ page == index }
+                active={page == index}
             />
         })
         return (
-            <div className='lateral_nav'>
+            <div className='lateral_nav' ref="lateralNav">
                 {imgShow}
             </div>
         )
