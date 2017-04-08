@@ -18,12 +18,13 @@ class App extends Component {
   componentDidMount() {
     ipcRenderer.on('file-extracted', (event, data) => {
       this.props.setDirectory(data.tmpFolder + '/');
-      event.sender.send('read-directory', data.tmpFolder);
+      this.props.setFiles(data.files);
+      // event.sender.send('read-directory', data.tmpFolder);
     });
 
-    ipcRenderer.on('list-files', (event, data) => {
-      this.props.setFiles(data.files);
-    })
+    // ipcRenderer.on('list-files', (event, data) => {
+    //   this.props.setFiles(data.files);
+    // })
   }
 
   filterFiles(files) {

@@ -32,6 +32,22 @@ function openFile(cb) {
     })
 }
 
+function removeFilesByExtensions(files, tmp, ext) {
+    if(typeof ext == 'string') ext = [ext];
+
+    console.log(files);
+    files.forEach(file => {
+        const fileExt = path.extname(file).toLowerCase();
+        const checked = ext.find( e => {
+            return e.toLowerCase() == fileExt;
+        })
+
+        if (!checked) {
+            fs.unlinkSync(path.join(tmp, file));
+        }
+    });
+}
+
 function extractFiles(pathFile) {
     const file = path.basename(pathFile);
     let tmpFolder = createTmpFolder(file);
@@ -94,7 +110,8 @@ function createTmpFolder(file) {
 }
 
 const API = {
-    openFile
+    openFile,
+    removeFilesByExtensions
 }
 
 module.exports = API;
