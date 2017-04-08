@@ -44,7 +44,7 @@ ipc.on('open-file', event => {
   removeTmpFolder();
   openFile((err, req) => {
     if (err) {
-      console.log(err);
+      throw new Error(err);
     }
     event.sender.send('file-extracted', req)
   });
