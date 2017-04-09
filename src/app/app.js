@@ -5,6 +5,7 @@ import './app.scss';
 import { Layout, Reader } from './components';
 import { ipcRenderer } from 'electron';
 import { setDirectory, setFiles } from './reducers/reader';
+import { setFullScreen } from './reducers/windowState';
 
 class App extends Component {
   constructor() {
@@ -21,27 +22,27 @@ class App extends Component {
       this.props.setFiles(data.files);
     });
 
-    ipcRenderer.on('right-press', (event, data) => {
+    ipcRenderer.on('right-press', () => {
       console.log('right press');
     })
 
-    ipcRenderer.on('left-press', (event, data) => {
+    ipcRenderer.on('left-press', () => {
       console.log('left press');
     })
 
-    ipcRenderer.on('enter-full-screen', (event, data) => {
-      console.log('enter-full-screen');
+    ipcRenderer.on('enter-full-screen', () => {
+      this.props.setFullScreen(true);
     })
 
-    ipcRenderer.on('leave-full-screen', (event, data) => {
-      console.log('leave-full-screen');
+    ipcRenderer.on('leave-full-screen', () => {
+      this.props.setFullScreen(false);
     })
 
-    ipcRenderer.on('ctrl-up-press', (event, data) => {
+    ipcRenderer.on('ctrl-up-press', () => {
       console.log('ctrl-up-press');
     })
 
-    ipcRenderer.on('ctrl-down-press', (event, data) => {
+    ipcRenderer.on('ctrl-down-press', () => {
       console.log('ctrl-down-press');
     })
   }
@@ -69,7 +70,8 @@ class App extends Component {
 
 const mapDispatchToProps = {
   setDirectory,
-  setFiles
+  setFiles,
+  setFullScreen
 }
 
 export default connect(null, mapDispatchToProps)(App);

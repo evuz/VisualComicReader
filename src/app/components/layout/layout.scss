@@ -6,5 +6,8 @@
             left: $nav_size;
             width: auto;
         }
+        &.full_screen {
+            @include absolute(0, 0, 0, 0);
+        }
     }
 }
