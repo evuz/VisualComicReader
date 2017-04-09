@@ -36,6 +36,14 @@ class App extends Component {
     ipcRenderer.on('leave-full-screen', (event, data) => {
       console.log('leave-full-screen');
     })
+
+    ipcRenderer.on('ctrl-up-press', (event, data) => {
+      console.log('ctrl-up-press');
+    })
+
+    ipcRenderer.on('ctrl-down-press', (event, data) => {
+      console.log('ctrl-down-press');
+    })
   }
 
   filterFiles(files) {

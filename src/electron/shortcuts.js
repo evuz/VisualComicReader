@@ -5,9 +5,16 @@ function registerShortcuts(mainWindow) {
         mainWindow.webContents.send('right-press');
     })
 
-
     globalShortcut.register('Left', () => {
         mainWindow.webContents.send('left-press');
+    })
+
+    globalShortcut.register('CommandOrControl + Up', () => {
+        mainWindow.webContents.send('ctrl-up-press');
+    })
+
+    globalShortcut.register('CommandOrControl + Down', () => {
+        mainWindow.webContents.send('ctrl-down-press');
     })
 }
 
