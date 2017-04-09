@@ -7,20 +7,12 @@ import {
 
 const Layout = (props) => {
     return (
-        <div className='layout'>
-            {
-                props.fullScreen ?
-                    <div className='container full_screen'>
-                        {props.children}
-                    </div> :
-                    <div>
-                        <HeaderNav />
-                        <LateralNav />
-                        <div className='container'>
-                            {props.children}
-                        </div>
-                    </div>
-            }
+        <div className={props.fullScreen ? 'layout full_screen' : 'layout'}>
+            <HeaderNav />
+            <LateralNav />
+            <div className='container'>
+                {props.children}
+            </div>
         </div>
     )
 };

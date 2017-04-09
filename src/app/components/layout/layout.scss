@@ -6,8 +6,16 @@
             left: $nav_size;
             width: auto;
         }
-        &.full_screen {
+    }
+    &.full_screen {
+        .container {
             @include absolute(0, 0, 0, 0);
+        }
+        .header_nav {
+            display: none;
+        }
+        .lateral_nav {
+            display: none;
         }
     }
 }
