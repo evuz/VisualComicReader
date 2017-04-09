@@ -28,6 +28,14 @@ class App extends Component {
     ipcRenderer.on('left-press', (event, data) => {
       console.log('left press');
     })
+
+    ipcRenderer.on('enter-full-screen', (event, data) => {
+      console.log('enter-full-screen');
+    })
+
+    ipcRenderer.on('leave-full-screen', (event, data) => {
+      console.log('leave-full-screen');
+    })
   }
 
   filterFiles(files) {

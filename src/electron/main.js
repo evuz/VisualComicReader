@@ -22,8 +22,18 @@ function createWindow() {
     slashes: true
   }))
 
-  mainWindow.on('blur', windowLeave);
-  mainWindow.on('focus', windowEnter);
+  mainWindow.on('blur', () => {
+    globalShortcut.unregisterAll();
+  });
+  mainWindow.on('focus', () => {
+    registerShortcuts(mainWindow);
+  });
+  mainWindow.on('enter-full-screen', () => {
+    mainWindow.webContents.send('enter-full-screen');
+  });
+  mainWindow.on('leave-full-screen', () => {
+    mainWindow.webContents.send('leave-full-screen');
+  });
 
   mainWindow.webContents.openDevTools()
 
@@ -47,14 +57,6 @@ app.on('activate', function () {
     createWindow()
   }
 })
-
-function windowLeave() {
-  globalShortcut.unregisterAll();
-}
-
-function windowEnter() {
-  registerShortcuts(mainWindow);
-}
 
 ipcMain.on('open-file', event => {
   removeTmpFolder();
