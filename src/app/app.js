@@ -19,12 +19,15 @@ class App extends Component {
     ipcRenderer.on('file-extracted', (event, data) => {
       this.props.setDirectory(data.tmpFolder + '/');
       this.props.setFiles(data.files);
-      // event.sender.send('read-directory', data.tmpFolder);
     });
 
-    // ipcRenderer.on('list-files', (event, data) => {
-    //   this.props.setFiles(data.files);
-    // })
+    ipcRenderer.on('right-press', (event, data) => {
+      console.log('right press');
+    })
+
+    ipcRenderer.on('left-press', (event, data) => {
+      console.log('left press');
+    })
   }
 
   filterFiles(files) {

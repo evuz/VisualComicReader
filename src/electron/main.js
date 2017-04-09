@@ -1,11 +1,15 @@
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow
-const ipc = electron.ipcMain;
+const {
+  app,
+  globalShortcut,
+  BrowserWindow,
+  ipcMain
+} = electron;
 
 const url = require('url');
-const { openFile, removeFilesByExtensions } = require('./files');
 const { readDirectory, removeTmpFolder } = require('./directory');
+const { openFile, removeFilesByExtensions } = require('./files');
+const registerShortcuts = require('./shortcuts');
 
 let mainWindow
 
@@ -18,6 +22,9 @@ function createWindow() {
     slashes: true
   }))
 
+  mainWindow.on('blur', windowLeave);
+  mainWindow.on('focus', windowEnter);
+
   mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', function () {
@@ -28,6 +35,7 @@ function createWindow() {
 app.on('ready', createWindow)
 
 app.on('window-all-closed', function () {
+  globalShortcut.unregisterAll();
   if (process.platform !== 'darwin') {
     removeTmpFolder();
     app.quit()
@@ -40,7 +48,15 @@ app.on('activate', function () {
   }
 })
 
-ipc.on('open-file', event => {
+function windowLeave() {
+  globalShortcut.unregisterAll();
+}
+
+function windowEnter() {
+  registerShortcuts(mainWindow);
+}
+
+ipcMain.on('open-file', event => {
   removeTmpFolder();
   openFile((err, req) => {
     if (err) {
@@ -50,10 +66,10 @@ ipc.on('open-file', event => {
     const { tmpFolder } = req;
     readDirectory(tmpFolder, (err, files) => {
       const ext = ['.jpg', '.png'];
-      
+
       removeFilesByExtensions(files, tmpFolder, ext)
       readDirectory(tmpFolder, (err, files) => {
-        if(err) console.log(err);
+        if (err) console.log(err);
         req = Object.assign({}, req, { files });
         event.sender.send('file-extracted', req)
       })
