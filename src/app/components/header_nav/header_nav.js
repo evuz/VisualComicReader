@@ -34,12 +34,22 @@ class HeaderNav extends Component {
         this.setTwoColumns = this.setTwoColumns.bind(this);
     }
 
+    componentDidMount() {
+        ipcRenderer.on('right-press', () => {
+            this.plusPage();
+        })
+
+        ipcRenderer.on('left-press', () => {
+            this.minusPage();
+        })
+    }
+
     newFile() {
         ipcRenderer.send('open-file');
     }
 
     plusPage() {
-        const { page, setPage, filesLength,twoColumns } = this.props;
+        const { page, setPage, filesLength, twoColumns } = this.props;
         const newPage = twoColumns ? page + 2 : page + 1;
         if (newPage < filesLength - 1) setPage(newPage);
     }
@@ -89,7 +99,7 @@ class HeaderNav extends Component {
                         <FaArrowsV onClick={this.setFullHeight} />
                         <FaColumns
                             onClick={this.setTwoColumns}
-                            className={ twoColumns ? 'active' : ''}
+                            className={twoColumns ? 'active' : ''}
                         />
                         <FaAngleLeft onClick={this.minusPage} />
                         <FaAngleRight onClick={this.plusPage} />

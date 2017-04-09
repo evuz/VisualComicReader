@@ -22,14 +22,6 @@ class App extends Component {
       this.props.setFiles(data.files);
     });
 
-    ipcRenderer.on('right-press', () => {
-      console.log('right press');
-    })
-
-    ipcRenderer.on('left-press', () => {
-      console.log('left press');
-    })
-
     ipcRenderer.on('enter-full-screen', () => {
       this.props.setFullScreen(true);
     })
