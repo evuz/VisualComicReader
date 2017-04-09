@@ -42,6 +42,14 @@ class HeaderNav extends Component {
         ipcRenderer.on('left-press', () => {
             this.minusPage();
         })
+
+        ipcRenderer.on('ctrl-up-press', () => {
+            this.plusZoom();
+        })
+
+        ipcRenderer.on('ctrl-down-press', () => {
+            this.minusZoom();
+        })
     }
 
     newFile() {
