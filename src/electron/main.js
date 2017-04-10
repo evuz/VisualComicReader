@@ -71,7 +71,7 @@ ipcMain.on('open-file', event => {
 
       removeFilesByExtensions(files, tmpFolder, ext)
       readDirectory(tmpFolder, (err, files) => {
-        if (err) console.log(err);
+        if (err) throw new Erro(err);
         req = Object.assign({}, req, { files });
         event.sender.send('file-extracted', req)
       })

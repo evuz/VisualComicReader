@@ -26,7 +26,6 @@ function openFile(cb) {
             .then(req => {
                 cb(null, req);
             }).catch(err => {
-                console.log(err);
                 cb(err)
             })
     })
@@ -35,7 +34,6 @@ function openFile(cb) {
 function removeFilesByExtensions(files, tmp, ext) {
     if(typeof ext == 'string') ext = [ext];
 
-    console.log(files);
     files.forEach(file => {
         const fileExt = path.extname(file).toLowerCase();
         const checked = ext.find( e => {
