@@ -4,7 +4,7 @@ const BrowserWindow = electron.BrowserWindow
 const ipc = electron.ipcMain;
 
 const url = require('url');
-const openFile = require('./files').openFile;
+const { openFile, removeFilesByExtensions } = require('./files');
 const { readDirectory, removeTmpFolder } = require('./directory');
 
 let mainWindow
@@ -44,17 +44,19 @@ ipc.on('open-file', event => {
   removeTmpFolder();
   openFile((err, req) => {
     if (err) {
-      console.log(err);
+      throw new Error(err);
     }
-    event.sender.send('file-extracted', req)
-  });
-})
 
-ipc.on('read-directory', (event, data) => {
-  readDirectory(data, (err, files) => {
-    if(err) {
-      event.sender.send('list-files', {err})
-    }
-    event.sender.send('list-files', {files})
-  })
+    const { tmpFolder } = req;
+    readDirectory(tmpFolder, (err, files) => {
+      const ext = ['.jpg', '.png'];
+      
+      removeFilesByExtensions(files, tmpFolder, ext)
+      readDirectory(tmpFolder, (err, files) => {
+        if(err) console.log(err);
+        req = Object.assign({}, req, { files });
+        event.sender.send('file-extracted', req)
+      })
+    })
+  });
 })

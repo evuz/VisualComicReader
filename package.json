@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "cbr": "^1.0.3",
+    "extract-zip": "^1.6.0",
     "i": "^0.3.5",
     "node-unrar": "^0.1.5",
     "npm": "^4.4.4",
