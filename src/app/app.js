@@ -5,6 +5,7 @@ import './app.scss';
 import { Layout, Reader } from './components';
 import { ipcRenderer } from 'electron';
 import { setDirectory, setFiles } from './reducers/reader';
+import { setFullScreen } from './reducers/windowState';
 
 class App extends Component {
   constructor() {
@@ -19,12 +20,15 @@ class App extends Component {
     ipcRenderer.on('file-extracted', (event, data) => {
       this.props.setDirectory(data.tmpFolder + '/');
       this.props.setFiles(data.files);
-      // event.sender.send('read-directory', data.tmpFolder);
     });
 
-    // ipcRenderer.on('list-files', (event, data) => {
-    //   this.props.setFiles(data.files);
-    // })
+    ipcRenderer.on('enter-full-screen', () => {
+      this.props.setFullScreen(true);
+    })
+
+    ipcRenderer.on('leave-full-screen', () => {
+      this.props.setFullScreen(false);
+    })
   }
 
   filterFiles(files) {
@@ -50,7 +54,8 @@ class App extends Component {
 
 const mapDispatchToProps = {
   setDirectory,
-  setFiles
+  setFiles,
+  setFullScreen
 }
 
 export default connect(null, mapDispatchToProps)(App);

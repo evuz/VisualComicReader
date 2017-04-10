@@ -14,6 +14,16 @@ class Reader extends Component {
         this.handleMouseMove = this.handleMouseMove.bind(this);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const { reader } = this.refs;
+        const prevPage = prevProps.reader.page;
+        const newPage = this.props.reader.page;
+
+        if (reader && prevPage !== newPage) {
+            reader.scrollTop = 0;
+        }
+    }
+
     handleMouseUp() {
         this.setState({
             clicked: false
