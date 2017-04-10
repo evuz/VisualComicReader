@@ -16,6 +16,10 @@ function registerShortcuts(mainWindow) {
     globalShortcut.register('CommandOrControl + Down', () => {
         mainWindow.webContents.send('ctrl-down-press');
     })
+
+    globalShortcut.register('CommandOrControl + F', () => {
+        mainWindow.setFullScreen(!mainWindow.isFullScreen());
+    })
 }
 
 module.exports = registerShortcuts;
