@@ -6,18 +6,19 @@ const {
   ipcMain
 } = electron;
 
+const path = require('path');
 const url = require('url');
-const { readDirectory, removeTmpFolder } = require('./directory');
-const { openFile, removeFilesByExtensions } = require('./files');
-const registerShortcuts = require('./shortcuts');
+const { readDirectory, removeTmpFolder } = require('./electron/directory');
+const { openFile, removeFilesByExtensions } = require('./electron/files');
+const registerShortcuts = require('./electron/shortcuts');
 
-let mainWindow
+let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600 })
 
   mainWindow.loadURL(url.format({
-    pathname: __dirname + '/../../dist/index.html',
+    pathname: path.join(__dirname,'index.html'),
     protocol: 'file',
     slashes: true
   }))
@@ -71,7 +72,7 @@ ipcMain.on('open-file', event => {
 
       removeFilesByExtensions(files, tmpFolder, ext)
       readDirectory(tmpFolder, (err, files) => {
-        if (err) throw new Erro(err);
+        if (err) throw new Error(err);
         req = Object.assign({}, req, { files });
         event.sender.send('file-extracted', req)
       })
