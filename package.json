@@ -45,14 +45,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "electron": "electron ./dist/main.js",
+    "eslint": "eslint dist/main.js dist/electron/**/*",
     "dev": "npm-run-all -p -r dev:webpack dev:electron",
     "dev:webpack": "cross-env NODE_ENV=development webpack --watch",
     "dev:electron": "cross-env NODE_ENV=development electron ./dist/main.js",
     "build": "npm run build:win && npm run build:linux && npm run build:mac",
     "build:react": "webpack -p",
-    "build:win": "npm run build:react && build --win --publish=never",
-    "build:linux": "npm run build:react &&  build --linux --publish=never",
-    "build:mac": "npm run build:react build --mac --publish=never"
+    "build:win": "npm run build:react && npm run eslint && build --win --publish=never",
+    "build:linux": "npm run build:react && npm run eslint && build --linux --publish=never",
+    "build:mac": "npm run build:react && npm run eslint && build --mac --publish=never"
   },
   "build": {
     "appId": "org.evuz.visualReader",
