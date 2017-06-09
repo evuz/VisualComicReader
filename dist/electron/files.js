@@ -1,4 +1,4 @@
-const electron = require('electron');
+const { dialog, app } = require('electron');
 
 const fs = require('fs');
 const path = require('path');
@@ -6,8 +6,6 @@ const path = require('path');
 const cbz = require('extract-zip');
 const cbr = require('cbr');
 const Unrar = require('node-unrar');
-
-const dialog = electron.dialog;
 
 function openFile(cb) {
   dialog.showOpenDialog({
@@ -96,11 +94,8 @@ function cbrExtractLinux(pathFile, tmpFolder) {
 }
 
 function createTmpFolder(file) {
-  let folder = path.join(__dirname, '..', '..', 'tmp');
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder);
-  }
-  folder = path.join(folder, file);
+  const folder = path.join(app.getPath('temp'), file);
+
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder);
   }

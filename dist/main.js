@@ -9,7 +9,7 @@ const {
 
 const path = require('path');
 const url = require('url');
-const { readDirectory, removeTmpFolder } = require('./electron/directory');
+const { readDirectory, removeTmpFolder, addDirectoryCreated } = require('./electron/directory');
 const { openFile, removeFilesByExtensions } = require('./electron/files');
 const registerShortcuts = require('./electron/shortcuts');
 
@@ -74,6 +74,7 @@ ipcMain.on('open-file', (event) => {
     readDirectory(tmpFolder, (err, files) => {
       const ext = ['.jpg', '.png'];
 
+      addDirectoryCreated(tmpFolder);
       removeFilesByExtensions(files, tmpFolder, ext);
       // eslint-disable-next-line no-shadow
       readDirectory(tmpFolder, (err, files) => {

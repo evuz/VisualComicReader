@@ -1,13 +1,15 @@
 const fs = require('fs');
-const path = require('path');
+
+const directoryCreated = [];
 
 function readDirectory(dir, cb) {
   fs.readdir(dir, cb);
 }
 
 function removeTmpFolder() {
-  const tmpFolder = path.join(__dirname, '..', '..', 'tmp');
-  deleteFolderRecursive(tmpFolder);
+  directoryCreated.forEach((dir) => {
+    deleteFolderRecursive(dir);
+  });
 }
 
 function deleteFolderRecursive(pathFolder) {
@@ -24,9 +26,14 @@ function deleteFolderRecursive(pathFolder) {
   }
 }
 
+function addDirectoryCreated(directory) {
+  directoryCreated.push(directory);
+}
+
 const API = {
   readDirectory,
   removeTmpFolder,
+  addDirectoryCreated,
 };
 
 module.exports = API;
