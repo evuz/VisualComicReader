@@ -18,7 +18,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600 })
 
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname,'index.html'),
+    pathname: path.join(__dirname, 'index.html'),
     protocol: 'file',
     slashes: true
   }))
@@ -36,7 +36,9 @@ function createWindow() {
     mainWindow.webContents.send('leave-full-screen');
   });
 
-  mainWindow.webContents.openDevTools()
+  if (process.env.NODE_ENV == 'development') {
+    mainWindow.webContents.openDevTools()
+  }
 
   mainWindow.on('closed', function () {
     mainWindow = null
