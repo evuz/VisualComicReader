@@ -7,5 +7,5 @@ export {
     HeaderNav,
     LateralNav,
     Layout,
-    Reader
+    Reader,
 };

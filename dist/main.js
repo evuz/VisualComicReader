@@ -1,9 +1,10 @@
 const electron = require('electron');
+
 const {
   app,
   globalShortcut,
   BrowserWindow,
-  ipcMain
+  ipcMain,
 } = electron;
 
 const path = require('path');
@@ -15,13 +16,13 @@ const registerShortcuts = require('./electron/shortcuts');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 800, height: 600 })
+  mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
-  mainWindow.loadURL(url.format({
+  mainWindow.loadURL(url.format({/**/
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file',
-    slashes: true
-  }))
+    slashes: true,
+  }));
 
   mainWindow.on('blur', () => {
     globalShortcut.unregisterAll();
@@ -36,32 +37,32 @@ function createWindow() {
     mainWindow.webContents.send('leave-full-screen');
   });
 
-  if (process.env.NODE_ENV == 'development') {
-    mainWindow.webContents.openDevTools()
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools();
   }
 
-  mainWindow.on('closed', function () {
-    mainWindow = null
-  })
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 }
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   globalShortcut.unregisterAll();
   if (process.platform !== 'darwin') {
     removeTmpFolder();
-    app.quit()
+    app.quit();
   }
-})
+});
 
-app.on('activate', function () {
+app.on('activate', () => {
   if (mainWindow === null) {
-    createWindow()
+    createWindow();
   }
-})
+});
 
-ipcMain.on('open-file', event => {
+ipcMain.on('open-file', (event) => {
   removeTmpFolder();
   openFile((err, req) => {
     if (err) {
@@ -69,15 +70,17 @@ ipcMain.on('open-file', event => {
     }
 
     const { tmpFolder } = req;
+    // eslint-disable-next-line no-shadow
     readDirectory(tmpFolder, (err, files) => {
       const ext = ['.jpg', '.png'];
 
-      removeFilesByExtensions(files, tmpFolder, ext)
+      removeFilesByExtensions(files, tmpFolder, ext);
+      // eslint-disable-next-line no-shadow
       readDirectory(tmpFolder, (err, files) => {
         if (err) throw new Error(err);
-        req = Object.assign({}, req, { files });
-        event.sender.send('file-extracted', req)
-      })
-    })
+        event.sender.send('file-extracted',
+          Object.assign({}, req, { files }));
+      });
+    });
   });
-})
+});
