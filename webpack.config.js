@@ -16,6 +16,14 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    // eslint options (if necessary)
+                },
+            },
+            {
                 test: /\.(sass|scss)$/, //Check for sass or scss file names
                 use: [
                     'style-loader',
