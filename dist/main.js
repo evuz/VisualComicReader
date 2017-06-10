@@ -50,8 +50,8 @@ app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
   globalShortcut.unregisterAll();
+  removeTmpFolder();
   if (process.platform !== 'darwin') {
-    removeTmpFolder();
     app.quit();
   }
 });
