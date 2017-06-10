@@ -62,13 +62,12 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('open-file', (event) => {
+ipcMain.on('open-file', () => {
   removeTmpFolder();
   openFile((err, req) => {
     if (err) {
       throw new Error(err);
     }
-
     const { tmpFolder } = req;
     // eslint-disable-next-line no-shadow
     readDirectory(tmpFolder, (err, files) => {
@@ -79,7 +78,7 @@ ipcMain.on('open-file', (event) => {
       // eslint-disable-next-line no-shadow
       readDirectory(tmpFolder, (err, files) => {
         if (err) throw new Error(err);
-        event.sender.send('file-extracted',
+        mainWindow.webContents.send('file-extracted',
           Object.assign({}, req, { files }));
       });
     });

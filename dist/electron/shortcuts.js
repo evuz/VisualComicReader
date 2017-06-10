@@ -1,4 +1,4 @@
-const { globalShortcut } = require('electron');
+const { globalShortcut, ipcMain } = require('electron');
 
 function registerShortcuts(mainWindow) {
   globalShortcut.register('Right', () => {
@@ -19,6 +19,10 @@ function registerShortcuts(mainWindow) {
 
   globalShortcut.register('CommandOrControl + F', () => {
     mainWindow.setFullScreen(!mainWindow.isFullScreen());
+  });
+
+  globalShortcut.register('CommandOrControl + O', () => {
+    ipcMain.emit('open-file', 'shortcut');
   });
 }
 
