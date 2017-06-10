@@ -2,15 +2,16 @@ import { ipcRenderer } from 'electron';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  FaFolderOpenO,
-  FaAngleLeft,
-  FaAngleRight,
-  FaArrowsV,
-  FaArrowsH,
-  FaColumns,
-  FaPlus,
-  FaMinus,
-} from 'react-icons/lib/fa';
+  MdOpenInBrowser,
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+  MdStayCurrentPortrait,
+  MdStayCurrentLandscape,
+  MdLooksTwo,
+  MdLooksOne,
+  MdZoomIn,
+  MdZoomOut,
+} from 'react-icons/lib/md';
 import { setPage } from '../../reducers/reader';
 import {
   setFullHeight,
@@ -94,22 +95,29 @@ class HeaderNav extends Component {
   render() {
     const { twoColumns } = this.props;
     return (
-      <div className="header_nav">
+      <div className="header_nav" >
         <div className="icons">
           <div className="left">
-            <FaFolderOpenO onClick={this.newFile} />
+            <MdOpenInBrowser onClick={this.newFile} />
+          </div>
+          <div className="center">
+            <MdKeyboardArrowLeft onClick={this.minusPage} />
+            <MdKeyboardArrowRight onClick={this.plusPage} />
           </div>
           <div className="right">
-            <FaMinus onClick={this.minusZoom} />
-            <FaPlus onClick={this.plusZoom} />
-            <FaArrowsH onClick={this.setFullWidth} />
-            <FaArrowsV onClick={this.setFullHeight} />
-            <FaColumns
-              onClick={this.setTwoColumns}
-              className={twoColumns ? 'active' : ''}
-            />
-            <FaAngleLeft onClick={this.minusPage} />
-            <FaAngleRight onClick={this.plusPage} />
+            <MdZoomOut onClick={this.minusZoom} />
+            <MdZoomIn onClick={this.plusZoom} />
+            <MdStayCurrentLandscape onClick={this.setFullWidth} />
+            <MdStayCurrentPortrait onClick={this.setFullHeight} />
+            {
+              twoColumns ?
+                <MdLooksOne
+                  onClick={this.setTwoColumns}
+                /> :
+                <MdLooksTwo
+                  onClick={this.setTwoColumns}
+                />
+            }
           </div>
         </div>
       </div>

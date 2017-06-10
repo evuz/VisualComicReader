@@ -1,6 +1,6 @@
 .layout {
     .container {
-        @include absolute($nav_size, 0, 0, $lateral_nav_size);
+        @include absolute(0, 0, $nav_size, $lateral_nav_size);
         background: rgb(30, 30, 30);
         &.lateral_nav {
             left: $nav_size;
@@ -20,7 +20,7 @@
             left: -100px;
             transition: 0.3s;
             opacity: 0;
-            
+
             &:hover {
                 opacity: 1;
                 left: 0;
