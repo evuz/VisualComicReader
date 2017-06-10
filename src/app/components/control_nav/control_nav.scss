@@ -9,21 +9,21 @@
         justify-content: space-between;
         height: $nav_size;
         color: white;
+        padding: 0 10px;
         font-size: 15px;
         .left {
-            margin-left: 10px;
+          svg {
+            margin-right: 5px;
+          }
         }
         .right {
-            margin-right: 10px;
+          svg {
+            margin-left: 5px;
+          }
         }
         .active {
             color: silver;
         }
-    }
-
-    svg {
-        margin: 10px;
-        margin-right: 0px;
     }
 
     svg:hover {
