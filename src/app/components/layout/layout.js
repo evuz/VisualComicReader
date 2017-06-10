@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  HeaderNav,
+  ControlNav,
   LateralPanel,
 } from '../';
 
 const Layout = props => (
   <div className={props.fullScreen ? 'layout full_screen' : 'layout'}>
-    <HeaderNav />
+    <ControlNav />
     <LateralPanel />
     <div className="container">
       {props.children}

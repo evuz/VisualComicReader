@@ -1,7 +1,7 @@
 @import './miniature_page/miniature_page';
 
 .lateral_nav {
-    @include absolute($nav_size, auto, 0, 0);
+    @include absolute(0, auto, 0, 0);
     overflow-y: auto;
     width: $lateral_nav_size;
     background: rgb(51, 51, 51);

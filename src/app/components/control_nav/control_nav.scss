@@ -1,19 +1,19 @@
 .header_nav{
-    @include absolute(0, 0, auto, 0);
-    width: 100%;
+    @include absolute(auto, 0, 0, $lateral_nav_size);
     height: $nav_size;
-    background: rgb(37, 37, 38);
+    background: $cinnabar;
 
     .icons {
-        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: $nav_size;
         color: white;
-        font-size: 30px;
+        font-size: 15px;
         .left {
-            float: left;
-            margin-left: 10px; 
+            margin-left: 10px;
         }
         .right {
-            float: right;
             margin-right: 10px;
         }
         .active {

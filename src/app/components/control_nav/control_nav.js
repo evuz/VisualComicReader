@@ -94,10 +94,14 @@ class HeaderNav extends Component {
   render() {
     const { twoColumns } = this.props;
     return (
-      <div className="header_nav">
+      <div className="header_nav" >
         <div className="icons">
           <div className="left">
             <FaFolderOpenO onClick={this.newFile} />
+          </div>
+          <div className="center">
+            <FaAngleLeft onClick={this.minusPage} />
+            <FaAngleRight onClick={this.plusPage} />
           </div>
           <div className="right">
             <FaMinus onClick={this.minusZoom} />
@@ -108,8 +112,6 @@ class HeaderNav extends Component {
               onClick={this.setTwoColumns}
               className={twoColumns ? 'active' : ''}
             />
-            <FaAngleLeft onClick={this.minusPage} />
-            <FaAngleRight onClick={this.plusPage} />
           </div>
         </div>
       </div>
