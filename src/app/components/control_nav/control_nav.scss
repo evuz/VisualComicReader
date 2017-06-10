@@ -1,5 +1,5 @@
 .header_nav{
-    @include absolute(auto, 0, 0, $lateral_nav_size);
+    @include absolute(auto, 0, 0, 0);
     height: $nav_size;
     background: $cinnabar;
 
