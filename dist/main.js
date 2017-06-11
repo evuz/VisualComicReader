@@ -11,6 +11,7 @@ const path = require('path');
 const url = require('url');
 const { removeTmpFolder } = require('./electron/directory');
 const { openFile } = require('./electron/files');
+const { showShorcutInfo } = require('./electron/info');
 const registerShortcuts = require('./electron/shortcuts');
 
 let mainWindow;
@@ -18,7 +19,7 @@ let mainWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
-  mainWindow.loadURL(url.format({/**/
+  mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file',
     slashes: true,
@@ -64,4 +65,8 @@ app.on('activate', () => {
 
 ipcMain.on('open-file', () => {
   openFile(mainWindow);
+});
+
+ipcMain.on('show-info-shortcut', () => {
+  showShorcutInfo(process.platform);
 });
