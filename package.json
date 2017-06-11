@@ -1,6 +1,6 @@
 {
   "name": "visual_comic_reader",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Read comics in differents platforms but the same way",
   "main": "dist/main.js",
   "author": {
@@ -43,6 +43,7 @@
     "webpack": "^2.2.1"
   },
   "scripts": {
+    "start": "npm run build:react && npm run electron",
     "test": "echo \"Error: no test specified\" && exit 1",
     "electron": "electron ./dist/main.js",
     "eslint": "eslint dist/main.js dist/electron/**/*",
