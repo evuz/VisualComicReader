@@ -60,6 +60,7 @@
     "appId": "org.evuz.visualReader",
     "asar": true,
     "productName": "Visual Comic Reader",
+    "icon": "icons/icon.icns",
     "mac": {
       "category": "public.app-category.entertainment",
       "target": [
@@ -81,6 +82,7 @@
       ]
     },
     "win": {
+      "icon": "icons/icon.ico",
       "target": [
         "zip",
         "nsis"
