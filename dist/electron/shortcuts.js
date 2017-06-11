@@ -1,4 +1,6 @@
 const { globalShortcut } = require('electron');
+const { openFile } = require('./files');
+const { showShorcutInfo } = require('./info');
 
 function registerShortcuts(mainWindow) {
   globalShortcut.register('Right', () => {
@@ -19,6 +21,14 @@ function registerShortcuts(mainWindow) {
 
   globalShortcut.register('CommandOrControl + F', () => {
     mainWindow.setFullScreen(!mainWindow.isFullScreen());
+  });
+
+  globalShortcut.register('CommandOrControl + O', () => {
+    openFile(mainWindow);
+  });
+
+  globalShortcut.register('CommandOrControl + S', () => {
+    showShorcutInfo();
   });
 }
 

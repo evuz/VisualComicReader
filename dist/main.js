@@ -9,8 +9,9 @@ const {
 
 const path = require('path');
 const url = require('url');
-const { readDirectory, removeTmpFolder, addDirectoryCreated } = require('./electron/directory');
-const { openFile, removeFilesByExtensions } = require('./electron/files');
+const { removeTmpFolder } = require('./electron/directory');
+const { openFile } = require('./electron/files');
+const { showShorcutInfo } = require('./electron/info');
 const registerShortcuts = require('./electron/shortcuts');
 
 let mainWindow;
@@ -18,7 +19,7 @@ let mainWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
-  mainWindow.loadURL(url.format({/**/
+  mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file',
     slashes: true,
@@ -50,8 +51,8 @@ app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
   globalShortcut.unregisterAll();
+  removeTmpFolder();
   if (process.platform !== 'darwin') {
-    removeTmpFolder();
     app.quit();
   }
 });
@@ -62,26 +63,10 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('open-file', (event) => {
-  removeTmpFolder();
-  openFile((err, req) => {
-    if (err) {
-      throw new Error(err);
-    }
+ipcMain.on('open-file', () => {
+  openFile(mainWindow);
+});
 
-    const { tmpFolder } = req;
-    // eslint-disable-next-line no-shadow
-    readDirectory(tmpFolder, (err, files) => {
-      const ext = ['.jpg', '.png'];
-
-      addDirectoryCreated(tmpFolder);
-      removeFilesByExtensions(files, tmpFolder, ext);
-      // eslint-disable-next-line no-shadow
-      readDirectory(tmpFolder, (err, files) => {
-        if (err) throw new Error(err);
-        event.sender.send('file-extracted',
-          Object.assign({}, req, { files }));
-      });
-    });
-  });
+ipcMain.on('show-info-shortcut', () => {
+  showShorcutInfo(process.platform);
 });

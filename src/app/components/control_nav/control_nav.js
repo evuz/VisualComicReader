@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   MdOpenInBrowser,
+  MdKeyboard,
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
   MdStayCurrentPortrait,
@@ -24,7 +25,6 @@ class HeaderNav extends Component {
   constructor() {
     super();
 
-    this.newFile = this.newFile.bind(this);
     this.plusPage = this.plusPage.bind(this);
     this.minusPage = this.minusPage.bind(this);
     this.setFullHeight = this.setFullHeight.bind(this);
@@ -92,6 +92,10 @@ class HeaderNav extends Component {
     ipcRenderer.send('open-file');
   }
 
+  showShortcutInfo() {
+    ipcRenderer.send('show-info-shortcut');
+  }
+
   render() {
     const { twoColumns } = this.props;
     return (
@@ -99,6 +103,7 @@ class HeaderNav extends Component {
         <div className="icons">
           <div className="left">
             <MdOpenInBrowser onClick={this.newFile} />
+            <MdKeyboard onClick={this.showShortcutInfo} />
           </div>
           <div className="center">
             <MdKeyboardArrowLeft onClick={this.minusPage} />
