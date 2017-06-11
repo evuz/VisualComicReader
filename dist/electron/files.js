@@ -7,7 +7,14 @@ const cbz = require('extract-zip');
 const cbr = require('cbr');
 const Unrar = require('node-unrar');
 
-function openFile(cb) {
+const {
+  removeTmpFolder,
+  readDirectory,
+  addDirectoryCreated,
+ } = require('./directory');
+
+function openFile(mainWindow) {
+  removeTmpFolder();
   dialog.showOpenDialog({
     properties: ['openFile'],
     filters: [{
@@ -16,16 +23,27 @@ function openFile(cb) {
     }],
   }, (files) => {
     if (!files) {
-      const err = 'Archivo no válido';
-      cb({ err });
       return;
     }
     const pathFile = files[0];
     extractFiles(pathFile)
       .then((req) => {
-        cb(null, req);
+        const { tmpFolder } = req;
+        // eslint-disable-next-line no-shadow
+        readDirectory(tmpFolder, (err, files) => {
+          const ext = ['.jpg', '.png'];
+
+          addDirectoryCreated(tmpFolder);
+          removeFilesByExtensions(files, tmpFolder, ext);
+          // eslint-disable-next-line no-shadow
+          readDirectory(tmpFolder, (err, files) => {
+            if (err) throw new Error(err);
+            mainWindow.webContents.send('file-extracted',
+              Object.assign({}, req, { files }));
+          });
+        });
       }).catch((err) => {
-        cb(err);
+        throw Error(err);
       });
   });
 }

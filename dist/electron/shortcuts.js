@@ -1,4 +1,5 @@
-const { globalShortcut, ipcMain } = require('electron');
+const { globalShortcut } = require('electron');
+const { openFile } = require('./files');
 
 function registerShortcuts(mainWindow) {
   globalShortcut.register('Right', () => {
@@ -22,7 +23,7 @@ function registerShortcuts(mainWindow) {
   });
 
   globalShortcut.register('CommandOrControl + O', () => {
-    ipcMain.emit('open-file', 'shortcut');
+    openFile(mainWindow);
   });
 }
 
