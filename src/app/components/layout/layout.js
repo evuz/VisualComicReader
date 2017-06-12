@@ -1,17 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
-    LateralNav,
-    HeaderNav
+  ControlNav,
+  LateralPanel,
 } from '../';
 
-const Layout = (props) => (
-    <div className='layout'>
-        <HeaderNav />
-        <LateralNav />
-        <div className='container'>
-            {props.children}
-        </div>
+const Layout = props => (
+  <div className={props.fullScreen ? 'layout full_screen' : 'layout'}>
+    <ControlNav />
+    <LateralPanel />
+    <div className="container">
+      {props.children}
     </div>
+  </div>
 );
 
-export default Layout;
+const mapStateToProps = state => ({
+  fullScreen: state.windowState.fullScreen,
+});
+
+export default connect(mapStateToProps)(Layout);

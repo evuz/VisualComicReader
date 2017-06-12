@@ -6,3 +6,5 @@ npm-debug.log
 
 dist/bundle.js
 dist/bundle.js.map
+tmp
+builds

@@ -1,4 +1,6 @@
-$nav_size: 50px;
+$nav_size: 25px;
+$lateral_nav_size: 125px;
+$cinnabar: #DD403A;
 
 @mixin absolute($top, $right, $bottom, $left) {
     position: absolute;
@@ -8,6 +10,7 @@ $nav_size: 50px;
     left: $left;
 }
 
-@import './components/header_nav/header_nav';
-@import './components/lateral_nav/lateral_nav';
+@import './components/control_nav/control_nav';
+@import './components/lateral_panel/lateral_panel';
 @import './components/layout/layout';
+@import './components/reader/reader';

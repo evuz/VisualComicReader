@@ -6,9 +6,6 @@ module.exports = {
         path: __dirname + '/dist',
         filename: 'bundle.js'
     },
-    devServer: {
-        contentBase: __dirname + '/dist'
-    },
     devtool: 'source-map',
     module: {
         loaders: [
@@ -17,6 +14,14 @@ module.exports = {
                 loader: 'babel-loader',
                 options: { presets: ['es2015', 'react'] },
                 exclude: /node_modules/
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    // eslint options (if necessary)
+                },
             },
             {
                 test: /\.(sass|scss)$/, //Check for sass or scss file names
