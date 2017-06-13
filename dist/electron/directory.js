@@ -1,15 +1,15 @@
-const fs = require('fs');
+const { app } = require('electron');
 
-const directoryCreated = [];
+const fs = require('fs');
+const path = require('path');
 
 function readDirectory(dir, cb) {
   fs.readdir(dir, cb);
 }
 
 function removeTmpFolder() {
-  directoryCreated.forEach((dir) => {
-    deleteFolderRecursive(dir);
-  });
+  const tmpPath = path.join(app.getPath('temp'), 'VisualComicReader');
+  deleteFolderRecursive(tmpPath);
 }
 
 function deleteFolderRecursive(pathFolder) {
@@ -26,14 +26,24 @@ function deleteFolderRecursive(pathFolder) {
   }
 }
 
-function addDirectoryCreated(directory) {
-  directoryCreated.push(directory);
+function createTmpFolder(file) {
+  const folder = file ?
+    path.join(app.getPath('temp'), 'VisualComicReader', file) :
+    path.join(app.getPath('temp'), 'VisualComicReader');
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder);
+  } else {
+    deleteFolderRecursive(folder);
+    createTmpFolder(file);
+  }
+
+  return folder;
 }
 
 const API = {
   readDirectory,
   removeTmpFolder,
-  addDirectoryCreated,
+  createTmpFolder,
 };
 
 module.exports = API;

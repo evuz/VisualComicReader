@@ -9,7 +9,7 @@ const {
 
 const path = require('path');
 const url = require('url');
-const { removeTmpFolder } = require('./electron/directory');
+const { removeTmpFolder, createTmpFolder } = require('./electron/directory');
 const { openFile } = require('./electron/files');
 const { showShorcutInfo } = require('./electron/info');
 const registerShortcuts = require('./electron/shortcuts');
@@ -41,7 +41,7 @@ function createWindow() {
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools();
   }
-
+  createTmpFolder();
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -51,8 +51,8 @@ app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
   globalShortcut.unregisterAll();
-  removeTmpFolder();
   if (process.platform !== 'darwin') {
+    removeTmpFolder();
     app.quit();
   }
 });

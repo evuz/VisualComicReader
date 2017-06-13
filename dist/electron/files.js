@@ -1,4 +1,4 @@
-const { dialog, app } = require('electron');
+const { dialog } = require('electron');
 
 const fs = require('fs');
 const path = require('path');
@@ -8,13 +8,11 @@ const cbr = require('cbr');
 const Unrar = require('node-unrar');
 
 const {
-  removeTmpFolder,
   readDirectory,
-  addDirectoryCreated,
+  createTmpFolder,
  } = require('./directory');
 
 function openFile(mainWindow) {
-  removeTmpFolder();
   dialog.showOpenDialog({
     properties: ['openFile'],
     filters: [{
@@ -33,7 +31,6 @@ function openFile(mainWindow) {
         readDirectory(tmpFolder, (err, files) => {
           const ext = ['.jpg', '.png'];
 
-          addDirectoryCreated(tmpFolder);
           removeFilesByExtensions(files, tmpFolder, ext);
           // eslint-disable-next-line no-shadow
           readDirectory(tmpFolder, (err, files) => {
@@ -109,15 +106,6 @@ function cbrExtractLinux(pathFile, tmpFolder) {
       resolve({ tmpFolder });
     });
   });
-}
-
-function createTmpFolder(file) {
-  const folder = path.join(app.getPath('temp'), file);
-
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder);
-  }
-  return folder;
 }
 
 const API = {
