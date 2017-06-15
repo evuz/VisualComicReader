@@ -25,30 +25,30 @@ class HeaderNav extends Component {
   constructor() {
     super();
 
-    this.plusPage = this.plusPage.bind(this);
-    this.minusPage = this.minusPage.bind(this);
+    this.nextPage = this.nextPage.bind(this);
+    this.previousPage = this.previousPage.bind(this);
     this.setFullHeight = this.setFullHeight.bind(this);
     this.setFullWidth = this.setFullWidth.bind(this);
-    this.minusZoom = this.minusZoom.bind(this);
-    this.plusZoom = this.plusZoom.bind(this);
+    this.zoomOut = this.zoomOut.bind(this);
+    this.zoomIn = this.zoomIn.bind(this);
     this.setTwoColumns = this.setTwoColumns.bind(this);
   }
 
   componentDidMount() {
     ipcRenderer.on('right-press', () => {
-      this.plusPage();
+      this.nextPage();
     });
 
     ipcRenderer.on('left-press', () => {
-      this.minusPage();
+      this.previousPage();
     });
 
     ipcRenderer.on('ctrl-up-press', () => {
-      this.plusZoom();
+      this.zoomIn();
     });
 
     ipcRenderer.on('ctrl-down-press', () => {
-      this.minusZoom();
+      this.zoomOut();
     });
   }
 
@@ -65,24 +65,24 @@ class HeaderNav extends Component {
     this.props.setTwoColumns(!twoColumns);
   }
 
-  plusZoom() {
+  zoomIn() {
     const { percentSize } = this.props;
     this.props.setPercentSize(percentSize + 10);
   }
 
-  minusZoom() {
+  zoomOut() {
     const { percentSize } = this.props;
     this.props.setPercentSize(percentSize - 10);
   }
 
-  minusPage() {
+  previousPage() {
     const { page, twoColumns } = this.props;
     const newPage = twoColumns ? page - 2 : page - 1;
     if (newPage > 0) this.props.setPage(newPage);
     else this.props.setPage(0);
   }
 
-  plusPage() {
+  nextPage() {
     const { page, filesLength, twoColumns } = this.props;
     const newPage = twoColumns ? page + 2 : page + 1;
     if (newPage < filesLength - 1) this.props.setPage(newPage);
@@ -106,12 +106,12 @@ class HeaderNav extends Component {
             <MdKeyboard onClick={this.showShortcutInfo} />
           </div>
           <div className="center">
-            <MdKeyboardArrowLeft onClick={this.minusPage} />
-            <MdKeyboardArrowRight onClick={this.plusPage} />
+            <MdKeyboardArrowLeft onClick={this.previousPage} />
+            <MdKeyboardArrowRight onClick={this.nextPage} />
           </div>
           <div className="right">
-            <MdZoomOut onClick={this.minusZoom} />
-            <MdZoomIn onClick={this.plusZoom} />
+            <MdZoomOut onClick={this.zoomIn} />
+            <MdZoomIn onClick={this.zoomOut} />
             <MdStayCurrentLandscape onClick={this.setFullWidth} />
             <MdStayCurrentPortrait onClick={this.setFullHeight} />
             {
