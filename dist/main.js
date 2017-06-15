@@ -10,7 +10,7 @@ const {
 const path = require('path');
 const url = require('url');
 const { removeTmpFolder, createTmpFolder } = require('./electron/directory');
-const { openFile } = require('./electron/files');
+const { selectOpenFile, changeFile, setFileMainWindows } = require('./electron/files');
 const { showShorcutInfo } = require('./electron/info');
 const registerShortcuts = require('./electron/shortcuts');
 
@@ -42,6 +42,7 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
   }
   createTmpFolder();
+  setFileMainWindows(mainWindow);
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -63,8 +64,16 @@ app.on('activate', () => {
   }
 });
 
+ipcMain.on('next-file', () => {
+  changeFile('next');
+});
+
+ipcMain.on('previous-file', () => {
+  changeFile('previous');
+});
+
 ipcMain.on('open-file', () => {
-  openFile(mainWindow);
+  selectOpenFile();
 });
 
 ipcMain.on('show-info-shortcut', () => {

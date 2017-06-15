@@ -10,9 +10,14 @@ const Unrar = require('node-unrar');
 const {
   readDirectory,
   createTmpFolder,
+  setCurrentDirectory,
+  getCurrentDirectory,
  } = require('./directory');
 
-function openFile(mainWindow) {
+let currentFile;
+let mainWindow;
+
+function selectOpenFile() {
   dialog.showOpenDialog({
     properties: ['openFile'],
     filters: [{
@@ -24,25 +29,53 @@ function openFile(mainWindow) {
       return;
     }
     const pathFile = files[0];
-    extractFiles(pathFile)
-      .then((req) => {
-        const { tmpFolder } = req;
+    openFile(pathFile);
+  });
+}
+
+function openFile(pathFile) {
+  setCurrentFile(pathFile, true);
+  setCurrentDirectory(pathFile);
+  extractFiles(pathFile)
+    .then((req) => {
+      const { tmpFolder } = req;
+      // eslint-disable-next-line no-shadow
+      readDirectory(tmpFolder, (err, files) => {
+        const ext = ['.jpg', '.png'];
+
+        removeFilesByExtensions(files, tmpFolder, ext);
         // eslint-disable-next-line no-shadow
         readDirectory(tmpFolder, (err, files) => {
-          const ext = ['.jpg', '.png'];
-
-          removeFilesByExtensions(files, tmpFolder, ext);
-          // eslint-disable-next-line no-shadow
-          readDirectory(tmpFolder, (err, files) => {
-            if (err) throw new Error(err);
-            mainWindow.webContents.send('file-extracted',
-              Object.assign({}, req, { files }));
-          });
+          if (err) throw new Error(err);
+          mainWindow.webContents.send('file-extracted',
+            Object.assign({}, req, { files }));
         });
-      }).catch((err) => {
-        throw Error(err);
       });
+    }).catch((err) => {
+      throw Error(err);
+    });
+}
+
+function changeFile(nextOrPrevious) {
+  readDirectory(getCurrentDirectory(), (err, files) => {
+    if (err) throw Error(err);
+    const filesFilter = files.filter((file) => {
+      const ext = path.extname(file).toLowerCase();
+      return ext === '.cbz' || ext === '.cbr';
+    });
+    const index = filesFilter.findIndex(file => file === currentFile);
+    const newIndex = nextOrPrevious === 'next' ? index + 1 : index - 1;
+    const hasNext = newIndex < filesFilter.length && newIndex > -1;
+    if (hasNext) openFile(path.join(getCurrentDirectory(), filesFilter[newIndex]));
   });
+}
+
+function setCurrentFile(file, isDirectory) {
+  if (isDirectory) {
+    currentFile = path.parse(file).base;
+  } else {
+    currentFile = file;
+  }
 }
 
 function removeFilesByExtensions(files, tmp, ext) {
@@ -108,9 +141,15 @@ function cbrExtractLinux(pathFile, tmpFolder) {
   });
 }
 
+function setFileMainWindows(main) {
+  mainWindow = main;
+}
+
 const API = {
-  openFile,
+  selectOpenFile,
   removeFilesByExtensions,
+  changeFile,
+  setFileMainWindows,
 };
 
 module.exports = API;

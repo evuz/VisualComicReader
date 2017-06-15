@@ -77,6 +77,7 @@ class HeaderNav extends Component {
 
   previousPage() {
     const { page, twoColumns } = this.props;
+    if (page === 0) return ipcRenderer.send('previous-file');
     const newPage = twoColumns ? page - 2 : page - 1;
     if (newPage > 0) this.props.setPage(newPage);
     else this.props.setPage(0);
@@ -86,6 +87,7 @@ class HeaderNav extends Component {
     const { page, filesLength, twoColumns } = this.props;
     const newPage = twoColumns ? page + 2 : page + 1;
     if (newPage < filesLength - 1) this.props.setPage(newPage);
+    else return ipcRenderer.send('next-file');
   }
 
   newFile() {

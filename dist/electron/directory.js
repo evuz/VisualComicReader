@@ -3,8 +3,18 @@ const { app } = require('electron');
 const fs = require('fs');
 const path = require('path');
 
+let currentDirectory;
+
 function readDirectory(dir, cb) {
   fs.readdir(dir, cb);
+}
+
+function setCurrentDirectory(directory) {
+  currentDirectory = path.parse(directory).dir;
+}
+
+function getCurrentDirectory() {
+  return currentDirectory;
 }
 
 function removeTmpFolder() {
@@ -44,6 +54,8 @@ const API = {
   readDirectory,
   removeTmpFolder,
   createTmpFolder,
+  setCurrentDirectory,
+  getCurrentDirectory,
 };
 
 module.exports = API;
