@@ -14,10 +14,14 @@ const registerShortcuts = require('./shortcuts');
 
 let mainWindow;
 
+const winURL = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:9080'
+  : `file://${__dirname}/index.html`;
+
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
-  mainWindow.loadURL('http://localhost:9080');
+  mainWindow.loadURL(winURL);
 
   mainWindow.on('blur', () => {
     globalShortcut.unregisterAll();
@@ -35,7 +39,7 @@ function createWindow() {
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools();
   }
-  mainWindow.webContents.openDevTools();
+
   createTmpFolder();
   setFileMainWindows(mainWindow);
   mainWindow.on('closed', () => {

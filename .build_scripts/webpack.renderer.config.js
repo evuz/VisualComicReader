@@ -7,8 +7,9 @@ const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
+const BabiliWebpackPlugin = require('babili-webpack-plugin');
 
-module.exports = {
+let rendererConfig = {
   entry: {
     renderer: path.join(__dirname, '..', 'src', 'renderer', 'index.js'),
   },
@@ -62,3 +63,25 @@ module.exports = {
   },
   target: 'electron-renderer'
 };
+
+/**
+ * Adjust rendererConfig for production settings
+ */
+if (process.env.NODE_ENV === 'production') {
+  rendererConfig.devtool = ''
+
+  rendererConfig.plugins.push(
+    new BabiliWebpackPlugin({
+      removeConsole: true,
+      removeDebugger: true
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  )
+}
+
+module.exports = rendererConfig;
