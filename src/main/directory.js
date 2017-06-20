@@ -37,9 +37,15 @@ function deleteFolderRecursive(pathFolder) {
 }
 
 function createTmpFolder(file) {
+  const tmpPath = process.env.NODE_ENV === 'development' ?
+    path.join(path.resolve(__dirname), '..', '..') :
+    app.getPath('temp');
+  const tmpFolder = process.env.NODE_ENV === 'development' ?
+    'static' : 'VisualComicReader';
+
   const folder = file ?
-    path.join(app.getPath('temp'), 'VisualComicReader', file) :
-    path.join(app.getPath('temp'), 'VisualComicReader');
+    path.join(tmpPath, tmpFolder, file) :
+    path.join(tmpPath, tmpFolder);
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder);
   } else {
