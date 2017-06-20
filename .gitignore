@@ -1,10 +1,11 @@
 .vscode
 .DS_Store
+static
 
 node_modules
 npm-debug.log
 
-dist/bundle.js
-dist/bundle.js.map
+dist
+index.html
 tmp
 builds

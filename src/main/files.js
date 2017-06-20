@@ -47,6 +47,9 @@ function openFile(pathFile) {
         // eslint-disable-next-line no-shadow
         readDirectory(tmpFolder, (err, files) => {
           if (err) throw new Error(err);
+          if (process.env.NODE_ENV === 'development') {
+            req.tmpFolder = path.relative(path.resolve(__dirname), tmpFolder);
+          }
           mainWindow.webContents.send('file-extracted',
             Object.assign({}, req, { files }));
         });
@@ -95,7 +98,6 @@ function removeFilesByExtensions(files, tmp, ext) {
 function extractFiles(pathFile) {
   const file = path.basename(pathFile);
   const tmpFolder = createTmpFolder(file);
-
   switch (path.extname(file)) {
     case '.cbz':
       return cbzExtract(pathFile, tmpFolder);

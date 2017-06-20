@@ -7,23 +7,21 @@ const {
   ipcMain,
 } = electron;
 
-const path = require('path');
-const url = require('url');
-const { removeTmpFolder, createTmpFolder } = require('./electron/directory');
-const { selectOpenFile, changeFile, setFileMainWindows } = require('./electron/files');
-const { showShorcutInfo } = require('./electron/info');
-const registerShortcuts = require('./electron/shortcuts');
+const { removeTmpFolder, createTmpFolder } = require('./directory');
+const { selectOpenFile, changeFile, setFileMainWindows } = require('./files');
+const { showShorcutInfo } = require('./info');
+const registerShortcuts = require('./shortcuts');
 
 let mainWindow;
+
+const winURL = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:9080'
+  : `file://${__dirname}/index.html`;
 
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file',
-    slashes: true,
-  }));
+  mainWindow.loadURL(winURL);
 
   mainWindow.on('blur', () => {
     globalShortcut.unregisterAll();
@@ -41,6 +39,7 @@ function createWindow() {
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools();
   }
+
   createTmpFolder();
   setFileMainWindows(mainWindow);
   mainWindow.on('closed', () => {
