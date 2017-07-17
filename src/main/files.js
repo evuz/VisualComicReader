@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const cbz = require('extract-zip');
-const cbr = require('cbr');
+const cbr = require('./cbr');
 const Unrar = require('node-unrar');
 
 const {
