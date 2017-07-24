@@ -21,6 +21,8 @@ import {
   setTwoColumns,
 } from '../../reducers/options';
 
+import './index.scss';
+
 class HeaderNav extends Component {
   constructor() {
     super();

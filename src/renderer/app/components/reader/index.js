@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './index.scss';
+
 class Reader extends Component {
   constructor() {
     super();

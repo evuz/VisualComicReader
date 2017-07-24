@@ -1,31 +1,32 @@
-.header_nav{
-    @include absolute(auto, 0, 0, 0);
-    height: $nav_size;
-    background: $cinnabar;
-
+.header_nav {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 25px;
+    background: #DD403A;
     .icons {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: $nav_size;
+        height: 25px;
         color: white;
         padding: 0 10px;
         font-size: 15px;
         .left {
-          svg {
-            margin-right: 5px;
-          }
+            svg {
+                margin-right: 5px;
+            }
         }
         .right {
-          svg {
-            margin-left: 5px;
-          }
+            svg {
+                margin-left: 5px;
+            }
         }
         .active {
             color: silver;
         }
     }
-
     svg:hover {
         cursor: pointer;
         color: silver;

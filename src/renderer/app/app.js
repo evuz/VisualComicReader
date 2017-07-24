@@ -1,11 +1,13 @@
 import { ipcRenderer } from 'electron';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './app.scss';
 
-import { Layout, Reader } from './components';
+import Layout from './components/layout';
+import Reader from './components/reader';
 import { setDirectory, setFiles } from './reducers/reader';
 import { setFullScreen } from './reducers/windowState';
+
+import './app.scss';
 
 class App extends Component {
   constructor() {

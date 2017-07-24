@@ -1,15 +1,23 @@
 .layout {
     .container {
-        @include absolute(0, 0, $nav_size, $lateral_nav_size);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 25px;
+        left: 125px;
         background: rgb(30, 30, 30);
         &.lateral_nav {
-            left: $nav_size;
+            left: 25px;
             width: auto;
         }
     }
     &.full_screen {
         .container {
-            @include absolute(0, 0, 0, 0);
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
         }
         .header_nav {
             display: none;
@@ -20,7 +28,6 @@
             left: -100px;
             transition: 0.3s;
             opacity: 0;
-
             &:hover {
                 opacity: 1;
                 left: 0;
@@ -28,14 +35,14 @@
             }
         }
     }
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
         opacity: 0;
     }
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
         width: 10px;
         opacity: 0;
     }
-    ::-webkit-scrollbar-thumb {
-        background-color: hsla(0,0%,47%,.4);
+     ::-webkit-scrollbar-thumb {
+        background-color: hsla(0, 0%, 47%, .4);
     }
 }

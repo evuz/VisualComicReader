@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  ControlNav,
-  LateralPanel,
-} from '../';
+
+import LateralPanel from '../lateral_panel';
+import ControlNav from '../control_nav';
+
+import './index.scss';
 
 const Layout = props => (
   <div className={props.fullScreen ? 'layout full_screen' : 'layout'}>

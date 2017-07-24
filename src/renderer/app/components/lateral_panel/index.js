@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setPage } from '../../reducers/reader';
-import MiniaturePage from './miniature_page/miniature_page';
+import MiniaturePage from './miniature_page';
+
+import './index.scss';
 
 class LateralNav extends Component {
   constructor(props) {
