@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setPage } from '../../reducers/reader';
-import MiniaturePage from './miniature_page';
+import MiniaturePage from './MiniaturePage';
 
 import './index.scss';
 
