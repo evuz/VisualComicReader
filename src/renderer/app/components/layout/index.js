@@ -1,8 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import LateralPanel from '../lateral_panel';
-import ControlNav from '../control_nav';
+import LateralPanel from '../LateralPanel';
+import ControlNav from '../ControlNav';
 
 import './index.scss';
 
@@ -16,8 +15,4 @@ const Layout = props => (
   </div>
 );
 
-const mapStateToProps = state => ({
-  fullScreen: state.windowState.fullScreen,
-});
-
-export default connect(mapStateToProps)(Layout);
+export default Layout;

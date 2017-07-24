@@ -84,45 +84,46 @@ class Reader extends Component {
         className="reader"
         ref={c => (this.reader = c)}
       >
-        {twoColumns ?
-          <div
-            className="doblePage"
-            style={{
-              height,
-            }}
-          >
-            <img
-              className={clicked ? 'left drag' : 'left'}
+        {
+          twoColumns ?
+            <div
+              className="doblePage"
+              style={{
+                height,
+              }}
+            >
+              <img
+                className={clicked ? 'left drag' : 'left'}
+                src={directory + files[page]}
+                alt=""
+                draggable="false"
+                onMouseDown={this.handleMouseDown}
+                onMouseUp={this.handleMouseUp}
+                onMouseMove={this.handleMouseMove}
+              />
+              <img
+                className={clicked ? 'right drag' : 'right'}
+                src={directory + files[page + 1]}
+                alt=""
+                draggable="false"
+                onMouseDown={this.handleMouseDown}
+                onMouseUp={this.handleMouseUp}
+                onMouseMove={this.handleMouseMove}
+              />
+            </div>
+            : <img
+              className={clicked ? 'drag' : ''}
               src={directory + files[page]}
               alt=""
-              draggable="false"
+              style={{
+                height,
+                width,
+              }}
               onMouseDown={this.handleMouseDown}
               onMouseUp={this.handleMouseUp}
               onMouseMove={this.handleMouseMove}
-            />
-            <img
-              className={clicked ? 'right drag' : 'right'}
-              src={directory + files[page + 1]}
-              alt=""
               draggable="false"
-              onMouseDown={this.handleMouseDown}
-              onMouseUp={this.handleMouseUp}
-              onMouseMove={this.handleMouseMove}
             />
-          </div>
-          : <img
-            className={clicked ? 'drag' : ''}
-            src={directory + files[page]}
-            alt=""
-            style={{
-              height,
-              width,
-            }}
-            onMouseDown={this.handleMouseDown}
-            onMouseUp={this.handleMouseUp}
-            onMouseMove={this.handleMouseMove}
-            draggable="false"
-          />
         }
       </div>
     ) : null;
