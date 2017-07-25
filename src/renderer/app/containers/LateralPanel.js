@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setPage,
+  onClickPage: setPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LateralPanelComponent);

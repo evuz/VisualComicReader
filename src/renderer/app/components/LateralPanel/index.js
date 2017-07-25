@@ -26,7 +26,7 @@ class LateralNav extends Component {
       src={directory + file}
       key={index}
       page={index}
-      handleClick={this.props.goToPage}
+      handleClick={this.props.onClickPage}
       active={page === index}
     />));
     return (
