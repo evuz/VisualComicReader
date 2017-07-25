@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ipcRenderer } from 'electron';
 
@@ -13,13 +13,35 @@ import {
 
 import ControlNavComponent from '../components/ControlNav';
 
-const ControlNavContainer = props => (
-  <ControlNavComponent
-    {...props}
-    onClickOpenFile={() => ipcRenderer.send('open-file')}
-    onClickShortcutInfo={() => ipcRenderer.send('show-info-shortcut')}
-  />
-);
+class ControlNavContainer extends Component {
+  componentDidMount() {
+    ipcRenderer.on('right-press', () => {
+      this.props.onClickNextPage();
+    });
+
+    ipcRenderer.on('left-press', () => {
+      this.props.onClickPreviousPage();
+    });
+
+    ipcRenderer.on('ctrl-up-press', () => {
+      this.props.onClickZoomIn();
+    });
+
+    ipcRenderer.on('ctrl-down-press', () => {
+      this.props.onClickZoomOut();
+    });
+  }
+
+  render() {
+    return (
+      <ControlNavComponent
+        {...this.props}
+        onClickOpenFile={() => ipcRenderer.send('open-file')}
+        onClickShortcutInfo={() => ipcRenderer.send('show-info-shortcut')}
+      />
+    );
+  }
+}
 
 const mapDispatchToProps = {
   onClickNextPage: nextPage,
