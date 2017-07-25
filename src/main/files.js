@@ -71,6 +71,7 @@ function changeFile(nextOrPrevious) {
     const newIndex = nextOrPrevious === 'next' ? index + 1 : index - 1;
     const hasNext = newIndex < filesFilter.length && newIndex > -1;
     if (hasNext) openFile(path.join(getCurrentDirectory(), filesFilter[newIndex]));
+    else mainWindow.webContents.send('fetching', false);
   });
 }
 
