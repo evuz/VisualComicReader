@@ -27,6 +27,7 @@ function selectOpenFile() {
     if (!files) {
       return;
     }
+    mainWindow.webContents.send('fetching', true);
     const pathFile = files[0];
     openFile(pathFile);
   });
@@ -37,7 +38,6 @@ function openFile(pathFile) {
   setCurrentDirectory(pathFile);
   extractFiles(pathFile)
     .then((req) => {
-      console.log(req);
       const { tmpFolder } = req;
       // eslint-disable-next-line no-shadow
       readDirectory(tmpFolder, (err, files) => {
@@ -50,6 +50,7 @@ function openFile(pathFile) {
           if (process.env.NODE_ENV === 'development') {
             req.tmpFolder = path.relative(path.resolve(__dirname), tmpFolder);
           }
+          mainWindow.webContents.send('fetching', false);
           mainWindow.webContents.send('file-extracted',
             Object.assign({}, req, { files }));
         });

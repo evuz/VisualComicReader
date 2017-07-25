@@ -64,10 +64,12 @@ app.on('activate', () => {
 });
 
 ipcMain.on('next-file', () => {
+  mainWindow.webContents.send('fetching', true);
   changeFile('next');
 });
 
 ipcMain.on('previous-file', () => {
+  mainWindow.webContents.send('fetching', true);
   changeFile('previous');
 });
 
