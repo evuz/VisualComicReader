@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { setPage } from '../../reducers/reader';
-import MiniaturePage from './miniature_page/miniature_page';
+
+import MiniaturePage from './MiniaturePage';
+
+import './index.scss';
 
 class LateralNav extends Component {
-  constructor(props) {
-    super(props);
-
-    this.goToPage = this.goToPage.bind(this);
-  }
-
-  goToPage(index) {
-    this.props.setPage(index);
-  }
-
   scrollPosition() {
     const { lateralNav } = this;
     if (lateralNav) {
@@ -35,7 +26,7 @@ class LateralNav extends Component {
       src={directory + file}
       key={index}
       page={index}
-      handleClick={this.goToPage}
+      handleClick={this.props.onClickPage}
       active={page === index}
     />));
     return (
@@ -46,17 +37,5 @@ class LateralNav extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { reader: { directory, files, page } } = state;
-  return {
-    directory,
-    files,
-    page,
-  };
-};
 
-const mapDispatchToProps = {
-  setPage,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LateralNav);
+export default LateralNav;

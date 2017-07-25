@@ -3,16 +3,22 @@ import {
   SET_FULL_WIDTH,
   SET_SIZE_PERCENT,
   SET_TWO_COLUMNS,
+  ZOOM_IN,
+  ZOOM_OUT,
 } from './actionTypes';
 
 export * from './actions';
 
-function options(state = {
+const initialState = {
   fullHeight: true,
   fullWidth: false,
   twoColumns: false,
   percentSize: 100,
-}, action) {
+};
+
+const zoomStep = 10;
+
+function options(state = initialState, action) {
   switch (action.type) {
     case SET_FULL_WIDTH:
       return Object.assign({}, state, {
@@ -41,6 +47,14 @@ function options(state = {
         percentSize: 100,
       });
     }
+    case ZOOM_IN:
+      return Object.assign({}, state, {
+        percentSize: state.percentSize + zoomStep,
+      });
+    case ZOOM_OUT:
+      return Object.assign({}, state, {
+        percentSize: state.percentSize - zoomStep,
+      });
     default:
       return state;
   }

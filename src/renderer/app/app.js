@@ -1,21 +1,15 @@
 import { ipcRenderer } from 'electron';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './app.scss';
 
-import { Layout, Reader } from './components';
+import Layout from './containers/Layout';
+import Reader from './containers/Reader';
 import { setDirectory, setFiles } from './reducers/reader';
 import { setFullScreen } from './reducers/windowState';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      workingDirectory: '',
-      files: [],
-    };
-  }
+import './app.scss';
 
+class App extends Component {
   componentDidMount() {
     ipcRenderer.on('file-extracted', (event, data) => {
       this.props.setDirectory(`${data.tmpFolder}/`);
@@ -31,20 +25,10 @@ class App extends Component {
     });
   }
 
-  filterFiles(files) {
-    const error = -1;
-    const filesFilter = files.filter(file => (file.indexOf('.jpg') > error || file.indexOf('.png') > error));
-
-    return filesFilter;
-  }
-
   render() {
     return (
       <Layout>
-        <Reader
-          dir={this.state.workingDirectory}
-          files={this.state.files}
-        />
+        <Reader />
       </Layout>
     );
   }

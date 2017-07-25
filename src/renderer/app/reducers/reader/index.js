@@ -6,11 +6,13 @@ import {
 
 export * from './actions';
 
-function reader(state = {
+const initialState = {
   files: [],
   directory: '',
   page: 0,
-}, action) {
+};
+
+function reader(state = initialState, action) {
   switch (action.type) {
     case SET_DIRECTORY: {
       const { directory } = action;

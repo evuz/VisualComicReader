@@ -3,6 +3,8 @@ import {
   SET_FULL_WIDTH,
   SET_SIZE_PERCENT,
   SET_TWO_COLUMNS,
+  ZOOM_IN,
+  ZOOM_OUT,
 } from './actionTypes';
 
 export function setFullHeight() {
@@ -24,9 +26,28 @@ export function setPercentSize(percentSize) {
   };
 }
 
+export function toogleTwoColumns() {
+  return (dispatch, getState) => {
+    const { twoColumns } = getState().options;
+    dispatch(setTwoColumns(!twoColumns));
+  };
+}
+
 export function setTwoColumns(twoColumns) {
   return {
     type: SET_TWO_COLUMNS,
     twoColumns,
+  };
+}
+
+export function zoomIn() {
+  return {
+    type: ZOOM_IN,
+  };
+}
+
+export function zoomOut() {
+  return {
+    type: ZOOM_OUT,
   };
 }
