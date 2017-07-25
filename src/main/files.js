@@ -4,8 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const cbz = require('extract-zip');
-const cbr = require('./cbr');
-const Unrar = require('node-unrar');
+const unrar = require('node-unrar-js');
 
 const {
   readDirectory,
@@ -38,6 +37,7 @@ function openFile(pathFile) {
   setCurrentDirectory(pathFile);
   extractFiles(pathFile)
     .then((req) => {
+      console.log(req);
       const { tmpFolder } = req;
       // eslint-disable-next-line no-shadow
       readDirectory(tmpFolder, (err, files) => {
@@ -119,27 +119,10 @@ function cbzExtract(pathFile, tmpFolder) {
 }
 
 function cbrExtract(pathFile, tmpFolder) {
-  if (process.platform === 'linux') {
-    return cbrExtractLinux(pathFile, tmpFolder);
-  }
-  return new Promise((resolve, reject) => {
-    cbr(pathFile, tmpFolder, (err) => {
-      if (err) {
-        reject(err);
-      }
-      resolve({ tmpFolder });
-    });
-  });
-}
-
-function cbrExtractLinux(pathFile, tmpFolder) {
-  return new Promise((resolve, reject) => {
-    const rar = new Unrar(pathFile);
-
-    rar.extract(tmpFolder, null, (err) => {
-      if (err) reject(err);
-      resolve({ tmpFolder });
-    });
+  return new Promise((resolve) => {
+    const extractor = unrar.createExtractorFromFile(pathFile, tmpFolder);
+    const extracted = extractor.extractAll();
+    if (extracted[0].state === 'SUCCESS') resolve({ tmpFolder });
   });
 }
 
