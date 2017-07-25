@@ -41,14 +41,12 @@ export function setTwoColumns(twoColumns) {
 }
 
 export function zoomIn() {
-  console.log('zoomIn');
   return {
     type: ZOOM_IN,
   };
 }
 
 export function zoomOut() {
-  console.log('zoomOut');
   return {
     type: ZOOM_OUT,
   };
