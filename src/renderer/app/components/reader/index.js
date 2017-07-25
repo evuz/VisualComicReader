@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import './index.scss';
 
@@ -130,9 +129,4 @@ class Reader extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  reader: state.reader,
-  options: state.options,
-});
-
-export default connect(mapStateToProps)(Reader);
+export default Reader;

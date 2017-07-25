@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Layout from './containers/Layout';
-import Reader from './components/Reader';
+import Reader from './containers/Reader';
 import { setDirectory, setFiles } from './reducers/reader';
 import { setFullScreen } from './reducers/windowState';
 
