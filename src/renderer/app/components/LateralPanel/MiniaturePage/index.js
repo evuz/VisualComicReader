@@ -22,8 +22,10 @@ class MiniaturePage extends Component {
         role="presentation"
         className={active ? 'active miniature-page' : 'miniature-page'}
       >
+        <div className="hover-page">
+          <div className="number-page">{page + 1}</div>
+        </div>
         <img src={src} alt="" />
-        <span className="number-page">{page + 1}</span>
       </div>
     );
   }
