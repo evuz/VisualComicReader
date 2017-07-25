@@ -1,16 +1,13 @@
 import React from 'react';
 
-import LateralPanel from '../LateralPanel';
-import ControlNav from '../ControlNav';
-
 import './index.scss';
 
-const Layout = props => (
-  <div className={props.fullScreen ? 'layout full_screen' : 'layout'}>
-    <ControlNav />
-    <LateralPanel />
+const Layout = ({ children, lateralPanel, controlNav, fullScreen }) => (
+  <div className={fullScreen ? 'layout full_screen' : 'layout'}>
+    {controlNav}
+    {lateralPanel}
     <div className="container">
-      {props.children}
+      {children}
     </div>
   </div>
 );
