@@ -3,6 +3,8 @@ const { app } = require('electron');
 const fs = require('fs');
 const path = require('path');
 
+const { getCleanedString, removeExtension } = require('./filters/cleanString');
+
 let currentDirectory;
 
 function readDirectory(dir, cb) {
@@ -44,7 +46,7 @@ function createTmpFolder(file) {
     'static' : 'VisualComicReader';
 
   const folder = file ?
-    path.join(tmpPath, tmpFolder, file) :
+    path.join(tmpPath, tmpFolder, getCleanedString(removeExtension(file))) :
     path.join(tmpPath, tmpFolder);
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder);
