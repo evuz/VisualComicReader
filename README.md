@@ -1,3 +1,5 @@
+<img src="https://electronjs.org/app-img/visual-comic-reader/visual-comic-reader-icon-128.png">
+
 Visual Comic Reader
 ======
 _by @evuz_
