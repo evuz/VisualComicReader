@@ -1,1 +1,0 @@
-export const SET_FULL_SCREEN = 'SET_FULL_SCREEN';
