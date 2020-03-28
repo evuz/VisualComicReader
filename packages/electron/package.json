@@ -1,13 +1,13 @@
 {
   "name": "@vcr/electron",
-  "productName": "electron",
+  "productName": "VisualComicReader",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
+    "package": "tsc && electron-forge package && vcr-scripts deps",
+    "make": "npm run package && electron-forge make --skip-package",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts ."
   },
@@ -19,7 +19,9 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "name": "VisualComicReader"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -35,11 +37,9 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "config": {
+            "bin": "VisualComicReader"
+          }
         }
       ]
     }
@@ -52,8 +52,9 @@
     "@electron-forge/maker-zip": "6.0.0-beta.50",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
-    "eslint": "^6.8.0",
+    "@vcr/scripts": "0.0.1",
     "electron": "8.2.0",
+    "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.0",
     "typescript": "^3.7.0"
   },

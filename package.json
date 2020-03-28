@@ -8,8 +8,12 @@
     ]
   },
   "scripts": {
+    "script:copy-renderer": "vcr-scripts copy-renderer",
     "app:start": "yarn workspace @vcr/webapp start",
-    "electron:start": "yarn workspace @vcr/electron start"
+    "app:build": "yarn workspace @vcr/webapp build",
+    "electron:start": "yarn workspace @vcr/electron start",
+    "electron:build": "yarn workspace @vcr/electron make",
+    "build": "run-s app:build script:copy-renderer electron:build"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
