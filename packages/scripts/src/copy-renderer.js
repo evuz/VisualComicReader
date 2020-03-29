@@ -15,13 +15,19 @@ const RENDERER_PATH = path.resolve(__dirname, paths.electron, RENDERER_FOLDER);
 
 module.exports = async function copyRenderer() {
   const spinner = ora('Copying..').start();
-  const existDistFolder = await utils.promisify(fs.exists)(DIST_PATH);
-  if (!existDistFolder) {
-    spinner.stop();
-    console.error(chalk.bold.red('You must build app before'));
+
+  try {
+    const existDistFolder = await utils.promisify(fs.exists)(DIST_PATH);
+    if (!existDistFolder) {
+      throw Error('You must build app before');
+    }
+
+    await fse.remove(RENDERER_PATH);
+    await fse.copy(DIST_PATH, RENDERER_PATH);
+    spinner.succeed();
+  } catch (error) {
+    spinner.fail();
+    console.error(chalk.bold.red(error));
     process.exit(1);
   }
-  await fse.remove(RENDERER_PATH);
-  await fse.copy(DIST_PATH, RENDERER_PATH);
-  spinner.stop();
 };

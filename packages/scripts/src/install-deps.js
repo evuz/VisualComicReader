@@ -12,22 +12,30 @@ const PACKAGING_FOLDER = 'out';
 const PACKAGING_PATH = path.resolve(__dirname, paths.electron, PACKAGING_FOLDER);
 
 async function getAppName() {
-  const pkg = JSON.parse(await utils.promisify(fs.readFile)(path.resolve(__dirname, paths.electron, 'package.json'), 'utf-8'));
+  const pkg = JSON.parse(
+    await utils.promisify(fs.readFile)(path.resolve(__dirname, paths.electron, 'package.json'), 'utf-8'),
+  );
   return pkg.productName;
 }
 
 module.exports = async function installDeps() {
-  const spinner = ora('Installing dependencies').start();
-  const existDistFolder = await utils.promisify(fs.exists)(PACKAGING_PATH);
-  if (!existDistFolder) {
-    spinner.stop();
-    console.error(chalk.bold.red('You must package app before'));
+  const spinner = ora('Installing dependencies').start();;
+
+  try {
+    const existDistFolder = await utils.promisify(fs.exists)(PACKAGING_PATH);
+    if (!existDistFolder) {
+      throw Error('You must package app before');
+    }
+
+    const appName = await getAppName();
+    const pkgs = await utils.promisify(glob)(path.join(PACKAGING_PATH, `${appName}*/**/package.json`));
+    const pkg = pkgs[0];
+    const pkgPath = path.dirname(pkg);
+    await utils.promisify(exec)('npm install --only=prod', { cwd: pkgPath });
+    spinner.succeed();
+  } catch (error) {
+    spinner.fail();
+    console.error(chalk.bold.red(error));
     process.exit(1);
   }
-  const appName = await getAppName();
-  const pkgs = await utils.promisify(glob)(path.join(PACKAGING_PATH, `${appName}*/**/package.json`));
-  const pkg = pkgs[0];
-  const pkgPath = path.dirname(pkg);
-  await utils.promisify(exec)('npm install --only=prod', { cwd: pkgPath });
-  spinner.succeed();
 };
