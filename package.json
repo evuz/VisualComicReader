@@ -5,7 +5,8 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ]
+    ],
+    "nohoist": ["**/electron", "**/electron/**"]
   },
   "scripts": {
     "script:copy-renderer": "vcr-scripts copy-renderer",
