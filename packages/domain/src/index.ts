@@ -1,4 +1,4 @@
 export function log() {
-  console.log('Logs');
-  return 'logs';
+  console.log('Logs')
+  return 'logs'
 }

@@ -1,7 +1,7 @@
 const paths = {
   packages: '../..',
   electron: '../../electron',
-  webapp: '../../webapp',
-};
+  webapp: '../../webapp'
+}
 
-module.exports = paths;
+module.exports = paths
