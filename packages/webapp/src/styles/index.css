@@ -1,14 +1,13 @@
 :root {
-  --background: #fff;
-  --accents-1: #fafafa;
-  --accents-2: #eaeaea;
-  --accents-3: #999;
+  --background: #111;
+  --accents-1: #333;
+  --accents-2: #444;
+  --accents-3: #666;
   --accents-4: #888;
-  --accents-5: #666;
-  --accents-6: #444;
-  --accents-7: #333;
-  --accents-8: #111;
-  --foreground: #000;
+  --accents-5: #999;
+  --accents-6: #eaeaea;
+  --accents-7: #fafafa;
+  --foreground: #fff;
   --error-light: #ff1a1a;
   --error: #e00;
   --error-dark: #c00;
@@ -32,10 +31,12 @@ body {
   margin: 0;
   font-family: var(--font-family);
   font-weight: 400;
-  color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+* > :first-child { margin-top: 0 !important; margin-left: 0 !important; }
+* > :last-child { margin-bottom: 0 !important; margin-right: 0 !important; }
 
 * {
   box-sizing: border-box;
