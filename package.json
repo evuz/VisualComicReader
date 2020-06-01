@@ -35,6 +35,9 @@
     "extends": [
       "./node_modules/@s-ui/lint/eslintrc.js"
     ],
+    "env": {
+      "jest": true
+    },
     "rules": {
       "no-unused-vars": "off",
       "react/react-in-jsx-scope": "off",

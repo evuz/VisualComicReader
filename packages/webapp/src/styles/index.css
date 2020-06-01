@@ -1,0 +1,42 @@
+:root {
+  --background: #fff;
+  --accents-1: #fafafa;
+  --accents-2: #eaeaea;
+  --accents-3: #999;
+  --accents-4: #888;
+  --accents-5: #666;
+  --accents-6: #444;
+  --accents-7: #333;
+  --accents-8: #111;
+  --foreground: #000;
+  --error-light: #ff1a1a;
+  --error: #e00;
+  --error-dark: #c00;
+  --success-light: #3291ff;
+  --success: #0070f3;
+  --success-dark: #0366d6;
+  --warning-light: #f7b955;
+  --warning: #f5a623;
+  --warning-dark: #f49b0b;
+  --alert: #ff0080;
+  --purple: #f81ce5;
+  --violet: #7928ca;
+  --cyan: #79ffe1;
+  --font-family: "Inter", sans-serif;
+  --font-mono: "Oxygen Mono", monospace;
+}
+@import './fonts.css';
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-family);
+  font-weight: 400;
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
