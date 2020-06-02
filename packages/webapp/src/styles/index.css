@@ -24,11 +24,26 @@
   --font-family: "Inter", sans-serif;
   --font-mono: "Oxygen Mono", monospace;
 }
+
+.light {
+  --background: #fff;
+  --accents-1: #fafafa;
+  --accents-2: #eaeaea;
+  --accents-3: #999;
+  --accents-4: #888;
+  --accents-5: #666;
+  --accents-6: #444;
+  --accents-7: #333;
+  --foreground: #111;
+}
+
 @import './fonts.css';
+
 html,
 body {
   padding: 0;
   margin: 0;
+  font-size: 100%;
   font-family: var(--font-family);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
