@@ -23,5 +23,8 @@
     "rollup-plugin-typescript2": "^0.26.0",
     "ts-jest": "^25.2.0",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "rxjs": "^6.5.5"
   }
 }
