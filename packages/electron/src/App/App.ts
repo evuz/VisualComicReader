@@ -1,4 +1,7 @@
-import { App as ElectronApp, BrowserWindow } from 'electron'
+import { App as ElectronApp, BrowserWindow, ipcMain } from 'electron'
+
+import { changeFile, selectOpenFile } from '../utils/files'
+import { showShorcutInfo } from '../utils/info'
 
 export abstract class App {
   protected window: BrowserWindow
@@ -17,6 +20,23 @@ export abstract class App {
     this.app.on('ready', () => this.show())
     this.app.on('window-all-closed', () => this.close())
     this.app.on('activate', () => this.activate())
+    ipcMain.on('next-file', () => {
+      this.window.webContents.send('fetching', true)
+      changeFile('next')
+    })
+
+    ipcMain.on('previous-file', () => {
+      this.window.webContents.send('fetching', true)
+      changeFile('previous')
+    })
+
+    ipcMain.on('open-file', () => {
+      selectOpenFile()
+    })
+
+    ipcMain.on('show-info-shortcut', () => {
+      showShorcutInfo(process.platform)
+    })
   }
 
   private close() {

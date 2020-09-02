@@ -62,6 +62,8 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "extract-zip": "^2.0.1",
+    "node-unrar-js": "^0.8.1"
   }
 }
