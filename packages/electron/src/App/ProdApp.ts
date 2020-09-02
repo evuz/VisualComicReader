@@ -8,9 +8,11 @@ export class ProdApp extends App {
     this.window = new BrowserWindow({
       height: 600,
       width: 800,
-      show: false
+      show: false,
     })
-    this.window.loadFile(path.join(__dirname, '..', '..', 'renderer', 'index.html'))
+    this.window.loadFile(
+      path.join(__dirname, '..', '..', 'renderer', 'index.html')
+    )
     return this.window
   }
 }

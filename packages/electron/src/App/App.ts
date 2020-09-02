@@ -1,5 +1,4 @@
-import {App as ElectronApp, BrowserWindow} from 'electron'
-import * as path from 'path'
+import { App as ElectronApp, BrowserWindow } from 'electron'
 
 export abstract class App {
   protected window: BrowserWindow

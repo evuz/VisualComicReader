@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './App.css'
-import {Button} from '../Button/Button'
+import { Button } from '../Button/Button'
 
 function App() {
   return (

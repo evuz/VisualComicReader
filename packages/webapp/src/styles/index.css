@@ -21,8 +21,8 @@
   --purple: #f81ce5;
   --violet: #7928ca;
   --cyan: #79ffe1;
-  --font-family: "Inter", sans-serif;
-  --font-mono: "Oxygen Mono", monospace;
+  --font-family: 'Inter', sans-serif;
+  --font-mono: 'Oxygen Mono', monospace;
 }
 
 .light {
@@ -50,8 +50,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* > :first-child { margin-top: 0 !important; margin-left: 0 !important; }
-* > :last-child { margin-bottom: 0 !important; margin-right: 0 !important; }
+* > :first-child {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+}
+* > :last-child {
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
+}
 
 * {
   box-sizing: border-box;

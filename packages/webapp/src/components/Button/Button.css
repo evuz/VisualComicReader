@@ -23,12 +23,12 @@ button:focus {
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 5px;
-  transition: all .3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
 
 .Button--small {
   height: 1.375rem;
-  padding: 0 .675rem;
+  padding: 0 0.675rem;
 }
 
 .Button--medium {
@@ -41,7 +41,8 @@ button:focus {
   font-size: 1rem;
 }
 
-.Button:hover, .Button:focus {
+.Button:hover,
+.Button:focus {
   background-color: var(--button-bg-hover);
   color: var(--button-color-hover);
   border: 1px solid var(--button-border-hover);
@@ -91,7 +92,6 @@ button:focus {
   --button-color-hover: var(--foreground);
   --button-border-hover: transparent;
 }
-
 
 .Button:active {
   transition: none;

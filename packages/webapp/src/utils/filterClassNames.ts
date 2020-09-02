@@ -4,6 +4,6 @@ type ClassNames = {
 
 export function filterClassNames(classnames: ClassNames) {
   return Object.keys(classnames)
-    .filter(key => classnames[key])
+    .filter((key) => classnames[key])
     .join(' ')
 }

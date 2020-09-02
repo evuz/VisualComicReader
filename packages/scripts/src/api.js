@@ -3,5 +3,5 @@ const installDeps = require('./install-deps')
 
 module.exports = {
   copyRenderer,
-  installDeps
+  installDeps,
 }

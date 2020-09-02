@@ -1,7 +1,7 @@
-import {App as ElectronApp} from 'electron'
+import { App as ElectronApp } from 'electron'
 
-import {DevApp} from './DevApp'
-import {ProdApp} from './ProdApp'
+import { DevApp } from './DevApp'
+import { ProdApp } from './ProdApp'
 
 export function appFactory(electronApp: ElectronApp) {
   if (process.env.NODE_ENV === 'development') {

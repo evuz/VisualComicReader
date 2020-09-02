@@ -1,9 +1,9 @@
-const program = require('commander');
+const program = require('commander')
 
-const api = require('../src/api');
+const api = require('../src/api')
 
-(async () => {
-  program.parse(process.argv);
+;(async () => {
+  program.parse(process.argv)
 
-  await api.copyRenderer();
-})();
+  await api.copyRenderer()
+})()

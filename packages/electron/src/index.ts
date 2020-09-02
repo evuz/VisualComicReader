@@ -1,4 +1,4 @@
-import {app as electonApp} from 'electron'
+import { app as electonApp } from 'electron'
 import { appFactory } from './App/factory'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.

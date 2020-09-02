@@ -1,5 +1,5 @@
-import typescript from 'rollup-plugin-typescript2';
-import pkg from './package.json';
+import typescript from 'rollup-plugin-typescript2'
+import pkg from './package.json'
 
 const external = [
   ...Object.keys({ ...pkg.peerDependencies, ...pkg.dependencies }),
@@ -9,7 +9,7 @@ const external = [
   'rxjs/operators',
   'rxfire/firestore',
   'rxfire/auth',
-];
+]
 
 export default [
   // CommonJS (for Node) and ES module (for bundlers) build.
@@ -27,4 +27,4 @@ export default [
       { file: pkg.module, format: 'es' },
     ],
   },
-];
+]

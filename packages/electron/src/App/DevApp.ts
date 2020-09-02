@@ -1,5 +1,4 @@
-import { BrowserWindow, screen } from 'electron'
-
+import { BrowserWindow } from 'electron'
 import { App } from './App'
 
 export class DevApp extends App {

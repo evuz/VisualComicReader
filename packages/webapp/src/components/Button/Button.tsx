@@ -1,6 +1,6 @@
-import React, {ReactNode} from 'react'
+import React, { ReactNode } from 'react'
 
-import {filterClassNames} from '../../utils/filterClassNames'
+import { filterClassNames } from '../../utils/filterClassNames'
 
 import './Button.css'
 
@@ -19,13 +19,13 @@ export function Button({
   color = 'primary',
   type = 'button',
   onClick = () => {},
-  size
+  size,
 }: Props) {
   const colorClass = disabled ? 'Button--disabled' : `Button--${color}`
   const classNames = filterClassNames({
     Button: true,
     [`Button--${size}`]: !!size,
-    [colorClass]: true
+    [colorClass]: true,
   })
 
   function click(ev: React.MouseEvent) {
