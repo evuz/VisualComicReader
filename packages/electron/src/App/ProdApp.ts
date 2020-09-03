@@ -9,6 +9,9 @@ export class ProdApp extends App {
       height: 600,
       width: 800,
       show: false,
+      webPreferences: {
+        nodeIntegration: true,
+      },
     })
     this.window.loadFile(
       path.join(__dirname, '..', '..', 'renderer', 'index.html')

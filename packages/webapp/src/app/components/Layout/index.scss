@@ -1,0 +1,48 @@
+.layout {
+    .container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 25px;
+        left: 125px;
+        background: rgb(30, 30, 30);
+        &.lateral_nav {
+            left: 25px;
+            width: auto;
+        }
+    }
+    &.full_screen {
+        .container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .header_nav {
+            display: none;
+        }
+        .lateral_nav {
+            z-index: 1;
+            top: 0;
+            left: -100px;
+            transition: 0.3s;
+            opacity: 0;
+            &:hover {
+                opacity: 1;
+                left: 0;
+                overflow-y: scroll;
+            }
+        }
+    }
+     ::-webkit-scrollbar-track {
+        opacity: 0;
+    }
+     ::-webkit-scrollbar {
+        width: 10px;
+        opacity: 0;
+    }
+     ::-webkit-scrollbar-thumb {
+        background-color: hsla(0, 0%, 47%, .4);
+    }
+}

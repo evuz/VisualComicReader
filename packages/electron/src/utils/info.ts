@@ -1,7 +1,7 @@
-import { dialog } from 'electron';
+import { dialog } from 'electron'
 
-export function showShorcutInfo(platform: string) {
-  const ctrlOrCmd = platform === 'darwin' ? 'Cmd' : 'Ctrl';
+export function showShorcutInfo(platform?: string) {
+  const ctrlOrCmd = platform === 'darwin' ? 'Cmd' : 'Ctrl'
 
   const options = {
     type: 'info',
@@ -16,6 +16,6 @@ export function showShorcutInfo(platform: string) {
     Right: Next page \n
     `,
     noLinks: true,
-  };
-  dialog.showMessageBox(options);
+  }
+  dialog.showMessageBox(options)
 }

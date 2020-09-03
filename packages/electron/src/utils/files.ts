@@ -37,7 +37,7 @@ export function selectOpenFile() {
     })
 }
 
-function openFile(pathFile: string) {
+export function openFile(pathFile: string) {
   setCurrentFile(pathFile, true)
   setCurrentDirectory(pathFile)
   extractFiles(pathFile)

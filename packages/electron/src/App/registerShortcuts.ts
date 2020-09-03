@@ -1,31 +1,34 @@
 import { BrowserWindow, globalShortcut } from 'electron'
 
+import { openFile } from '../utils/files'
+import { showShorcutInfo } from '../utils/info'
+
 export function registerShortcuts(window: BrowserWindow) {
   globalShortcut.register('Right', () => {
-    window.webContents.send('right-press');
-  });
+    window.webContents.send('right-press')
+  })
 
   globalShortcut.register('Left', () => {
-    window.webContents.send('left-press');
-  });
+    window.webContents.send('left-press')
+  })
 
   globalShortcut.register('CommandOrControl + Up', () => {
-    window.webContents.send('ctrl-up-press');
-  });
+    window.webContents.send('ctrl-up-press')
+  })
 
   globalShortcut.register('CommandOrControl + Down', () => {
-    window.webContents.send('ctrl-down-press');
-  });
+    window.webContents.send('ctrl-down-press')
+  })
 
   globalShortcut.register('CommandOrControl + F', () => {
-    window.setFullScreen(!window.isFullScreen());
-  });
+    window.setFullScreen(!window.isFullScreen())
+  })
 
   globalShortcut.register('CommandOrControl + O', () => {
-    openFile(window);
-  });
+    openFile(window as any)
+  })
 
   globalShortcut.register('CommandOrControl + S', () => {
-    showShorcutInfo();
-  });
+    showShorcutInfo()
+  })
 }
