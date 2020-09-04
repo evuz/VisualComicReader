@@ -1,11 +1,12 @@
 import { App as ElectronApp, BrowserWindow, ipcMain } from 'electron'
 
-import { changeFile, selectOpenFile } from '../utils/files'
+import { changeFile, selectOpenFile, setFileMainWindows } from '../utils/files'
 import { showShorcutInfo } from '../utils/info'
+import { createTmpFolder } from '../utils/directory'
 
 export abstract class App {
   protected window: BrowserWindow
-  constructor(private app: ElectronApp) {
+  constructor(protected app: ElectronApp) {
     this.listen()
   }
 
@@ -13,6 +14,8 @@ export abstract class App {
 
   private show() {
     this.load()
+    createTmpFolder()
+    setFileMainWindows(this.window)
     this.window.once('ready-to-show', () => this.window.show())
   }
 

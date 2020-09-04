@@ -53,7 +53,8 @@ export function openFile(pathFile: string) {
         readDirectory(tmpFolder, (err: any, files: string[]) => {
           if (err) throw new Error(err)
           if (process.env.NODE_ENV === 'development') {
-            req.tmpFolder = path.relative(path.resolve(__dirname), tmpFolder)
+            const relativePath = path.relative(process.cwd(), tmpFolder)
+            req.tmpFolder = `local://${relativePath}`
           }
           mainWindow.webContents.send('fetching', false)
           mainWindow.webContents.send(
