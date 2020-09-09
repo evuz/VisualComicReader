@@ -9,6 +9,7 @@
     "dist/**/*"
   ],
   "scripts": {
+    "start": "npm run build:dev",
     "build": "rollup -c",
     "build:dev": "rollup -c -w",
     "dev": "jest --watch",
@@ -25,6 +26,6 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "rxjs": "^6.5.5"
+    "rxjs": "^6.6.3"
   }
 }

@@ -17,6 +17,8 @@
     "app:build": "yarn workspace @vcr/webapp build",
     "electron:start": "yarn workspace @vcr/electron start",
     "electron:build": "yarn workspace @vcr/electron make",
+    "domain:start": "yarn workspace @vcr/domain start",
+    "domain:build": "yarn workspace @vcr/domain build",
     "build": "run-s app:build script:copy-renderer electron:build"
   },
   "devDependencies": {
