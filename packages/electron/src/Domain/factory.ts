@@ -13,9 +13,9 @@ export function factory() {
     comic: new ElectronComicRepository(adapters.processMain),
   }
 
-  const useCases = {
+  const listeners = {
     selectFile: new SelectFileListener(repositories.comic),
   }
 
-  return new Domain({ useCases })
+  return new Domain({ listeners })
 }

@@ -60,8 +60,8 @@ export abstract class App {
       showShorcutInfo(process.platform)
     })
 
-    this.domain
-      .getUseCase('selectFile')
+    this.domain()
+      .getListener('selectFile')
       .execute()
       .subscribe(() => {
         selectOpenFile()

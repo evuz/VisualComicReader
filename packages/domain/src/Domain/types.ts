@@ -1,5 +1,6 @@
-export type Args<T> = {
-  useCases: T
+export type Args<T = {}, K = {}> = {
+  useCases?: T
+  listeners?: K
   config?: any
 }
 

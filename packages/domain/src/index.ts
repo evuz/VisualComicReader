@@ -14,3 +14,4 @@ export * from './Adapters/ProcessMain/ElectronProcessMain'
 
 // Utils
 export * from './Utils/uuid'
+export * from './Utils/singleton'

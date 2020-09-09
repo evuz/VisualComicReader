@@ -1,11 +1,13 @@
 import { Args, GetConfig, SetConfig } from './types'
 
-export class Domain<T> {
+export class Domain<T, K> {
   private useCases: T
+  private listeners: K
   private config: { [e: string]: any }
 
-  constructor({ useCases, config = {} }: Args<T>) {
+  constructor({ useCases, listeners, config = {} }: Args<T, K>) {
     this.useCases = useCases
+    this.listeners = listeners
     this.config = config
   }
 
@@ -21,9 +23,17 @@ export class Domain<T> {
   }
 
   getUseCase<U extends keyof T>(useCase: U): T[U] {
-    if (!this.useCases[useCase]) {
-      throw Error(`${useCase} doesn't exist in Domain`)
+    return this.get(this.useCases, useCase)
+  }
+
+  getListener<U extends keyof K>(listener: U): K[U] {
+    return this.get(this.listeners, listener)
+  }
+
+  private get<U, V extends keyof U>(obj: U, key: V) {
+    if (!obj[key]) {
+      throw Error(`${key} doesn't exist in Domain`)
     }
-    return this.useCases[useCase]
+    return obj[key]
   }
 }
