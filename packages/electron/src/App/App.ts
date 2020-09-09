@@ -4,10 +4,14 @@ import { changeFile, selectOpenFile, setFileMainWindows } from '../utils/files'
 import { showShorcutInfo } from '../utils/info'
 import { createTmpFolder } from '../utils/directory'
 
+import { Domain } from '../Domain'
+
 export abstract class App {
   protected window: BrowserWindow
-  constructor(protected app: ElectronApp) {
-    this.listen()
+
+  constructor(protected app: ElectronApp, protected domain: Domain) {
+    this.applisten()
+    this.ipcListen()
   }
 
   protected abstract load(): BrowserWindow
@@ -19,27 +23,10 @@ export abstract class App {
     this.window.once('ready-to-show', () => this.window.show())
   }
 
-  private listen() {
+  private applisten() {
     this.app.on('ready', () => this.show())
     this.app.on('window-all-closed', () => this.close())
     this.app.on('activate', () => this.activate())
-    ipcMain.on('next-file', () => {
-      this.window.webContents.send('fetching', true)
-      changeFile('next')
-    })
-
-    ipcMain.on('previous-file', () => {
-      this.window.webContents.send('fetching', true)
-      changeFile('previous')
-    })
-
-    ipcMain.on('open-file', () => {
-      selectOpenFile()
-    })
-
-    ipcMain.on('show-info-shortcut', () => {
-      showShorcutInfo(process.platform)
-    })
   }
 
   private close() {
@@ -56,5 +43,28 @@ export abstract class App {
     if (BrowserWindow.getAllWindows().length === 0) {
       this.show()
     }
+  }
+
+  private ipcListen() {
+    ipcMain.on('next-file', () => {
+      this.window.webContents.send('fetching', true)
+      changeFile('next')
+    })
+
+    ipcMain.on('previous-file', () => {
+      this.window.webContents.send('fetching', true)
+      changeFile('previous')
+    })
+
+    ipcMain.on('show-info-shortcut', () => {
+      showShorcutInfo(process.platform)
+    })
+
+    this.domain
+      .getUseCase('selectFile')
+      .execute()
+      .subscribe(() => {
+        selectOpenFile()
+      })
   }
 }

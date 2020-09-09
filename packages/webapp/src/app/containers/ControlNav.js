@@ -11,6 +11,7 @@ import {
 } from '../reducers/options'
 
 import ControlNavComponent from '../components/ControlNav'
+import { domain } from '../../domain'
 
 class ControlNavContainer extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class ControlNavContainer extends Component {
     return (
       <ControlNavComponent
         {...this.props}
-        onClickOpenFile={() => this.ipcRenderer.send('open-file')}
+        onClickOpenFile={() => domain.getUseCase('selectComic').execute()}
         onClickShortcutInfo={() => this.ipcRenderer.send('show-info-shortcut')}
       />
     )
