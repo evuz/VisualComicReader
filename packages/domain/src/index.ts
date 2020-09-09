@@ -1,3 +1,6 @@
+// Entities
+export * from './Comic/Entities/Comic'
+
 // Domain
 export * from './Domain/Domain'
 export * from './Domain/models/Entity'
