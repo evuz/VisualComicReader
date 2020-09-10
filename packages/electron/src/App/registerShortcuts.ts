@@ -1,7 +1,7 @@
 import { BrowserWindow, globalShortcut } from 'electron'
 
 import { openFile } from '../utils/files'
-import { showShorcutInfo } from '../utils/info'
+import { domain } from '../Domain'
 
 export function registerShortcuts(window: BrowserWindow) {
   globalShortcut.register('Right', () => {
@@ -29,6 +29,6 @@ export function registerShortcuts(window: BrowserWindow) {
   })
 
   globalShortcut.register('CommandOrControl + S', () => {
-    showShorcutInfo()
+    domain().getUseCase('showInfoShortcuts').execute()
   })
 }

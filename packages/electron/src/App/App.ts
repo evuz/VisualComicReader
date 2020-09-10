@@ -1,10 +1,10 @@
 import { App as ElectronApp, BrowserWindow, ipcMain } from 'electron'
 
 import { changeFile, selectOpenFile, setFileMainWindows } from '../utils/files'
-import { showShorcutInfo } from '../utils/info'
 import { createTmpFolder } from '../utils/directory'
 
 import { Domain } from '../Domain'
+import { registerShortcuts } from './registerShortcuts'
 
 export abstract class App {
   protected window: BrowserWindow
@@ -20,6 +20,7 @@ export abstract class App {
     this.load()
     createTmpFolder()
     setFileMainWindows(this.window)
+    registerShortcuts(this.window)
     this.window.once('ready-to-show', () => this.window.show())
   }
 
@@ -56,9 +57,12 @@ export abstract class App {
       changeFile('previous')
     })
 
-    ipcMain.on('show-info-shortcut', () => {
-      showShorcutInfo(process.platform)
-    })
+    this.domain()
+      .getListener('showInfoShortcuts')
+      .execute()
+      .subscribe(() => {
+        this.domain().getUseCase('showInfoShortcuts').execute()
+      })
 
     this.domain()
       .getListener('selectFile')

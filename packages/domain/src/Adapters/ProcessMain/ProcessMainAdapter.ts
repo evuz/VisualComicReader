@@ -3,7 +3,7 @@ import { Observable } from 'rxjs'
 export enum IpcMessages {
   SelectFile = 'select_file',
   ReadFile = 'read_file',
-  ShowInfoShortcut = 'show_info_shortcut',
+  ShowInfoShortcut = 'show-info-shortcut',
 }
 
 export type IpcArgs = {
