@@ -5,6 +5,6 @@ export class SelectFileListener implements UseCase {
   constructor(private repository: ComicRepository) {}
 
   execute() {
-    return this.repository.selectFile()
+    return this.repository.onSelectComic()
   }
 }
