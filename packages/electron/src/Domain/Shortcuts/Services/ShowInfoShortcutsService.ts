@@ -3,7 +3,7 @@ import { ShortcutsRepository } from '../Repositories/ShortcutsRepository'
 import { inject } from 'depsin'
 import { Symbols } from '../../symbols'
 
-export class ShowInfoShortcutService implements Service {
+export class ShowInfoShortcutsService implements Service {
   constructor(
     @inject(Symbols.ShortcutsRepository) private repository: ShortcutsRepository
   ) {}

@@ -1,10 +1,10 @@
 import { UseCase } from '@vcr/domain'
 
-import { ShowInfoShortcutService } from '../Services/ShowInfoShortcustService'
+import { ShowInfoShortcutService } from '../Services/ShowInfoShortcutsService'
 import { inject } from 'depsin'
 import { Symbols } from '../../symbols'
 
-export class ShowInfoShortcutUseCase implements UseCase {
+export class ShowInfoShortcutsUseCase implements UseCase {
   constructor(
     @inject(Symbols.ShowInfoShortcutsService)
     private service: ShowInfoShortcutService

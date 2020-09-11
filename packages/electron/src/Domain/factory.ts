@@ -7,8 +7,8 @@ import { SelectFileListener } from './Comic/Listeners/SelectFileListener'
 import { ShowInfoShortcutListener } from './Shortcuts/Listeners/ShowInfoShortcutListener'
 import { ElectronShortcutsRepository } from './Shortcuts/Repositories/ElectronShortcutsRepository'
 import { ElectronDialog } from './Adapters/Dialog/ElectronDialog'
-import { ShowInfoShortcutUseCase } from './Shortcuts/UseCase/ShowInfoShortcutUseCase'
-import { ShowInfoShortcutService } from './Shortcuts/Services/ShowInfoShortcustService'
+import { ShowInfoShortcutsUseCase } from './Shortcuts/UseCase/ShowInfoShortcutsUseCase'
+import { ShowInfoShortcutsService } from './Shortcuts/Services/ShowInfoShortcutsService'
 import { Symbols } from './symbols'
 
 export function factory() {
@@ -29,12 +29,12 @@ export function factory() {
       [Symbols.Dialog]: { asValue: adapters.dialog },
       [Symbols.ComicRepository]: { asClass: ElectronComicRepository },
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
-      [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutService },
+      [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener,
       },
-      [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutUseCase },
+      [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutsUseCase },
     },
     { lifetime: 'singleton' }
   )
@@ -49,7 +49,7 @@ export function factory() {
 
   // UseCases
   const useCases = {
-    showInfoShortcuts: container.get<ShowInfoShortcutUseCase>(
+    showInfoShortcuts: container.get<ShowInfoShortcutsUseCase>(
       Symbols.ShowInfoShortcutsUseCase
     ),
   }
