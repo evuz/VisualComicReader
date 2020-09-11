@@ -1,5 +1,5 @@
 import { app } from 'electron'
-import { getCleanedString, removeExtension } from './cleanString'
+import { cleanString, removeExtension } from './strings'
 import * as fs from 'fs'
 import * as path from 'path'
 
@@ -47,7 +47,7 @@ export function createTmpFolder(file?: string) {
     process.env.NODE_ENV === 'development' ? '.tmp' : 'VisualComicReader'
 
   const folder = file
-    ? path.join(tmpPath, tmpFolder, getCleanedString(removeExtension(file)))
+    ? path.join(tmpPath, tmpFolder, cleanString(removeExtension(file)))
     : path.join(tmpPath, tmpFolder)
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder)
