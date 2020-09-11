@@ -3,13 +3,15 @@ import { Observable } from 'rxjs'
 
 import { ShortcutsRepository } from './ShortcutsRepository'
 import { DialogAdapter } from '../../Adapters/Dialog/DialogAdapter'
+import { inject } from 'depsin'
+import { Symbols } from '../../symbols'
 
 export class ElectronShortcutsRepository implements ShortcutsRepository {
   constructor(
-    private processMain: ProcessMainAdapter,
-    private dialog: DialogAdapter,
+    @inject(Symbols.ProcessMain) private processMain: ProcessMainAdapter,
+    @inject(Symbols.Dialog) private dialog: DialogAdapter,
     // TODO: implement config type
-    private config: any
+    @inject(Symbols.Config) private config: any
   ) {}
 
   onShowInfo(): Observable<any> {

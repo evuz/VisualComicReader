@@ -1,4 +1,5 @@
 import { ipcMain } from 'electron'
+import { createContainer } from 'depsin'
 import { Domain, electronProcessMain } from '@vcr/domain'
 
 import { ElectronComicRepository } from './Comic/Repositories/ElectronComicRepository'
@@ -8,6 +9,7 @@ import { ElectronShortcutsRepository } from './Shortcuts/Repositories/ElectronSh
 import { ElectronDialog } from './Adapters/Dialog/ElectronDialog'
 import { ShowInfoShortcutUseCase } from './Shortcuts/UseCase/ShowInfoShortcutUseCase'
 import { ShowInfoShortcutService } from './Shortcuts/Services/ShowInfoShortcustService'
+import { Symbols } from './symbols'
 
 export function factory() {
   // Config
@@ -15,30 +17,41 @@ export function factory() {
     platform: process.platform,
   }
 
-  // Adapters
-  const processMain = electronProcessMain(ipcMain)
-  const dialog = new ElectronDialog()
-
-  // Repositories
-  const repositories = {
-    comic: new ElectronComicRepository(processMain),
-    shortcuts: new ElectronShortcutsRepository(processMain, dialog, config),
+  const adapters = {
+    processMain: electronProcessMain(ipcMain),
+    dialog: new ElectronDialog(),
   }
 
-  // Services
-  const services = {
-    showInfoShortcuts: new ShowInfoShortcutService(repositories.shortcuts),
-  }
+  const container = createContainer(
+    {
+      [Symbols.Config]: { asValue: config },
+      [Symbols.ProcessMain]: { asValue: adapters.processMain },
+      [Symbols.Dialog]: { asValue: adapters.dialog },
+      [Symbols.ComicRepository]: { asClass: ElectronComicRepository },
+      [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
+      [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutService },
+      [Symbols.SelectFileListener]: { asClass: SelectFileListener },
+      [Symbols.ShowInfoShortcutsListener]: {
+        asClass: ShowInfoShortcutListener,
+      },
+      [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutUseCase },
+    },
+    { lifetime: 'singleton' }
+  )
 
   // Listeners
   const listeners = {
-    selectFile: new SelectFileListener(repositories.comic),
-    showInfoShortcuts: new ShowInfoShortcutListener(repositories.shortcuts),
+    selectFile: container.get<SelectFileListener>(Symbols.SelectFileListener),
+    showInfoShortcuts: container.get<ShowInfoShortcutListener>(
+      Symbols.ShowInfoShortcutsListener
+    ),
   }
 
   // UseCases
   const useCases = {
-    showInfoShortcuts: new ShowInfoShortcutUseCase(services.showInfoShortcuts),
+    showInfoShortcuts: container.get<ShowInfoShortcutUseCase>(
+      Symbols.ShowInfoShortcutsUseCase
+    ),
   }
 
   return new Domain({ useCases, listeners, config })
