@@ -8,6 +8,7 @@ import { setDirectory, setFiles } from './reducers/reader'
 import { setFullScreen, setFetching } from './reducers/windowState'
 
 import './app.scss'
+import { domain } from '../domain'
 
 class App extends Component {
   componentDidMount() {
@@ -17,6 +18,13 @@ class App extends Component {
     if (!ipcRenderer) {
       return
     }
+
+    domain
+      .getListener('registerShortcut')
+      .execute('$mod+L')
+      .subscribe(() => {
+        console.log('Shortcut!!')
+      })
 
     ipcRenderer.on('file-extracted', (event, data) => {
       this.props.setDirectory(`${data.tmpFolder}/`)

@@ -1,4 +1,8 @@
-import { ProcessMainAdapter, IpcMessages } from '@vcr/domain'
+import {
+  ProcessMainAdapter,
+  IpcMessages,
+  KeysListenerAdapter,
+} from '@vcr/domain'
 import { Observable } from 'rxjs'
 
 import { ShortcutsRepository } from './ShortcutsRepository'
@@ -10,6 +14,7 @@ export class ElectronShortcutsRepository implements ShortcutsRepository {
   constructor(
     @inject(Symbols.ProcessMain) private processMain: ProcessMainAdapter,
     @inject(Symbols.Dialog) private dialog: DialogAdapter,
+    @inject(Symbols.KeysListener) private keysListener: KeysListenerAdapter,
     // TODO: implement config type
     @inject(Symbols.Config) private config: any
   ) {}
@@ -34,5 +39,16 @@ export class ElectronShortcutsRepository implements ShortcutsRepository {
     `,
       noLink: true,
     })
+  }
+
+  register() {
+    this.processMain.listen(IpcMessages.RegisterShortcut).subscribe({
+      next: ({ payload, id }) => {
+        this.keysListener.register(payload?.key).subscribe(() => {
+          this.processMain.emit(IpcMessages.RegisterShortcut, { id })
+        })
+      },
+    })
+    return Promise.resolve()
   }
 }

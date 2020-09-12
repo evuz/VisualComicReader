@@ -23,6 +23,7 @@ export abstract class App {
     setFileMainWindows(this.window)
     this.domain = createDomain(this.window)
     this.ipcListen()
+    this.domain().getUseCase('registerShortcuts').execute()
     registerShortcuts(this.window)
     this.window.once('ready-to-show', () => this.window.show())
   }
