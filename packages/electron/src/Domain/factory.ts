@@ -27,7 +27,7 @@ export function factory(browserWindow: BrowserWindow) {
       browserWindow.webContents
     ),
     dialog: new ElectronDialog(),
-    keysListener: new GlobalShortcut(),
+    keysListener: new GlobalShortcut(browserWindow),
   }
 
   const container = createContainer(
