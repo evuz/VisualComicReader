@@ -1,6 +1,6 @@
-import { ipcMain } from 'electron'
+import { ipcMain, BrowserWindow } from 'electron'
 import { createContainer } from 'depsin'
-import { Domain, electronProcessMain } from '@vcr/domain'
+import { Domain } from '@vcr/domain'
 
 import { ElectronComicRepository } from './Comic/Repositories/ElectronComicRepository'
 import { SelectFileListener } from './Comic/Listeners/SelectFileListener'
@@ -10,16 +10,24 @@ import { ElectronDialog } from './Adapters/Dialog/ElectronDialog'
 import { ShowInfoShortcutsUseCase } from './Shortcuts/UseCase/ShowInfoShortcutsUseCase'
 import { ShowInfoShortcutsService } from './Shortcuts/Services/ShowInfoShortcutsService'
 import { Symbols } from './symbols'
+import { GlobalShortcut } from './Adapters/KeysListener/GlobalShortcut'
+import { RegisterShortcutsService } from './Shortcuts/Services/RegisterShortcutsService'
+import { RegisterShortcutsUseCase } from './Shortcuts/UseCase/RegisterShortcutsUseCase'
+import { ElectronMainProcessComunication } from './Adapters/ProcessComunication/ElectronMainProcessComunication'
 
-export function factory() {
+export function factory(browserWindow: BrowserWindow) {
   // Config
   const config = {
     platform: process.platform,
   }
 
   const adapters = {
-    processMain: electronProcessMain(ipcMain),
+    processMain: new ElectronMainProcessComunication(
+      ipcMain,
+      browserWindow.webContents
+    ),
     dialog: new ElectronDialog(),
+    keysListener: new GlobalShortcut(),
   }
 
   const container = createContainer(
@@ -27,14 +35,17 @@ export function factory() {
       [Symbols.Config]: { asValue: config },
       [Symbols.ProcessMain]: { asValue: adapters.processMain },
       [Symbols.Dialog]: { asValue: adapters.dialog },
+      [Symbols.KeysListener]: { asValue: adapters.keysListener },
       [Symbols.ComicRepository]: { asClass: ElectronComicRepository },
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
+      [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener,
       },
       [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutsUseCase },
+      [Symbols.RegisterShortcutsUseCase]: { asClass: RegisterShortcutsUseCase },
     },
     { lifetime: 'singleton' }
   )
@@ -51,6 +62,9 @@ export function factory() {
   const useCases = {
     showInfoShortcuts: container.get<ShowInfoShortcutsUseCase>(
       Symbols.ShowInfoShortcutsUseCase
+    ),
+    registerShortcuts: container.get<RegisterShortcutsUseCase>(
+      Symbols.RegisterShortcutsUseCase
     ),
   }
 

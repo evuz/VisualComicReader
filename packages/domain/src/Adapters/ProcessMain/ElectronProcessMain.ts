@@ -4,34 +4,30 @@ import { filter, take } from 'rxjs/operators'
 import { IpcMessages, IpcArgs, ProcessMainAdapter } from './ProcessMainAdapter'
 import { uuid } from '../../Utils/uuid'
 
-export function electronProcessMain(ipc: any): ProcessMainAdapter {
-  function emit(message: IpcMessages, args?: IpcArgs) {
-    ipc.send(message, args)
+export class ElectronProcessMain implements ProcessMainAdapter {
+  constructor(private ipc: any) {}
+
+  public emit(message: IpcMessages, args?: IpcArgs) {
+    this.ipc.send(message, args)
   }
 
-  function listen(message: IpcMessages) {
+  public listen(message: IpcMessages) {
     return new Observable<IpcArgs>((obs) => {
-      const fn = (args: IpcArgs) => obs.next(args)
-      ipc.on(message, fn)
-      return () => ipc.off(message, fn)
+      const fn = (_, args: IpcArgs) => obs.next(args)
+      this.ipc.on(message, fn)
+      return () => this.ipc.off(message, fn)
     })
   }
 
-  function request(messsage: IpcMessages, args?: IpcArgs) {
+  public request(messsage: IpcMessages, args?: IpcArgs) {
     const id = uuid(6)
-    const promise = listen(messsage)
+    const promise = this.listen(messsage)
       .pipe(
         filter((args: IpcArgs) => args?.id === id),
         take(1)
       )
       .toPromise()
-    emit(messsage, { id, ...args })
+    this.emit(messsage, { id, ...args })
     return promise
-  }
-
-  return {
-    emit,
-    listen,
-    request,
   }
 }

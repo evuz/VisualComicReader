@@ -1,4 +1,4 @@
-import { Domain, electronProcessMain } from '@vcr/domain'
+import { Domain, ElectronProcessMain } from '@vcr/domain'
 
 import { ElectronComicRepository } from './Comic/Repositories/ElectronComicRepository'
 import { SelectComicService } from './Comic/Services/SelectComicService'
@@ -8,7 +8,7 @@ export function factory() {
   const ipc = window.require ? window.require('electron').ipcRenderer : null
 
   const adapters = {
-    processMain: electronProcessMain(ipc),
+    processMain: new ElectronProcessMain(ipc),
   }
   const repositories = {
     comic: new ElectronComicRepository(adapters.processMain),

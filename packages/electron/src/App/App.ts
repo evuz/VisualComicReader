@@ -2,16 +2,17 @@ import { App as ElectronApp, BrowserWindow, ipcMain } from 'electron'
 
 import { changeFile, selectOpenFile, setFileMainWindows } from '../utils/files'
 import { createTmpFolder } from '../utils/directory'
-
-import { Domain } from '../Domain'
 import { registerShortcuts } from './registerShortcuts'
+
+import { Domain, createDomain } from '../Domain'
 
 export abstract class App {
   protected window: BrowserWindow
+  protected domain: Domain
 
-  constructor(protected app: ElectronApp, protected domain: Domain) {
+  constructor(protected app: ElectronApp) {
+    // TODO: init appListen with a new method run
     this.applisten()
-    this.ipcListen()
   }
 
   protected abstract load(): BrowserWindow
@@ -20,6 +21,8 @@ export abstract class App {
     this.load()
     createTmpFolder()
     setFileMainWindows(this.window)
+    this.domain = createDomain(this.window)
+    this.ipcListen()
     registerShortcuts(this.window)
     this.window.once('ready-to-show', () => this.window.show())
   }
