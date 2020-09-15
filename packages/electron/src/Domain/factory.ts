@@ -14,10 +14,11 @@ import { GlobalShortcut } from './Adapters/KeysListener/GlobalShortcut'
 import { RegisterShortcutsService } from './Shortcuts/Services/RegisterShortcutsService'
 import { RegisterShortcutsUseCase } from './Shortcuts/UseCase/RegisterShortcutsUseCase'
 import { ElectronMainProcessComunication } from './Adapters/ProcessComunication/ElectronMainProcessComunication'
+import { IConfig } from './Config/models/Config'
 
 export function factory(browserWindow: BrowserWindow) {
   // Config
-  const config = {
+  const config: IConfig = {
     platform: process.platform,
   }
 
