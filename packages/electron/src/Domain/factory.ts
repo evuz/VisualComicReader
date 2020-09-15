@@ -27,7 +27,7 @@ export function factory(browserWindow: BrowserWindow) {
       ipcMain,
       browserWindow.webContents
     ),
-    dialog: new ElectronDialog(),
+    dialog: new ElectronDialog(browserWindow),
     keysListener: new GlobalShortcut(browserWindow),
   }
 
