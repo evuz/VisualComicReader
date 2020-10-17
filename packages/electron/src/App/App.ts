@@ -2,7 +2,6 @@ import { App as ElectronApp, BrowserWindow, ipcMain } from 'electron'
 
 import { changeFile, selectOpenFile, setFileMainWindows } from '../utils/files'
 import { createTmpFolder } from '../utils/directory'
-import { registerShortcuts } from './registerShortcuts'
 
 import { Domain, createDomain } from '../Domain'
 
@@ -11,6 +10,7 @@ export abstract class App {
   protected domain: Domain
 
   constructor(protected app: ElectronApp) {
+    app.allowRendererProcessReuse = true
     // TODO: init appListen with a new method run
     this.applisten()
   }
@@ -24,7 +24,6 @@ export abstract class App {
     this.domain = createDomain(this.window)
     this.ipcListen()
     this.domain().getUseCase('registerShortcuts').execute()
-    registerShortcuts(this.window)
     this.window.once('ready-to-show', () => this.window.show())
   }
 
@@ -60,6 +59,13 @@ export abstract class App {
       this.window.webContents.send('fetching', true)
       changeFile('previous')
     })
+
+    this.domain()
+      .getListener('toggleFullscreen')
+      .execute()
+      .subscribe(() => {
+        this.domain().getUseCase('toggleFullscreen').execute()
+      })
 
     this.domain()
       .getListener('showInfoShortcuts')

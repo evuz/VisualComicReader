@@ -15,6 +15,10 @@ import { RegisterShortcutsService } from './Shortcuts/Services/RegisterShortcuts
 import { RegisterShortcutsUseCase } from './Shortcuts/UseCase/RegisterShortcutsUseCase'
 import { ElectronMainProcessComunication } from './Adapters/ProcessComunication/ElectronMainProcessComunication'
 import { IConfig } from './Config/models/Config'
+import { ElectronScreen } from './Adapters/Screen/ElectronScreen'
+import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRepository'
+import { ToggleFullscreenUsecase } from './Screen/UseCases/ToggleFullscreenUseCase'
+import { ToggleFullscreenListener } from './Screen/Listeners/ToggleFullscreenListener'
 
 export function factory(browserWindow: BrowserWindow) {
   // Config
@@ -29,6 +33,7 @@ export function factory(browserWindow: BrowserWindow) {
     ),
     dialog: new ElectronDialog(browserWindow),
     keysListener: new GlobalShortcut(browserWindow),
+    screen: new ElectronScreen(browserWindow),
   }
 
   const container = createContainer(
@@ -36,17 +41,21 @@ export function factory(browserWindow: BrowserWindow) {
       [Symbols.Config]: { asValue: config },
       [Symbols.ProcessMain]: { asValue: adapters.processMain },
       [Symbols.Dialog]: { asValue: adapters.dialog },
+      [Symbols.Screen]: { asValue: adapters.screen },
       [Symbols.KeysListener]: { asValue: adapters.keysListener },
       [Symbols.ComicRepository]: { asClass: ElectronComicRepository },
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
+      [Symbols.ScreenRepository]: { asClass: ElectronScreenRepository },
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
+      [Symbols.ToggleFullscreenListener]: { asClass: ToggleFullscreenListener },
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener,
       },
       [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutsUseCase },
       [Symbols.RegisterShortcutsUseCase]: { asClass: RegisterShortcutsUseCase },
+      [Symbols.ToggleFullscreenUseCase]: { asClass: ToggleFullscreenUsecase },
     },
     { lifetime: 'singleton' }
   )
@@ -57,6 +66,9 @@ export function factory(browserWindow: BrowserWindow) {
     showInfoShortcuts: container.get<ShowInfoShortcutListener>(
       Symbols.ShowInfoShortcutsListener
     ),
+    toggleFullscreen: container.get<ToggleFullscreenListener>(
+      Symbols.ToggleFullscreenListener
+    ),
   }
 
   // UseCases
@@ -66,6 +78,9 @@ export function factory(browserWindow: BrowserWindow) {
     ),
     registerShortcuts: container.get<RegisterShortcutsUseCase>(
       Symbols.RegisterShortcutsUseCase
+    ),
+    toggleFullscreen: container.get<ToggleFullscreenUsecase>(
+      Symbols.ToggleFullscreenUseCase
     ),
   }
 

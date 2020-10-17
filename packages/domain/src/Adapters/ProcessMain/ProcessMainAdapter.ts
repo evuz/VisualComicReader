@@ -3,6 +3,7 @@ import { Observable } from 'rxjs'
 export enum IpcMessages {
   SelectFile = 'select_file',
   ReadFile = 'read_file',
+  ToggleFullscreen = 'toggle-fullscreen',
   ShowInfoShortcut = 'show-info-shortcut',
   RegisterShortcut = 'register-shortcut',
 }

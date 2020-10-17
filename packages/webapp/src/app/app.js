@@ -21,9 +21,16 @@ class App extends Component {
 
     domain
       .getListener('registerShortcut')
-      .execute('$mod+L')
+      .execute('$mod+o')
       .subscribe(() => {
-        console.log('Shortcut!!')
+        domain.getUseCase('selectComic').execute()
+      })
+
+    domain
+      .getListener('registerShortcut')
+      .execute('$mod+f')
+      .subscribe(() => {
+        domain.getUseCase('toggleFullscreen').execute()
       })
 
     ipcRenderer.on('file-extracted', (event, data) => {

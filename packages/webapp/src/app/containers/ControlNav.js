@@ -23,21 +23,40 @@ class ControlNavContainer extends Component {
   }
 
   componentDidMount() {
-    this.ipcRenderer.on('right-press', () => {
-      this.props.onClickNextPage()
-    })
+    domain
+      .getListener('registerShortcut')
+      .execute('Right')
+      .subscribe(() => {
+        this.props.onClickNextPage()
+      })
 
-    this.ipcRenderer.on('left-press', () => {
-      this.props.onClickPreviousPage()
-    })
+    domain
+      .getListener('registerShortcut')
+      .execute('Left')
+      .subscribe(() => {
+        this.props.onClickPreviousPage()
+      })
 
-    this.ipcRenderer.on('ctrl-up-press', () => {
-      this.props.onClickZoomIn()
-    })
+    domain
+      .getListener('registerShortcut')
+      .execute('$mod+Up')
+      .subscribe(() => {
+        this.props.onClickZoomIn()
+      })
 
-    this.ipcRenderer.on('ctrl-down-press', () => {
-      this.props.onClickZoomOut()
-    })
+    domain
+      .getListener('registerShortcut')
+      .execute('$mod+Down')
+      .subscribe(() => {
+        this.props.onClickZoomOut()
+      })
+
+    domain
+      .getListener('registerShortcut')
+      .execute('$mod+S')
+      .subscribe(() => {
+        this.ipcRenderer.send('show-info-shortcut')
+      })
   }
 
   render() {
