@@ -32,7 +32,7 @@ export function factory(browserWindow: BrowserWindow) {
       browserWindow.webContents
     ),
     dialog: new ElectronDialog(browserWindow),
-    keysListener: new GlobalShortcut(browserWindow),
+    keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
   }
 
