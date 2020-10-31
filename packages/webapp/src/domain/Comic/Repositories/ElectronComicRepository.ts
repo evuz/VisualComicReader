@@ -1,14 +1,14 @@
-import { ProcessMainAdapter, IpcMessages, Comic } from '@vcr/domain'
+import { ProcessMainAdapter, Comic, IpcMessages } from '@vcr/domain'
 
 import { ComicRepository } from './ComicRepository'
 
 export class ElectronComicRepository implements ComicRepository {
-  constructor(private electron: ProcessMainAdapter) {}
+  constructor(private processMain: ProcessMainAdapter) {}
 
-  async selectComic(): Promise<Comic> {
-    const response = await this.electron.request(IpcMessages.SelectFile, {
-      payload: ['cbz', 'cbr'],
-    })
-    return response.payload
+  async openComic(file: string): Promise<Comic> {
+    // TODO: map response to Comic
+    return this.processMain.request(IpcMessages.OpenFile, {
+      payload: file,
+    }) as any
   }
 }
