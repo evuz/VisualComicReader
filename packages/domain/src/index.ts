@@ -13,6 +13,7 @@ export * from './Domain/models/Paginated'
 export * from './Adapters/ProcessMain/ProcessMainAdapter'
 export * from './Adapters/ProcessMain/ElectronProcessMain'
 export * from './Adapters/KeysListener/KeysListenerAdapter'
+export * from './Adapters/FileManager/FileManagerAdapter'
 
 // Utils
 export * from './Utils/uuid'

@@ -2,8 +2,7 @@ import { ipcMain, BrowserWindow } from 'electron'
 import { createContainer } from 'depsin'
 import { Domain } from '@vcr/domain'
 
-import { ElectronComicRepository } from './Comic/Repositories/ElectronComicRepository'
-import { SelectFileListener } from './Comic/Listeners/SelectFileListener'
+import { SelectFileListener } from './File/Listeners/SelectFileListener'
 import { ShowInfoShortcutListener } from './Shortcuts/Listeners/ShowInfoShortcutListener'
 import { ElectronShortcutsRepository } from './Shortcuts/Repositories/ElectronShortcutsRepository'
 import { ElectronDialog } from './Adapters/Dialog/ElectronDialog'
@@ -19,6 +18,8 @@ import { ElectronScreen } from './Adapters/Screen/ElectronScreen'
 import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRepository'
 import { ToggleFullscreenUsecase } from './Screen/UseCases/ToggleFullscreenUseCase'
 import { ToggleFullscreenListener } from './Screen/Listeners/ToggleFullscreenListener'
+import { DialogFileManager } from './Adapters/FileManager/DialogFileManager'
+import { OpenFileListener } from './File/Listeners/OpenFileListener'
 
 export function factory(browserWindow: BrowserWindow) {
   // Config
@@ -34,6 +35,7 @@ export function factory(browserWindow: BrowserWindow) {
     dialog: new ElectronDialog(browserWindow),
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
+    fileManager: DialogFileManager.factory(),
   }
 
   const container = createContainer(
@@ -43,11 +45,11 @@ export function factory(browserWindow: BrowserWindow) {
       [Symbols.Dialog]: { asValue: adapters.dialog },
       [Symbols.Screen]: { asValue: adapters.screen },
       [Symbols.KeysListener]: { asValue: adapters.keysListener },
-      [Symbols.ComicRepository]: { asClass: ElectronComicRepository },
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
       [Symbols.ScreenRepository]: { asClass: ElectronScreenRepository },
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
+      [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
       [Symbols.ToggleFullscreenListener]: { asClass: ToggleFullscreenListener },
       [Symbols.ShowInfoShortcutsListener]: {
@@ -66,6 +68,7 @@ export function factory(browserWindow: BrowserWindow) {
     showInfoShortcuts: container.get<ShowInfoShortcutListener>(
       Symbols.ShowInfoShortcutsListener
     ),
+    openFile: container.get<OpenFileListener>(Symbols.OpenFileListener),
     toggleFullscreen: container.get<ToggleFullscreenListener>(
       Symbols.ToggleFullscreenListener
     ),
@@ -82,6 +85,7 @@ export function factory(browserWindow: BrowserWindow) {
     toggleFullscreen: container.get<ToggleFullscreenUsecase>(
       Symbols.ToggleFullscreenUseCase
     ),
+    fileManager: adapters.fileManager,
   }
 
   return new Domain({ useCases, listeners, config })

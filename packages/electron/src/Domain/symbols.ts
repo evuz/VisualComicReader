@@ -12,11 +12,14 @@ export const Symbols = {
   // Services
   ShowInfoShortcutsService: 'ShowInfoShortcutsService',
   RegisterShortcutsService: 'RegisterShortcutsService',
+  OpenFileService: 'OpenFileService',
   // Listeners
   SelectFileListener: 'SelectFileListener',
+  OpenFileListener: 'OpenFileListener',
   ShowInfoShortcutsListener: 'ShowInfoShortcutsListener',
   ToggleFullscreenListener: 'ToggleFullscreenListener',
   // UseCases
+  OpenFileUseCase: 'OpenFileUseCase',
   ShowInfoShortcutsUseCase: 'ShowInfoShortcutsUseCase',
   RegisterShortcutsUseCase: 'RegisterShortcutsUseCase',
   ToggleFullscreenUseCase: 'ToggleFullscreenUseCase',

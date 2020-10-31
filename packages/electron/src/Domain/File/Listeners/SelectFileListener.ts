@@ -1,15 +1,14 @@
-import { ProcessMainAdapter, IpcMessages } from '@vcr/domain'
-
-import { ComicRepository } from './ComicRepository'
+import { IpcMessages, ProcessMainAdapter, UseCase } from '@vcr/domain'
 import { inject } from 'depsin'
+
 import { Symbols } from '../../symbols'
 
-export class ElectronComicRepository implements ComicRepository {
+export class SelectFileListener implements UseCase {
   constructor(
     @inject(Symbols.ProcessMain) private processMain: ProcessMainAdapter
   ) {}
 
-  onSelectComic() {
+  execute() {
     return this.processMain.listen(IpcMessages.SelectFile)
   }
 }

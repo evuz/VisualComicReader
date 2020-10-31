@@ -1,6 +1,6 @@
 import { App as ElectronApp, BrowserWindow, ipcMain } from 'electron'
 
-import { changeFile, selectOpenFile, setFileMainWindows } from '../utils/files'
+import { changeFile, setFileMainWindows } from '../utils/files'
 import { createTmpFolder } from '../utils/directory'
 
 import { Domain, createDomain } from '../Domain'
@@ -50,6 +50,7 @@ export abstract class App {
   }
 
   private ipcListen() {
+    const domain = this.domain()
     ipcMain.on('next-file', () => {
       this.window.webContents.send('fetching', true)
       changeFile('next')
@@ -60,25 +61,33 @@ export abstract class App {
       changeFile('previous')
     })
 
-    this.domain()
+    domain
       .getListener('toggleFullscreen')
       .execute()
       .subscribe(() => {
-        this.domain().getUseCase('toggleFullscreen').execute()
+        domain.getUseCase('toggleFullscreen').execute()
       })
 
-    this.domain()
+    domain
       .getListener('showInfoShortcuts')
       .execute()
       .subscribe(() => {
-        this.domain().getUseCase('showInfoShortcuts').execute()
+        domain.getUseCase('showInfoShortcuts').execute()
       })
 
-    this.domain()
+    domain
       .getListener('selectFile')
       .execute()
-      .subscribe(() => {
-        selectOpenFile()
+      .subscribe(async ({ payload, response }) => {
+        const file = await domain.getUseCase('fileManager').selectFile(payload)
+        response(file)
+      })
+
+    domain
+      .getListener('openFile')
+      .execute()
+      .subscribe(async ({ payload }) => {
+        console.log(payload)
       })
   }
 }
