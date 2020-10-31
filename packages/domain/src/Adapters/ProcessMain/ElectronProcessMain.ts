@@ -1,7 +1,12 @@
 import { Observable } from 'rxjs'
 import { filter, take } from 'rxjs/operators'
 
-import { IpcMessages, IpcArgs, ProcessMainAdapter } from './ProcessMainAdapter'
+import {
+  IpcMessages,
+  IpcArgs,
+  ProcessMainAdapter,
+  IpcRequest,
+} from './ProcessMainAdapter'
 import { uuid } from '../../Utils/uuid'
 
 export class ElectronProcessMain implements ProcessMainAdapter {
@@ -12,8 +17,13 @@ export class ElectronProcessMain implements ProcessMainAdapter {
   }
 
   public listen(message: IpcMessages) {
-    return new Observable<IpcArgs>((obs) => {
-      const fn = (_, args: IpcArgs) => obs.next(args)
+    return new Observable<IpcRequest>((obs) => {
+      const fn = (_, args: IpcArgs) => {
+        const response = (payload: IpcArgs['payload']) => {
+          this.emit(message, { payload, id: args?.id })
+        }
+        obs.next({ ...args, response })
+      }
       this.ipc.on(message, fn)
       return () => this.ipc.off(message, fn)
     })
