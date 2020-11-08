@@ -85,7 +85,7 @@ export abstract class App {
       .getListener('openFile')
       .execute()
       .subscribe(async ({ payload }) => {
-        const file = await domain.getUseCase('openFile').execute(payload)
+        const file = await domain.getUseCase('openComic').execute(payload)
         console.log(file)
       })
   }

@@ -16,17 +16,17 @@ export class ShowInfoShortcutsService implements Service {
     const ctrlOrCmd = this.config.platform === 'darwin' ? 'Cmd' : 'Ctrl'
 
     return this.repository.showInfo({
-      type: 'info',
+      type: 'none',
       title: 'Shortcuts',
       message: `
-    ${ctrlOrCmd} + F: Enable/disable fullscreen \n
-    ${ctrlOrCmd} + O: OpenFile \n
-    ${ctrlOrCmd} + S: Show shortcuts \n
-    ${ctrlOrCmd} + Down: Zoom Out \n
-    ${ctrlOrCmd} + Up: Zoom In \n
-    Left: Previous page \n
-    Right: Next page \n
-    `,
+        ${ctrlOrCmd} + F: Enable/disable fullscreen \n
+        ${ctrlOrCmd} + O: OpenFile \n
+        ${ctrlOrCmd} + S: Show shortcuts \n
+        ${ctrlOrCmd} + Down: Zoom Out \n
+        ${ctrlOrCmd} + Up: Zoom In \n
+        Left: Previous page \n
+        Right: Next page \n
+      `,
     })
   }
 }

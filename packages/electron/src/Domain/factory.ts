@@ -21,9 +21,9 @@ import { ToggleFullscreenListener } from './Screen/Listeners/ToggleFullscreenLis
 import { DialogFileManager } from './Adapters/FileManager/DialogFileManager'
 import { OpenFileListener } from './File/Listeners/OpenFileListener'
 import { SelectFileUseCase } from './File/UseCases/SelectFileUseCase'
-import { OpenFileUseCase } from './File/UseCases/OpenFileUseCase'
+import { OpenComicUseCase } from './Comic/UseCases/OpenComicUseCase'
 import { SelectFileService } from './File/Services/SelectFileService'
-import { OpenFileService } from './File/Services/OpenFileService'
+import { OpenComicService } from './Comic/Services/OpenComicService'
 import { OpenFileFactory } from './File/Factories/OpenFileFactory'
 import { getPaths } from './Utils/getPaths'
 import { ClearTmpFolder } from './File/UseCases/ClearTmpFolder'
@@ -63,7 +63,7 @@ export function factory(browserWindow: BrowserWindow) {
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
       [Symbols.SelectFileService]: { asClass: SelectFileService },
-      [Symbols.OpenFileService]: { asClass: OpenFileService },
+      [Symbols.OpenComicService]: { asClass: OpenComicService },
       // Listeners
       [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
@@ -76,7 +76,7 @@ export function factory(browserWindow: BrowserWindow) {
       [Symbols.RegisterShortcutsUseCase]: { asClass: RegisterShortcutsUseCase },
       [Symbols.ToggleFullscreenUseCase]: { asClass: ToggleFullscreenUsecase },
       [Symbols.SelectFileUseCase]: { asClass: SelectFileUseCase },
-      [Symbols.OpenFileUseCase]: { asClass: OpenFileUseCase },
+      [Symbols.OpenComicUseCase]: { asClass: OpenComicUseCase },
       [Symbols.ClearTmpFolder]: { asClass: ClearTmpFolder },
       // Utils
       [Symbols.RemoveFolder]: { asClass: RemoveFolder },
@@ -108,7 +108,7 @@ export function factory(browserWindow: BrowserWindow) {
       Symbols.ToggleFullscreenUseCase
     ),
     selectFile: container.get<SelectFileUseCase>(Symbols.SelectFileUseCase),
-    openFile: container.get<OpenFileUseCase>(Symbols.OpenFileUseCase),
+    openComic: container.get<OpenComicUseCase>(Symbols.OpenComicUseCase),
     clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolder),
   }
 

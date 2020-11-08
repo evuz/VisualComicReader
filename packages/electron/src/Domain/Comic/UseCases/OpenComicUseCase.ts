@@ -1,11 +1,11 @@
 import { Path, UseCase } from '@vcr/domain'
 import { inject } from 'depsin'
 import { Symbols } from '../../symbols'
-import { OpenFileService } from '../Services/OpenFileService'
+import { OpenComicService } from '../Services/OpenComicService'
 
-export class OpenFileUseCase implements UseCase {
+export class OpenComicUseCase implements UseCase {
   constructor(
-    @inject(Symbols.OpenFileService) private service: OpenFileService
+    @inject(Symbols.OpenComicService) private service: OpenComicService
   ) {}
 
   execute(path: Path) {

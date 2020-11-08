@@ -8,7 +8,7 @@ import {
 import { inject } from 'depsin'
 import { Symbols } from '../../symbols'
 
-export class OpenFileService implements Service {
+export class OpenComicService implements Service {
   constructor(
     @inject(Symbols.FileManager) private fileManager: FileManagerAdapter,
     @inject(Symbols.ProcessMain) private processMain: ProcessMainAdapter

@@ -14,7 +14,7 @@ export const Symbols = {
   ShowInfoShortcutsService: 'ShowInfoShortcutsService',
   RegisterShortcutsService: 'RegisterShortcutsService',
   SelectFileService: 'SelectFileService',
-  OpenFileService: 'OpenFileService',
+  OpenComicService: 'OpenFileService',
   // Listeners
   SelectFileListener: 'SelectFileListener',
   OpenFileListener: 'OpenFileListener',
@@ -25,7 +25,7 @@ export const Symbols = {
   RegisterShortcutsUseCase: 'RegisterShortcutsUseCase',
   ToggleFullscreenUseCase: 'ToggleFullscreenUseCase',
   SelectFileUseCase: 'SelectFileUseCase',
-  OpenFileUseCase: 'OpenFileUseCase',
+  OpenComicUseCase: 'OpenFileUseCase',
   ClearTmpFolder: 'ClearTmpFolder',
   // Utils
   RemoveFolder: 'RemoveFolder',

@@ -46,13 +46,13 @@ class App extends Component {
       this.props.setFullScreen(false)
     })
 
-    ipcRenderer.on('fetching', (event, state) => {
-      if (!state) {
+    ipcRenderer.on('fetching', (event, { payload }) => {
+      if (!payload) {
         setTimeout(() => {
-          this.props.setFetching(state)
+          this.props.setFetching(payload)
         }, 2000)
       } else {
-        this.props.setFetching(state)
+        this.props.setFetching(payload)
       }
     })
   }

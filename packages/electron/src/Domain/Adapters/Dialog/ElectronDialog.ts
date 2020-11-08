@@ -6,6 +6,9 @@ export class ElectronDialog implements DialogAdapter {
   constructor(private browserWindow: BrowserWindow) {}
 
   show(opts: MessageOptions): Promise<any> {
-    return dialog.showMessageBox(this.browserWindow, opts)
+    return dialog.showMessageBox(
+      this.browserWindow,
+      Object.assign({}, opts, { buttons: ['Ok'] })
+    )
   }
 }
