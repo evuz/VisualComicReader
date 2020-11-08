@@ -1,12 +1,16 @@
 import { dialog, Dialog } from 'electron'
-import { FileManagerAdapter } from '@vcr/domain'
+import { FileManagerAdapter, Path } from '@vcr/domain'
+import { OpenFileFactory } from '../../File/Factories/OpenFileFactory'
 
 export class DialogFileManager implements FileManagerAdapter {
-  static factory() {
-    return new DialogFileManager(dialog)
+  static factory(openFileFactory: OpenFileFactory) {
+    return new DialogFileManager(dialog, openFileFactory)
   }
 
-  constructor(private dialog: Dialog) {}
+  constructor(
+    private dialog: Dialog,
+    private openFileFactory: OpenFileFactory
+  ) {}
 
   selectDirectory() {
     return this.dialog.showOpenDialog({
@@ -25,5 +29,10 @@ export class DialogFileManager implements FileManagerAdapter {
       ],
     })
     return res.filePaths[0]
+  }
+
+  async openFile(path: Path) {
+    const exec = this.openFileFactory.get(path)
+    return exec.run()
   }
 }

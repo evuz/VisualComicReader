@@ -5,6 +5,7 @@ export const Symbols = {
   Screen: 'Screen',
   ProcessMain: 'ProcessMain',
   KeysListener: 'KeysListener',
+  FileManager: 'FileManager',
   // Repositories
   ComicRepository: 'ComicRepository',
   ShortcutsRepository: 'ShortcutsRepository',
@@ -12,6 +13,7 @@ export const Symbols = {
   // Services
   ShowInfoShortcutsService: 'ShowInfoShortcutsService',
   RegisterShortcutsService: 'RegisterShortcutsService',
+  SelectFileService: 'SelectFileService',
   OpenFileService: 'OpenFileService',
   // Listeners
   SelectFileListener: 'SelectFileListener',
@@ -19,8 +21,12 @@ export const Symbols = {
   ShowInfoShortcutsListener: 'ShowInfoShortcutsListener',
   ToggleFullscreenListener: 'ToggleFullscreenListener',
   // UseCases
-  OpenFileUseCase: 'OpenFileUseCase',
   ShowInfoShortcutsUseCase: 'ShowInfoShortcutsUseCase',
   RegisterShortcutsUseCase: 'RegisterShortcutsUseCase',
   ToggleFullscreenUseCase: 'ToggleFullscreenUseCase',
+  SelectFileUseCase: 'SelectFileUseCase',
+  OpenFileUseCase: 'OpenFileUseCase',
+  ClearTmpFolder: 'ClearTmpFolder',
+  // Utils
+  RemoveFolder: 'RemoveFolder',
 }

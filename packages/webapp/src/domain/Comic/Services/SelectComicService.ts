@@ -1,14 +1,15 @@
-import { Service, FileManagerAdapter } from '@vcr/domain'
+import { Service } from '@vcr/domain'
+import { ComicRepository } from '../Repositories/ComicRepository'
 import { OpenComicService } from './OpenComicService'
 
 export class SelectComicService implements Service {
   constructor(
-    private fileManager: FileManagerAdapter,
+    private comicRepository: ComicRepository,
     private openComicSrv: OpenComicService
   ) {}
 
   async execute() {
-    const file = await this.fileManager.selectFile(['cbz', 'cbr'])
+    const { payload: file } = await this.comicRepository.selectComic()
     const comic = this.openComicSrv.execute(file)
     return comic
   }

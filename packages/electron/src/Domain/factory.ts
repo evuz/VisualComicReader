@@ -20,11 +20,20 @@ import { ToggleFullscreenUsecase } from './Screen/UseCases/ToggleFullscreenUseCa
 import { ToggleFullscreenListener } from './Screen/Listeners/ToggleFullscreenListener'
 import { DialogFileManager } from './Adapters/FileManager/DialogFileManager'
 import { OpenFileListener } from './File/Listeners/OpenFileListener'
+import { SelectFileUseCase } from './File/UseCases/SelectFileUseCase'
+import { OpenFileUseCase } from './File/UseCases/OpenFileUseCase'
+import { SelectFileService } from './File/Services/SelectFileService'
+import { OpenFileService } from './File/Services/OpenFileService'
+import { OpenFileFactory } from './File/Factories/OpenFileFactory'
+import { getPaths } from './Utils/getPaths'
+import { ClearTmpFolder } from './File/UseCases/ClearTmpFolder'
+import { RemoveFolder } from './File/Utils/RemoveFolder'
 
 export function factory(browserWindow: BrowserWindow) {
   // Config
   const config: IConfig = {
     platform: process.platform,
+    paths: getPaths(),
   }
 
   const adapters = {
@@ -35,29 +44,42 @@ export function factory(browserWindow: BrowserWindow) {
     dialog: new ElectronDialog(browserWindow),
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
-    fileManager: DialogFileManager.factory(),
+    fileManager: DialogFileManager.factory(new OpenFileFactory(config)),
   }
 
   const container = createContainer(
     {
       [Symbols.Config]: { asValue: config },
+      // Adapters
       [Symbols.ProcessMain]: { asValue: adapters.processMain },
       [Symbols.Dialog]: { asValue: adapters.dialog },
       [Symbols.Screen]: { asValue: adapters.screen },
       [Symbols.KeysListener]: { asValue: adapters.keysListener },
+      [Symbols.FileManager]: { asValue: adapters.fileManager },
+      // Repositories
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
       [Symbols.ScreenRepository]: { asClass: ElectronScreenRepository },
+      // Services
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
+      [Symbols.SelectFileService]: { asClass: SelectFileService },
+      [Symbols.OpenFileService]: { asClass: OpenFileService },
+      // Listeners
       [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
       [Symbols.ToggleFullscreenListener]: { asClass: ToggleFullscreenListener },
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener,
       },
+      // Use cases
       [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutsUseCase },
       [Symbols.RegisterShortcutsUseCase]: { asClass: RegisterShortcutsUseCase },
       [Symbols.ToggleFullscreenUseCase]: { asClass: ToggleFullscreenUsecase },
+      [Symbols.SelectFileUseCase]: { asClass: SelectFileUseCase },
+      [Symbols.OpenFileUseCase]: { asClass: OpenFileUseCase },
+      [Symbols.ClearTmpFolder]: { asClass: ClearTmpFolder },
+      // Utils
+      [Symbols.RemoveFolder]: { asClass: RemoveFolder },
     },
     { lifetime: 'singleton' }
   )
@@ -85,7 +107,9 @@ export function factory(browserWindow: BrowserWindow) {
     toggleFullscreen: container.get<ToggleFullscreenUsecase>(
       Symbols.ToggleFullscreenUseCase
     ),
-    fileManager: adapters.fileManager,
+    selectFile: container.get<SelectFileUseCase>(Symbols.SelectFileUseCase),
+    openFile: container.get<OpenFileUseCase>(Symbols.OpenFileUseCase),
+    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolder),
   }
 
   return new Domain({ useCases, listeners, config })

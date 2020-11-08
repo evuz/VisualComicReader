@@ -77,7 +77,7 @@ export abstract class App {
       .getListener('selectFile')
       .execute()
       .subscribe(async ({ payload, response }) => {
-        const file = await domain.getUseCase('fileManager').selectFile(payload)
+        const file = await domain.getUseCase('selectFile').execute(payload)
         response(file)
       })
 
@@ -85,7 +85,8 @@ export abstract class App {
       .getListener('openFile')
       .execute()
       .subscribe(async ({ payload }) => {
-        console.log(payload)
+        const file = await domain.getUseCase('openFile').execute(payload)
+        console.log(file)
       })
   }
 }

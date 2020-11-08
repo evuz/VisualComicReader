@@ -2,6 +2,7 @@ import {
   IpcMessages,
   ProcessMainAdapter,
   FileManagerAdapter,
+  Path,
 } from '@vcr/domain'
 
 export class ElectronFileManager implements FileManagerAdapter {
@@ -15,5 +16,9 @@ export class ElectronFileManager implements FileManagerAdapter {
 
   selectDirectory() {
     return this.electron.request(IpcMessages.SelectDirectory)
+  }
+
+  openFile(file: Path) {
+    return this.electron.request(IpcMessages.OpenFile, { payload: file })
   }
 }

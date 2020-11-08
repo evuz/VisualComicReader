@@ -21,7 +21,7 @@ export function factory() {
   }
 
   const repositories = {
-    comic: new ElectronComicRepository(adapters.processMain),
+    comic: new ElectronComicRepository(adapters.fileManager),
     shortcuts: new ElectronShortcutRepository(adapters.processMain),
     screen: new ElectronScreenRepository(adapters.processMain),
   }
@@ -30,7 +30,7 @@ export function factory() {
 
   const services = {
     openComic: openComicSrv,
-    selectComic: new SelectComicService(adapters.fileManager, openComicSrv),
+    selectComic: new SelectComicService(repositories.comic, openComicSrv),
   }
 
   const listeners = {

@@ -7,6 +7,7 @@ export enum IpcMessages {
   ToggleFullscreen = 'toggle-fullscreen',
   ShowInfoShortcut = 'show-info-shortcut',
   RegisterShortcut = 'register-shortcut',
+  Fetching = 'fetching',
 }
 
 export type IpcArgs = {
