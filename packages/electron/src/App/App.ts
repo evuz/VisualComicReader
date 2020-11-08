@@ -1,7 +1,6 @@
 import { App as ElectronApp, BrowserWindow, ipcMain } from 'electron'
 
-import { changeFile, setFileMainWindows } from '../utils/files'
-import { createTmpFolder } from '../utils/directory'
+import { changeFile } from '../utils/files'
 
 import { Domain, createDomain } from '../Domain'
 
@@ -19,10 +18,9 @@ export abstract class App {
 
   private show() {
     this.load()
-    createTmpFolder()
-    setFileMainWindows(this.window)
     this.domain = createDomain(this.window)
     this.ipcListen()
+    this.domain().getUseCase('clearTmpFolder').execute()
     this.domain().getUseCase('registerShortcuts').execute()
     this.window.once('ready-to-show', () => this.window.show())
   }
