@@ -1,11 +1,11 @@
-import { Path } from '@vcr/domain'
+import { File } from '@vcr/domain'
 import { CreateTmpFolder } from './CreateTmpFolder'
 import * as unrar from 'node-unrar-js'
 
 export class RarExtract {
   private folder: string
 
-  constructor(private path: Path, private createTmpFolder: CreateTmpFolder) {}
+  constructor(private path: File, private createTmpFolder: CreateTmpFolder) {}
 
   async run() {
     const { folder, isNew } = await this.createTmpFolder.run(this.path)

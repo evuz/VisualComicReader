@@ -29,4 +29,6 @@ export const Symbols = {
   ClearTmpFolder: 'ClearTmpFolder',
   // Utils
   RemoveFolder: 'RemoveFolder',
+  ReadFolder: 'ReadFolder',
+  NormalizeAssetSrc: 'NormalizeAssetSrc',
 }

@@ -1,9 +1,9 @@
-import { Path } from '@vcr/domain'
+import { File } from '@vcr/domain'
 import { CreateTmpFolder } from './CreateTmpFolder'
 import * as unzip from 'extract-zip'
 
 export class ZipExtract {
-  constructor(private path: Path, private createTmpFolder: CreateTmpFolder) {}
+  constructor(private path: File, private createTmpFolder: CreateTmpFolder) {}
 
   async run() {
     const { folder, isNew } = await this.createTmpFolder.run(this.path)

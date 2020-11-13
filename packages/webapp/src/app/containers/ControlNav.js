@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { nextPage, previousPage } from '../reducers/reader'
+import { nextPage, previousPage, setFiles } from '../reducers/reader'
 import {
   setFullHeight,
   setFullWidth,
@@ -20,6 +20,8 @@ class ControlNavContainer extends Component {
     this.ipcRenderer = window.require
       ? window.require('electron').ipcRenderer
       : null
+
+    this.selectComic = this.selectComic.bind(this)
   }
 
   componentDidMount() {
@@ -59,11 +61,20 @@ class ControlNavContainer extends Component {
       })
   }
 
+  selectComic() {
+    domain
+      .getUseCase('selectComic')
+      .execute()
+      .then((comic) => {
+        this.props.setFiles(comic.images)
+      })
+  }
+
   render() {
     return (
       <ControlNavComponent
         {...this.props}
-        onClickOpenFile={() => domain.getUseCase('selectComic').execute()}
+        onClickOpenFile={this.selectComic}
         onClickShortcutInfo={() => this.ipcRenderer.send('show-info-shortcut')}
       />
     )
@@ -78,6 +89,7 @@ const mapDispatchToProps = {
   onClickZoomOut: zoomOut,
   onClickZoomIn: zoomIn,
   onClickChangeColumns: toogleTwoColumns,
+  setFiles: setFiles,
 }
 
 export default connect(null, mapDispatchToProps)(ControlNavContainer)

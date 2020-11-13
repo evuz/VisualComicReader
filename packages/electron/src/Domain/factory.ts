@@ -28,12 +28,21 @@ import { OpenFileFactory } from './File/Factories/OpenFileFactory'
 import { getPaths } from './Utils/getPaths'
 import { ClearTmpFolder } from './File/UseCases/ClearTmpFolder'
 import { RemoveFolder } from './File/Utils/RemoveFolder'
+import { ReadFolder } from './File/Utils/ReadFolder'
+import {
+  DevNormalizeAssetSrc,
+  NormalizeAssetSrc,
+} from './File/Utils/NormalizeAssetSrc'
 
 export function factory(browserWindow: BrowserWindow) {
   // Config
   const config: IConfig = {
     platform: process.platform,
     paths: getPaths(),
+  }
+
+  const utils = {
+    normalizeAssetSrc: NormalizeAssetSrc,
   }
 
   const adapters = {
@@ -45,6 +54,10 @@ export function factory(browserWindow: BrowserWindow) {
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
     fileManager: DialogFileManager.factory(new OpenFileFactory(config)),
+  }
+
+  if (process.env.NODE_ENV === 'development') {
+    utils.normalizeAssetSrc = DevNormalizeAssetSrc
   }
 
   const container = createContainer(
@@ -80,6 +93,8 @@ export function factory(browserWindow: BrowserWindow) {
       [Symbols.ClearTmpFolder]: { asClass: ClearTmpFolder },
       // Utils
       [Symbols.RemoveFolder]: { asClass: RemoveFolder },
+      [Symbols.ReadFolder]: { asClass: ReadFolder },
+      [Symbols.NormalizeAssetSrc]: { asClass: utils.normalizeAssetSrc },
     },
     { lifetime: 'singleton' }
   )

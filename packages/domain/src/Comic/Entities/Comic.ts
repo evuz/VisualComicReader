@@ -3,7 +3,6 @@ import { Entity } from '../../Domain/models/Entity'
 export interface IComic {
   pages: number
   name: string
-  path: string
   images: string[]
 }
 

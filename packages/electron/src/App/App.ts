@@ -1,6 +1,4 @@
-import { App as ElectronApp, BrowserWindow, ipcMain } from 'electron'
-
-import { changeFile } from '../utils/files'
+import { App as ElectronApp, BrowserWindow } from 'electron'
 
 import { Domain, createDomain } from '../Domain'
 
@@ -49,15 +47,6 @@ export abstract class App {
 
   private ipcListen() {
     const domain = this.domain()
-    ipcMain.on('next-file', () => {
-      this.window.webContents.send('fetching', true)
-      changeFile('next')
-    })
-
-    ipcMain.on('previous-file', () => {
-      this.window.webContents.send('fetching', true)
-      changeFile('previous')
-    })
 
     domain
       .getListener('toggleFullscreen')
@@ -84,9 +73,9 @@ export abstract class App {
     domain
       .getListener('openFile')
       .execute()
-      .subscribe(async ({ payload }) => {
-        const file = await domain.getUseCase('openComic').execute(payload)
-        console.log(file)
+      .subscribe(async ({ payload, response }) => {
+        const comic = await domain.getUseCase('openComic').execute(payload)
+        response(comic)
       })
   }
 }

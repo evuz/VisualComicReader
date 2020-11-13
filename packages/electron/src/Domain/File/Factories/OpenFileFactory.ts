@@ -1,5 +1,5 @@
 import * as paths from 'path'
-import { Path, File } from '@vcr/domain'
+import { File } from '@vcr/domain'
 import { ZipExtract } from '../Utils/ZipExtract'
 import { inject } from 'depsin'
 import { Symbols } from '../../symbols'
@@ -8,13 +8,13 @@ import { IConfig } from '../../Config/models/Config'
 import { RarExtract } from '../Utils/RarExtract'
 
 interface Executer {
-  run(): Promise<File>
+  run(): Promise<any>
 }
 
 export class OpenFileFactory {
   constructor(@inject(Symbols.Config) private config: IConfig) {}
 
-  get(path: Path): Executer {
+  get(path: File): Executer {
     const extension = paths.extname(path)
     switch (extension) {
       case '.cbz':

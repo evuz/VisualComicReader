@@ -1,5 +1,3 @@
-import { Path } from '@vcr/domain'
-
 import * as path from 'path'
 import * as crypto from 'crypto'
 
@@ -13,7 +11,7 @@ export class CreateTmpFolder {
 
   constructor(private config: IConfig, private createFolder: ICreateFolder) {}
 
-  async run(filePath: Path) {
+  async run(filePath: string) {
     const hashPath = crypto.createHash('md5').update(filePath).digest('hex')
     const tmpPath = path.join(this.config.paths.tmp, hashPath)
 

@@ -23,7 +23,12 @@ class App extends Component {
       .getListener('registerShortcut')
       .execute('$mod+o')
       .subscribe(() => {
-        domain.getUseCase('selectComic').execute()
+        domain
+          .getUseCase('selectComic')
+          .execute()
+          .then((comic) => {
+            this.props.setFiles(comic.images)
+          })
       })
 
     domain

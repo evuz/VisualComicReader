@@ -1,5 +1,5 @@
 import { dialog, Dialog } from 'electron'
-import { FileManagerAdapter, Path } from '@vcr/domain'
+import { FileManagerAdapter } from '@vcr/domain'
 import { OpenFileFactory } from '../../File/Factories/OpenFileFactory'
 
 export class DialogFileManager implements FileManagerAdapter {
@@ -31,8 +31,8 @@ export class DialogFileManager implements FileManagerAdapter {
     return res.filePaths[0]
   }
 
-  async openFile(path: Path) {
-    const exec = this.openFileFactory.get(path)
+  async openFile(filePath: string) {
+    const exec = this.openFileFactory.get(filePath)
     return exec.run()
   }
 }

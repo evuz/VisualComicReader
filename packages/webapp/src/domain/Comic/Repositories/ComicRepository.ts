@@ -1,6 +1,6 @@
-import { Comic, Path } from '@vcr/domain'
+import { Comic, File } from '@vcr/domain'
 
 export interface ComicRepository {
-  selectComic(): Promise<Path>
+  selectComic(): Promise<File>
   openComic(file: any): Promise<Comic>
 }

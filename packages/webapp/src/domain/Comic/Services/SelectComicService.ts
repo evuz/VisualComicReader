@@ -9,7 +9,7 @@ export class SelectComicService implements Service {
   ) {}
 
   async execute() {
-    const { payload: file } = await this.comicRepository.selectComic()
+    const file = await this.comicRepository.selectComic()
     const comic = this.openComicSrv.execute(file)
     return comic
   }

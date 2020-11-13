@@ -1,9 +1,8 @@
-export type File = any
 export type Directory = any
-export type Path = any
+export type File = string
 
 export interface FileManagerAdapter {
-  selectFile(type: string[]): Promise<Path>
+  selectFile(type: string[]): Promise<File>
   selectDirectory(): Promise<Directory>
-  openFile(file: Path): Promise<File>
+  openFile(file: File): Promise<any>
 }
