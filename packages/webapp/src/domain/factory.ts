@@ -1,10 +1,11 @@
 import { Domain, ElectronProcessMain } from '@vcr/domain'
-import { ElectronFileManager } from './Adapters/FileManager/ElectronFileManager'
 
+import { ElectronFileManager } from './Adapters/FileManager/ElectronFileManager'
 import { ElectronComicRepository } from './Comic/Repositories/ElectronComicRepository'
 import { OpenComicService } from './Comic/Services/OpenComicService'
 import { SelectComicService } from './Comic/Services/SelectComicService'
 import { SelectComicUseCase } from './Comic/UseCases/SelectComicUseCase'
+import { FetchingListener } from './Screen/Listeners/FetchingListener'
 import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRepository'
 import { ToggleFullscrenUseCase } from './Screen/UseCases/ToggleFullscreenUseCase'
 import { RegisterShortcutListener } from './Shortcuts/Listeners/RegisterShortcutListener'
@@ -35,6 +36,7 @@ export function factory() {
 
   const listeners = {
     registerShortcut: new RegisterShortcutListener(repositories.shortcuts),
+    fetching: new FetchingListener(repositories.screen),
   }
 
   const useCases = {
