@@ -3,15 +3,15 @@ import { ComicState } from './Comic/ComicContext'
 
 import { DomainState } from './Domain/DomainContext'
 import { WindowState } from './WindowState/WindowStateContext'
-import { ControlComicState } from './ControlComic/ControlComicContext'
+import { ReaderState } from './Reader/ReaderContext'
 
 export const AppContext: FC = ({ children }) => {
   return (
     <DomainState>
       <ComicState>
-        <ControlComicState>
+        <ReaderState>
           <WindowState>{children}</WindowState>
-        </ControlComicState>
+        </ReaderState>
       </ComicState>
     </DomainState>
   )
