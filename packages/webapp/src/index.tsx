@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import configureStore from './app/configureStore'
 
 import { AppContext } from './app/context/AppContext'
-import App from './app/app'
+import { App } from './app/app'
 
 const store = configureStore()
 
