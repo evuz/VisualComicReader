@@ -1,9 +1,11 @@
 import { useCallback } from 'react'
+import { useDomain } from './useDomain'
 
 export function useShortcuts() {
+  const domain = useDomain()
   const showShortcuts = useCallback(() => {
-    // TODO: show shortcuts
-  }, [])
+    domain.getUseCase('showInfoShortcuts').execute()
+  }, [domain])
 
   return { showShortcuts }
 }

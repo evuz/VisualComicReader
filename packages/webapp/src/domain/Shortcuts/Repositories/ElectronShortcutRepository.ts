@@ -19,4 +19,8 @@ export class ElectronShortcutRepository implements ShortcutRepository {
       .listen(IpcMessages.RegisterShortcut)
       .pipe(filter(({ id: messageId }) => messageId === id))
   }
+
+  showInfo() {
+    return this.processMain.emit(IpcMessages.ShowInfoShortcut)
+  }
 }
