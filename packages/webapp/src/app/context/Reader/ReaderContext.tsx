@@ -1,4 +1,5 @@
-import React, { createContext, useCallback, useState } from 'react'
+import React, { createContext, useCallback, useEffect, useState } from 'react'
+import { useComic } from '../../hooks/useComic'
 
 enum IReaderStateViewMode {
   Width,
@@ -62,9 +63,14 @@ const defaultContext: IReaderContext = {
 export const ReaderContext = createContext<IReaderContext>(defaultContext)
 
 export const ReaderState: React.FC = ({ children }) => {
+  const { comic } = useComic()
   const [{ page, percentSize, viewMode, pageMode }, setState] = useState<
     IReaderState
   >(defaultValue)
+
+  useEffect(() => {
+    setState(defaultValue)
+  }, [comic])
 
   const setStateProperty = useCallback(function <T extends keyof IReaderState>(
     key: T,
