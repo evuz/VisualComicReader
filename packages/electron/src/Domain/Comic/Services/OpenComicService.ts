@@ -46,7 +46,7 @@ export class OpenComicService implements Service {
           return this.getImages(filePath)
         }
 
-        if (!imgExtensions.includes(path.extname(file.name))) {
+        if (!imgExtensions.includes(path.extname(file.name).toLowerCase())) {
           return null
         }
 
