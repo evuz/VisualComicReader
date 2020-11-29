@@ -1,25 +1,20 @@
 .reader {
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    .doblePage {
-        display: flex;
-        img {
-            height: 100%;
-            &.left {
-                margin-right: 0;
-            }
-            &.right {
-                margin-left: 0;
-            }
-        }
-    }
+  height: 100%;
+  width: 100%;
+  .doblePage {
+    display: flex;
     img {
-        display: block;
-        margin: 0 auto;
-        cursor: -webkit-grab;
-        &.drag {
-            cursor: -webkit-grabbing;
-        }
+      height: 100%;
+      &.left {
+        margin-right: 0;
+      }
+      &.right {
+        margin-left: 0;
+      }
     }
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+  }
 }

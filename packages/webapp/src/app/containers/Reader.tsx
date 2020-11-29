@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 
-import ReaderComponent from '../components/Reader'
+import { Reader } from '../components/Reader/Reader'
 import { useComic } from '../hooks/useComic'
 import { useControlComic } from '../hooks/useReader'
 import { useRegisterShortchuts } from '../hooks/useRegisterShortcuts'
 
-export const Reader: FC = () => {
+export const ReaderContainer: FC = () => {
   const {
     percentSize,
     isDoublePage,
@@ -25,7 +25,7 @@ export const Reader: FC = () => {
   useRegisterShortchuts('$mod+down', zoomOut)
 
   return (
-    <ReaderComponent
+    <Reader
       files={comic?.images}
       page={page}
       twoColumns={isDoublePage()}

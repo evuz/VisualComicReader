@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { LayoutContainer } from './containers/Layout'
-import { Reader } from './containers/Reader'
+import { ReaderContainer } from './containers/Reader'
 import { LoadingContainer } from './containers/Loading'
 import { RegisterShortcuts } from './containers/RegisterShortcuts'
 
@@ -13,7 +13,7 @@ export const App: FC = () => {
       <RegisterShortcuts />
       <LoadingContainer />
       <LayoutContainer>
-        <Reader />
+        <ReaderContainer />
       </LayoutContainer>
     </div>
   )
