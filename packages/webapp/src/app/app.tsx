@@ -1,9 +1,8 @@
 import React, { FC } from 'react'
 
-import { LayoutContainer } from './containers/Layout'
-import { ReaderContainer } from './containers/Reader'
 import { LoadingContainer } from './containers/Loading'
 import { RegisterShortcuts } from './containers/RegisterShortcuts'
+import { Router } from './router'
 
 import './app.css'
 
@@ -12,9 +11,7 @@ export const App: FC = () => {
     <div className="App">
       <RegisterShortcuts />
       <LoadingContainer />
-      <LayoutContainer>
-        <ReaderContainer />
-      </LayoutContainer>
+      <Router />
     </div>
   )
 }

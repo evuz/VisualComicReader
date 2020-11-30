@@ -1,6 +1,8 @@
 import { Comic } from '@vcr/domain'
 import React, { createContext, useCallback, useState } from 'react'
+
 import { useDomain } from '../../hooks/useDomain'
+import { useLocation } from '../../hooks/useLocation'
 
 type IComicState = Comic | null
 
@@ -17,6 +19,7 @@ export const ComicContext = createContext<IComicContext>(defaultValue)
 
 export const ComicState: React.FC = ({ children }) => {
   const domain = useDomain()
+  const { replace } = useLocation()
   const [comic, setComic] = useState<IComicState>(defaultValue.comic)
 
   const selectComic = useCallback(() => {
@@ -24,9 +27,10 @@ export const ComicState: React.FC = ({ children }) => {
       .getUseCase('selectComic')
       .execute()
       .then((comic) => {
+        replace('reader')
         setComic(comic)
       })
-  }, [domain])
+  }, [domain, replace])
 
   const context: IComicContext = {
     comic,
