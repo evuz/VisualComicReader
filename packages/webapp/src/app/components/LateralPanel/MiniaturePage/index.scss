@@ -14,7 +14,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgba(var(--accents-1), .5);
+        background-color: rgba(var(--background), .5);
         .number-page {
           height: 25px;
           width: 25px;
@@ -22,7 +22,7 @@
           justify-content: center;
           align-items: center;
           font-size: 14px;
-          background-color: rgb(var(--accents-1));
+          background-color: rgb(var(--background));
           border-radius: 20px;
         }
         &:hover {

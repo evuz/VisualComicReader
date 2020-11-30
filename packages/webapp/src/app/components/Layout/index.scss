@@ -5,7 +5,7 @@
         right: 0;
         bottom: 25px;
         left: 125px;
-        background: rgb(var(--accents-1));
+        background: rgb(var(--background));
         &.lateral_nav {
             left: 25px;
             width: auto;
@@ -43,6 +43,6 @@
         opacity: 0;
     }
      ::-webkit-scrollbar-thumb {
-        background-color: rgba(var(--accents-5), 0.4);
+        background-color: rgba(var(--accents-4), 0.4);
     }
 }
