@@ -1,0 +1,70 @@
+.Button {
+  /* Reset Button */
+  font: inherit;
+  cursor: pointer;
+
+  height: 3rem;
+  color: rgb(var(--button-color));
+  background-color: rgb(var(--button-bg));
+  border: 1px solid rgb(var(--button-border-color));
+  padding: 0 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0.3125rem;
+  transition: all 0.15s ease 0s;
+  white-space: nowrap;
+
+  /* is-primary */
+  --button-bg: var(--foreground);
+  --button-color: var(--background);
+  --button-border-color: var(--foreground);
+  --button-hover-bg: var(--background);
+  --button-hover-color: var(--foreground);
+  --button-hover-border-color: var(--foreground);
+  --button-active-bg: var(--accents-2);
+  --button-active-color: var(--foreground);
+  --button-active-border-color: var(--foreground);
+}
+
+.Button:focus {
+  outline: none;
+}
+
+.Button:hover {
+  background-color: rgb(var(--button-hover-bg));
+  color: rgb(var(--button-hover-color));
+  border-color: rgb(var(--button-hover-border-color));
+}
+
+.Button:active {
+  transition: none;
+  background-color: rgb(var(--button-active-bg));
+  color: rgb(var(--button-active-color));
+  border-color: rgb(var(--button-active-border-color));
+}
+
+.is-ghost {
+  --button-bg: var(--background);
+  --button-color: var(--accents-5);
+  --button-border-color: var(--accents-2);
+  --button-hover-bg: var(--background);
+  --button-hover-color: var(--foreground);
+  --button-hover-border-color: var(--foreground);
+  --button-active-bg: var(--accents-2);
+  --button-active-color: var(--foreground);
+  --button-active-border-color: var(--foreground);
+}
+
+.is-disabled {
+  cursor: not-allowed;
+
+  --button-bg: var(--accents-1);
+  --button-color: var(--accents-3);
+  --button-border-color: var(--accents-2);
+  --button-hover-bg: var(--accents-1);
+  --button-hover-color: var(--accents-3);
+  --button-hover-border-color: var(--accents-2);
+  --button-active-bg: var(--accents-1);
+  --button-active-color: var(--accents-3);
+  --button-active-border-color: var(--accents-2);
+}
