@@ -1,6 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
+:root {
+  /* Theme */
+  --background: 0, 0, 0;          /* rgb(0, 0, 0); */
+  --accents-1: 17, 17, 17;        /* rgb(17, 17, 17); */
+  --accents-2: 51, 51, 51;        /* rgb(51, 51, 51); */
+  --accents-3: 68, 68, 68;        /* rgb(68, 68, 68); */
+  --accents-4: 102, 102, 102;     /* rgb(102, 102, 102); */
+  --accents-5: 136, 136, 136;     /* rgb(136, 136, 136); */
+  --accents-6: 153, 153, 153;     /* rgb(153, 153, 153); */
+  --accents-7: 234, 234, 234;     /* rgb(234, 234, 234); */
+  --accents-8: 250, 250, 250;     /* rgb(250, 250, 250); */
+  --foreground: 255, 255, 255;    /* rgb(255, 255, 255); */
+  --red: 221, 64, 58;             /* rgb(221, 64, 58); */
+  /* Error */
+  --error: 255, 0, 0;             /* rgb(255, 0, 0); */
+  --error-light: 255, 51, 51;     /* rgb(255, 51, 51); */
+  --error-dark: 230, 0, 0;        /* rgb(230, 0, 0); */
+  /* Success */
+  --success: 0, 112, 243;         /* rgb(0, 112, 243); */
+  --success-light: 50, 145, 255;  /* rgb(50, 145, 255); */
+  --success-dark: 7, 97, 209;     /* rgb(7, 97, 209); */
+  /* Warning */
+  --warning: 245, 166, 35;        /* rgb(245, 166, 35); */
+  --warning-light: 247, 185, 85;  /* rgb(247, 185, 85); */
+  --warning-dark: 171, 87, 10;    /* rgb(171, 87, 10); */
+
+  /* Fonts */
+  --font-family: 'Inter', sans-serif;
+}
+
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-family);
   font-size: 100%;
 }
