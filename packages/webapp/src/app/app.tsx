@@ -5,7 +5,7 @@ import { ReaderContainer } from './containers/Reader'
 import { LoadingContainer } from './containers/Loading'
 import { RegisterShortcuts } from './containers/RegisterShortcuts'
 
-import './app.scss'
+import './app.css'
 
 export const App: FC = () => {
   return (
