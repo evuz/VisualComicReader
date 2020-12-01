@@ -3,8 +3,7 @@ import React, { FC } from 'react'
 import ControlNavComponent from '../components/ControlNav'
 
 import { useComic } from '../hooks/useComic'
-import { useControlComic } from '../hooks/useReader'
-import { useShortcuts } from '../hooks/useShortcuts'
+import { useReader } from '../hooks/useReader'
 
 export const ControlNavContainer: FC = () => {
   const { selectComic } = useComic()
@@ -14,11 +13,11 @@ export const ControlNavContainer: FC = () => {
     nextPage,
     zoomIn,
     zoomOut,
-    setHeigthMode,
+    setHeightMode,
     setWidthMode,
     togglePageMode,
     isDoublePage,
-  } = useControlComic()
+  } = useReader()
 
   return (
     <ControlNavComponent
@@ -29,7 +28,7 @@ export const ControlNavContainer: FC = () => {
       onClickZoomOut={zoomOut}
       onClickZoomIn={zoomIn}
       onClickFullWidth={setWidthMode}
-      onClickFullHeight={setHeigthMode}
+      onClickFullHeight={setHeightMode}
       onClickChangeColumns={togglePageMode}
       twoColumns={isDoublePage()}
     />

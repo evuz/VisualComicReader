@@ -27,7 +27,7 @@ type IReaderContext = {
   zoomOut: () => void
   isFullHeight: () => boolean
   isFullWidth: () => boolean
-  setHeigthMode: () => void
+  setHeightMode: () => void
   setWidthMode: () => void
   isSinglePage: () => boolean
   isDoublePage: () => boolean
@@ -53,7 +53,7 @@ const defaultContext: IReaderContext = {
   zoomOut: () => {},
   isFullHeight: () => true,
   isFullWidth: () => false,
-  setHeigthMode: () => {},
+  setHeightMode: () => {},
   setWidthMode: () => {},
   isSinglePage: () => true,
   isDoublePage: () => false,
@@ -112,7 +112,7 @@ export const ReaderState: React.FC = ({ children }) => {
     [viewMode]
   )
 
-  const setHeigthMode = useCallback(() => {
+  const setHeightMode = useCallback(() => {
     setStateProperty('viewMode', IReaderStateViewMode.Heigth)
   }, [setStateProperty])
 
@@ -151,7 +151,7 @@ export const ReaderState: React.FC = ({ children }) => {
     zoomOut,
     isFullHeight,
     isFullWidth,
-    setHeigthMode,
+    setHeightMode,
     setWidthMode,
     isSinglePage,
     isDoublePage,
