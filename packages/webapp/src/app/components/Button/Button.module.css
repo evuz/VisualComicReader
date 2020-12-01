@@ -1,12 +1,10 @@
 .Button {
-  /* Reset Button */
-  font: inherit;
-  cursor: pointer;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 3rem;
   color: rgb(var(--button-color));
   background-color: rgb(var(--button-bg));
-  border: 1px solid rgb(var(--button-border-color));
   padding: 0 1.5rem;
   font-size: 1rem;
   font-weight: 700;
@@ -26,10 +24,6 @@
   --button-active-border-color: var(--foreground);
 }
 
-.Button:focus {
-  outline: none;
-}
-
 .Button:hover {
   background-color: rgb(var(--button-hover-bg));
   color: rgb(var(--button-hover-color));
@@ -41,6 +35,10 @@
   background-color: rgb(var(--button-active-bg));
   color: rgb(var(--button-active-color));
   border-color: rgb(var(--button-active-border-color));
+}
+
+.is-border {
+  border: 1px solid rgb(var(--button-border-color));
 }
 
 .is-ghost {
@@ -67,4 +65,13 @@
   --button-active-bg: var(--accents-1);
   --button-active-color: var(--accents-3);
   --button-active-border-color: var(--accents-2);
+}
+
+.is-square {
+  width: 3rem;
+  padding: 0;
+}
+
+.is-rounded {
+  border-radius: 3rem;
 }
