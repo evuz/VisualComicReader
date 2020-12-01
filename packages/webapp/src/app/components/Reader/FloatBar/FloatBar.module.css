@@ -1,0 +1,39 @@
+.FloatBar {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.FloatBar:hover {
+  opacity: 1;
+}
+
+.BottomBar {
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.BottomBar .container {
+  background: rgba(var(--background));
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.RightBar {
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.RightBar .container > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.FloatBar .is-row {
+  display: flex;
+}
