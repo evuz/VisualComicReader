@@ -1,0 +1,29 @@
+.ControlNav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 25px;
+  background: rgb(var(--success));
+  display: flex;
+}
+
+.ControlNav .ButtonNav {
+  color: rgba(var(--foreground), .8);
+  font-size: .75rem;
+  font-weight: 300;
+  padding: 0 .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ControlNav .ButtonNav:hover {
+  background-color: rgba(var(--accents-6), .2);
+}
+
+.ControlNav .ButtonNav:active {
+  color: rgba(var(--foreground), .6);
+  background-color: rgba(var(--accents-6), .4);
+}

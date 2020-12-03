@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
 
 :root {
   /* Theme */
@@ -32,6 +32,7 @@
 
 html {
   font-family: var(--font-family);
+  font-weight: 400;
   font-size: 100%;
 }
 
