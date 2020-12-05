@@ -1,12 +1,12 @@
 import { UseCase } from '@vcr/domain'
-import { inject } from 'depsin'
+import { DEPS_SYMBOL } from 'depsin'
 import { Symbols } from '../../symbols'
 import { OpenComicService } from '../Services/OpenComicService'
 
 export class OpenComicUseCase implements UseCase {
-  constructor(
-    @inject(Symbols.OpenComicService) private service: OpenComicService
-  ) {}
+  static [DEPS_SYMBOL] = [Symbols.OpenComicService]
+
+  constructor(private service: OpenComicService) {}
 
   execute(filePath: string) {
     return this.service.execute(filePath)

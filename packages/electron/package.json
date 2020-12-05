@@ -5,10 +5,10 @@
   "description": "My Electron application description",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && cross-env NODE_ENV=development electron-forge start",
-    "package": "tsc && electron-forge package && vcr-scripts deps",
+    "start": "npm run build && cross-env NODE_ENV=development electron-forge start",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node10.23 --external:electron --outfile=dist/index.js",
+    "package": "npm run build && electron-forge package && vcr-scripts deps",
     "make": "npm run package && electron-forge make --skip-package",
-    "publish": "electron-forge publish",
     "test": "jest --silent",
     "test:watch": "jest --watch",
     "lint": "eslint --ext .ts ."
@@ -32,10 +32,7 @@
           }
         },
         {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
+          "name": "@electron-forge/maker-zip"
         },
         {
           "name": "@electron-forge/maker-dmg",
@@ -62,6 +59,7 @@
     "@electron-forge/cli": "6.0.0-beta.50",
     "@electron-forge/maker-deb": "6.0.0-beta.50",
     "@electron-forge/maker-dmg": "^6.0.0-beta.50",
+    "@electron-forge/maker-flatpak": "6.0.0-beta.50",
     "@electron-forge/maker-rpm": "6.0.0-beta.50",
     "@electron-forge/maker-squirrel": "6.0.0-beta.50",
     "@electron-forge/maker-zip": "6.0.0-beta.50",
@@ -71,6 +69,7 @@
     "@vcr/scripts": "0.0.1",
     "cross-env": "^7.0.2",
     "electron": "8.2.0",
+    "esbuild": "^0.8.18",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.0",
     "typescript": "^3.8.3"

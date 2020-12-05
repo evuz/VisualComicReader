@@ -1,15 +1,16 @@
 import { Service } from '@vcr/domain'
 import { ShortcutsRepository } from '../Repositories/ShortcutsRepository'
-import { inject } from 'depsin'
+import { DEPS_SYMBOL } from 'depsin'
 
 import { Symbols } from '../../symbols'
 import { IConfig } from '../../Config/models/Config'
 
 export class ShowInfoShortcutsService implements Service {
+  static [DEPS_SYMBOL] = [Symbols.ShortcutsRepository, Symbols.Config]
+
   constructor(
-    @inject(Symbols.ShortcutsRepository)
     private repository: ShortcutsRepository,
-    @inject(Symbols.Config) private config: IConfig
+    private config: IConfig
   ) {}
 
   execute() {

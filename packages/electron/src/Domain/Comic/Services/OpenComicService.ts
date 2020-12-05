@@ -6,7 +6,7 @@ import {
   Service,
 } from '@vcr/domain'
 import * as path from 'path'
-import { inject } from 'depsin'
+import { DEPS_SYMBOL } from 'depsin'
 
 import { ReadFolder } from '../../File/Utils/ReadFolder'
 import { Symbols } from '../../symbols'
@@ -15,11 +15,18 @@ import { NormalizeAssetSrc } from '../../File/Utils/NormalizeAssetSrc'
 const imgExtensions = ['.jpg', '.png', '.jpeg']
 
 export class OpenComicService implements Service {
+  static [DEPS_SYMBOL] = [
+    Symbols.FileManager,
+    Symbols.ProcessMain,
+    Symbols.ReadFolder,
+    Symbols.NormalizeAssetSrc,
+  ]
+
   constructor(
-    @inject(Symbols.FileManager) private fileManager: FileManagerAdapter,
-    @inject(Symbols.ProcessMain) private processMain: ProcessMainAdapter,
-    @inject(Symbols.ReadFolder) private readFolder: ReadFolder,
-    @inject(Symbols.NormalizeAssetSrc) private normalizeSrc: NormalizeAssetSrc
+    private fileManager: FileManagerAdapter,
+    private processMain: ProcessMainAdapter,
+    private readFolder: ReadFolder,
+    private normalizeSrc: NormalizeAssetSrc
   ) {}
 
   async execute(comicPath: string): Promise<Comic> {

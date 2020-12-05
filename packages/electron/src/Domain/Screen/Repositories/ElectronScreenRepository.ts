@@ -1,14 +1,16 @@
 import { IpcMessages, ProcessMainAdapter } from '@vcr/domain'
-import { inject } from 'depsin'
+import { DEPS_SYMBOL } from 'depsin'
 import { Observable } from 'rxjs'
 import { ScreenAdapter } from '../../Adapters/Screen/ScreenAdapter'
 import { Symbols } from '../../symbols'
 import { ScreenRepository } from './ScreenRepository'
 
 export class ElectronScreenRepository implements ScreenRepository {
+  static [DEPS_SYMBOL] = [Symbols.Screen, Symbols.ProcessMain]
+
   constructor(
-    @inject(Symbols.Screen) private screen: ScreenAdapter,
-    @inject(Symbols.ProcessMain) private processMain: ProcessMainAdapter
+    private screen: ScreenAdapter,
+    private processMain: ProcessMainAdapter
   ) {}
 
   toggleFullscreen() {

@@ -4,17 +4,23 @@ import {
   KeysListenerAdapter,
 } from '@vcr/domain'
 import { Observable } from 'rxjs'
+import { DEPS_SYMBOL } from 'depsin'
 
 import { IMessageOptions, ShortcutsRepository } from './ShortcutsRepository'
 import { DialogAdapter } from '../../Adapters/Dialog/DialogAdapter'
-import { inject } from 'depsin'
 import { Symbols } from '../../symbols'
 
 export class ElectronShortcutsRepository implements ShortcutsRepository {
+  static [DEPS_SYMBOL] = [
+    Symbols.ProcessMain,
+    Symbols.Dialog,
+    Symbols.KeysListener,
+  ]
+
   constructor(
-    @inject(Symbols.ProcessMain) private processMain: ProcessMainAdapter,
-    @inject(Symbols.Dialog) private dialog: DialogAdapter,
-    @inject(Symbols.KeysListener) private keysListener: KeysListenerAdapter
+    private processMain: ProcessMainAdapter,
+    private dialog: DialogAdapter,
+    private keysListener: KeysListenerAdapter
   ) {}
 
   onShowInfo(): Observable<any> {

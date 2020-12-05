@@ -1,13 +1,12 @@
 import { Listener } from '@vcr/domain'
 import { ShortcutsRepository } from '../Repositories/ShortcutsRepository'
-import { inject } from 'depsin'
+import { DEPS_SYMBOL } from 'depsin'
 import { Symbols } from '../../symbols'
 
 export class ShowInfoShortcutListener implements Listener {
-  constructor(
-    @inject(Symbols.ShortcutsRepository)
-    private repository: ShortcutsRepository
-  ) {}
+  static [DEPS_SYMBOL] = [Symbols.ShortcutsRepository]
+
+  constructor(private repository: ShortcutsRepository) {}
 
   execute() {
     return this.repository.onShowInfo()
