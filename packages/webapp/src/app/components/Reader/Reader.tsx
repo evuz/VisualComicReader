@@ -1,8 +1,12 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Comic } from '@vcr/domain'
 
-import './index.scss'
 import { useDragScroll } from '../../hooks/useDragScroll'
+
+import styles from './Reader.module.css'
+import { filterClassNames } from '../../utils/filterClassNames'
+import { BottomBar } from './FloatBar/BottomBar'
+import { RightBar } from './FloatBar/RightBar'
 
 export type ReaderProps = {
   files: Comic['images'] | undefined
@@ -11,6 +15,12 @@ export type ReaderProps = {
   percentSize: number
   fullHeight: boolean
   fullWidth: boolean
+  onPreviousPage: () => void
+  onNextPage: () => void
+  onZoomOut: () => void
+  onZoomIn: () => void
+  onFullWidth: () => void
+  onFullHeight: () => void
 }
 
 type ImgSize = {
@@ -44,10 +54,14 @@ export const Reader: FC<ReaderProps> = ({
   fullHeight,
   fullWidth,
   percentSize,
+  onPreviousPage,
+  onNextPage,
+  onFullWidth,
+  onFullHeight,
+  onZoomOut,
+  onZoomIn,
 }) => {
   const [readerRef, setReaderRef] = useDragScroll<HTMLDivElement>()
-  const [clicked] = useState(false)
-
   const { height, width } = imgSize({ fullHeight, fullWidth, percentSize })
 
   useEffect(() => {
@@ -57,31 +71,37 @@ export const Reader: FC<ReaderProps> = ({
     }
   }, [page, readerRef])
 
-  return files?.length ? (
-    <div className="reader" ref={setReaderRef}>
+  if (!files?.length) {
+    return null
+  }
+
+  return (
+    <div className={styles.Reader} ref={setReaderRef}>
       {twoColumns ? (
         <div
-          className="doblePage"
+          className={styles['double-page']}
           style={{
             height,
           }}
         >
           <img
-            className={clicked ? 'left drag' : 'left'}
+            className={filterClassNames([styles['is-left'], styles['is-img']])}
             src={files[page]}
-            alt=""
+            alt={`Page ${page}`}
+            draggable="false"
           />
           <img
-            className={clicked ? 'right drag' : 'right'}
+            className={filterClassNames([styles['is-right'], styles['is-img']])}
             src={files[page + 1]}
-            alt=""
+            alt={`Page ${page + 1}`}
+            draggable="false"
           />
         </div>
       ) : (
         <img
-          className={clicked ? 'drag' : ''}
+          className={styles['is-img']}
           src={files[page]}
-          alt=""
+          alt={`Page ${page}`}
           style={{
             height,
             width,
@@ -89,6 +109,13 @@ export const Reader: FC<ReaderProps> = ({
           draggable="false"
         />
       )}
+      <BottomBar
+        onPreviousPage={onPreviousPage}
+        onNextPage={onNextPage}
+        onFullWidth={onFullWidth}
+        onFullHeight={onFullHeight}
+      />
+      <RightBar onZoomOut={onZoomOut} onZoomIn={onZoomIn} />
     </div>
-  ) : null
+  )
 }

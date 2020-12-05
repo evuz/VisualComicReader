@@ -1,8 +1,8 @@
 .miniature-page {
     text-align: center;
-    color: white;
-    padding: 10px;
-    padding-bottom: 0;
+    color: rgb(var(--foreground));
+    padding: 5px 10px;
+    padding-right: 5px;
     position: relative;
     .hover-page {
         opacity: 0;
@@ -14,7 +14,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgba(30, 30, 30, 0.5);
+        background-color: rgba(var(--background), .5);
         .number-page {
           height: 25px;
           width: 25px;
@@ -22,7 +22,7 @@
           justify-content: center;
           align-items: center;
           font-size: 14px;
-          background-color: #1e1e1e;
+          background-color: rgb(var(--background));
           border-radius: 20px;
         }
         &:hover {

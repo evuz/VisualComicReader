@@ -1,0 +1,26 @@
+.Reader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Reader .double-page {
+  display: flex;
+}
+
+.double-page .is-left {
+  height: 100%;
+  margin-right: 0;
+}
+
+.double-page .is-right {
+  height: 100%;
+  margin-left: 0;
+}
+
+.is-img {
+  display: block;
+  margin: 0 auto;
+}

@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
 import LateralPanelComponent from '../components/LateralPanel'
-import { useControlComic } from '../hooks/useReader'
+import { useReader } from '../hooks/useReader'
 import { useComic } from '../hooks/useComic'
 
 export const LateralPanelContainer: FC = () => {
   const { comic } = useComic()
-  const { page, selectPage } = useControlComic()
+  const { page, selectPage } = useReader()
 
   return (
     <LateralPanelComponent

@@ -2,21 +2,23 @@ import React, { FC } from 'react'
 
 import { Reader } from '../components/Reader/Reader'
 import { useComic } from '../hooks/useComic'
-import { useControlComic } from '../hooks/useReader'
+import { useReader } from '../hooks/useReader'
 import { useRegisterShortchuts } from '../hooks/useRegisterShortcuts'
 
 export const ReaderContainer: FC = () => {
   const {
     percentSize,
+    page,
     isDoublePage,
     isFullHeight,
     isFullWidth,
-    page,
     nextPage,
     previousPage,
     zoomIn,
     zoomOut,
-  } = useControlComic()
+    setHeightMode,
+    setWidthMode,
+  } = useReader()
   const { comic } = useComic()
 
   useRegisterShortchuts('Right', nextPage)
@@ -32,6 +34,12 @@ export const ReaderContainer: FC = () => {
       percentSize={percentSize}
       fullHeight={isFullHeight()}
       fullWidth={isFullWidth()}
+      onZoomIn={zoomIn}
+      onZoomOut={zoomOut}
+      onNextPage={nextPage}
+      onPreviousPage={previousPage}
+      onFullHeight={setHeightMode}
+      onFullWidth={setWidthMode}
     />
   )
 }

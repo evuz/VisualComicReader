@@ -41,7 +41,7 @@ export const WindowState: React.FC = ({ children }) => {
   }, [domain])
 
   useEffect(() => {
-    domain
+    const subscription = domain
       .getListener('fetching')
       .execute()
       .subscribe((newValue) => {
@@ -49,6 +49,7 @@ export const WindowState: React.FC = ({ children }) => {
           Object.assign({}, prev, { isFetching: newValue })
         )
       })
+    return () => subscription.unsubscribe()
   })
 
   const context: IWindowStateContext = {

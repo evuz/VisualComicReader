@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react'
+import React, { createContext, useCallback, useState, useEffect } from 'react'
 import { useComic } from '../../hooks/useComic'
 
 enum IReaderStateViewMode {
@@ -28,7 +28,7 @@ type IReaderContext = {
   zoomOut: () => void
   isFullHeight: () => boolean
   isFullWidth: () => boolean
-  setHeigthMode: () => void
+  setHeightMode: () => void
   setWidthMode: () => void
   isSinglePage: () => boolean
   isDoublePage: () => boolean
@@ -54,7 +54,7 @@ const defaultContext: IReaderContext = {
   zoomOut: () => {},
   isFullHeight: () => true,
   isFullWidth: () => false,
-  setHeigthMode: () => {},
+  setHeightMode: () => {},
   setWidthMode: () => {},
   isSinglePage: () => true,
   isDoublePage: () => false,
@@ -86,12 +86,31 @@ export const ReaderState: React.FC = ({ children }) => {
   [])
 
   const nextPage = useCallback(() => {
-    setStateProperty('page', (prev) => prev + 1)
-  }, [setStateProperty])
+    setStateProperty('page', (prev) => {
+      if (!comic) {
+        return prev
+      }
+      const lastPage = comic.images.length
+      const nextPage = prev + 1
+      if (nextPage >= lastPage) {
+        return prev
+      }
+      return nextPage
+    })
+  }, [setStateProperty, comic])
 
   const previousPage = useCallback(() => {
-    setStateProperty('page', (prev) => prev - 1)
-  }, [setStateProperty])
+    setStateProperty('page', (prev) => {
+      if (!comic) {
+        return prev
+      }
+      const previousPage = prev - 1
+      if (previousPage < 0) {
+        return prev
+      }
+      return previousPage
+    })
+  }, [setStateProperty, comic])
 
   const selectPage = useCallback(
     (newPage) => {
@@ -118,13 +137,23 @@ export const ReaderState: React.FC = ({ children }) => {
     [viewMode]
   )
 
-  const setHeigthMode = useCallback(() => {
-    setStateProperty('viewMode', IReaderStateViewMode.Heigth)
-  }, [setStateProperty])
+  const setHeightMode = useCallback(() => {
+    setState((prev) =>
+      Object.assign({}, prev, {
+        viewMode: IReaderStateViewMode.Heigth,
+        percentSize: defaultValue.percentSize,
+      })
+    )
+  }, [])
 
   const setWidthMode = useCallback(() => {
-    setStateProperty('viewMode', IReaderStateViewMode.Width)
-  }, [setStateProperty])
+    setState((prev) =>
+      Object.assign({}, prev, {
+        viewMode: IReaderStateViewMode.Width,
+        percentSize: defaultValue.percentSize,
+      })
+    )
+  }, [])
 
   const isSinglePage = useCallback(
     () => pageMode === IReaderStatePageMode.Single,
@@ -157,7 +186,7 @@ export const ReaderState: React.FC = ({ children }) => {
     zoomOut,
     isFullHeight,
     isFullWidth,
-    setHeigthMode,
+    setHeightMode,
     setWidthMode,
     isSinglePage,
     isDoublePage,
