@@ -4,8 +4,8 @@ import { useDomain } from './useDomain'
 export function useShortcuts() {
   const domain = useDomain()
   const showShortcuts = useCallback(() => {
-    domain.getUseCase('showInfoShortcuts').execute()
-  }, [domain])
+    console.log('Show shortcuts is not implemented')
+  }, [])
 
   return { showShortcuts }
 }

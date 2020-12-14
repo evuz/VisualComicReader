@@ -10,7 +10,6 @@ import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRe
 import { ToggleFullscrenUseCase } from './Screen/UseCases/ToggleFullscreenUseCase'
 import { RegisterShortcutListener } from './Shortcuts/Listeners/RegisterShortcutListener'
 import { BrowserShortcutRepository } from './Shortcuts/Repositories/BrowserShortcutRepository'
-import { ShowShortcutsUseCase } from './Shortcuts/UseCases/ShowShortcutsUseCase'
 
 export function factory() {
   const ipc = window.require ? window.require('electron').ipcRenderer : null
@@ -43,7 +42,6 @@ export function factory() {
   const useCases = {
     selectComic: new SelectComicUseCase(services.selectComic),
     toggleFullscreen: new ToggleFullscrenUseCase(repositories.screen),
-    showInfoShortcuts: new ShowShortcutsUseCase(repositories.shortcuts),
   }
 
   return new Domain({ useCases, listeners })
