@@ -16,7 +16,7 @@ export const MainPage: FC = () => {
 
   useEffect(() => {
     if (comic) {
-      replace('reader')
+      replace('/reader')
     }
   }, [comic, replace])
 
