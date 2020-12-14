@@ -9,7 +9,7 @@ const currentLocation = () => {
 
 export const useHashLocation: BaseLocationHook = () => {
   const [loc, setLoc] = useState(currentLocation())
-  console.log(loc)
+
   useEffect(() => {
     // this function is called whenever the hash changes
     const handler = () => setLoc(currentLocation())
