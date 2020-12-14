@@ -9,6 +9,7 @@
     "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",
     "react-spinkit": "^3.0.0",
+    "snarkdown": "^2.0.0",
     "tinykeys":"^1.1.1",
     "wouter": "^2.6.0"
   },

@@ -1,0 +1,48 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(var(--background), .75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal {
+  width: 26.25rem;
+  border-radius: .3125rem;
+  color: rgb(var(--foreground));
+  background-color: rgb(var(--background));
+  border: 1px solid rgba(var(--foreground), .5);
+}
+
+.Modal .body {
+  padding: 1.5rem;
+}
+
+.Modal .title,
+.Modal .text h1,
+.Modal .text h2,
+.Modal .text h3,
+.Modal .text h4 {
+  font-weight: 300;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Modal .title {
+  font-size: 1.5rem;
+}
+
+.Modal .text {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.Modal .text *{
+  margin: 0;
+}
