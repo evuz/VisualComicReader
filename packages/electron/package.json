@@ -9,8 +9,8 @@
     "type-check": "tsc --noEmit",
     "type-check:watch": "tsc --noEmit --watch",
     "build": "esbuild src/index.ts --bundle --platform=node --target=node10.23 --external:electron --outfile=dist/index.js",
-    "package": "npm run build && electron-forge package && vcr-scripts deps",
-    "make": "npm run package && electron-forge make --skip-package",
+    "package": "electron-forge package",
+    "make": "npm run build && electron-forge make",
     "test": "jest --silent",
     "test:watch": "jest --watch",
     "lint": "eslint --ext .ts ."
