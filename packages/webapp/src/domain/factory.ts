@@ -9,7 +9,7 @@ import { FetchingListener } from './Screen/Listeners/FetchingListener'
 import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRepository'
 import { ToggleFullscrenUseCase } from './Screen/UseCases/ToggleFullscreenUseCase'
 import { RegisterShortcutListener } from './Shortcuts/Listeners/RegisterShortcutListener'
-import { ElectronShortcutRepository } from './Shortcuts/Repositories/ElectronShortcutRepository'
+import { BrowserShortcutRepository } from './Shortcuts/Repositories/BrowserShortcutRepository'
 import { ShowShortcutsUseCase } from './Shortcuts/UseCases/ShowShortcutsUseCase'
 
 export function factory() {
@@ -24,7 +24,7 @@ export function factory() {
 
   const repositories = {
     comic: new ElectronComicRepository(adapters.fileManager),
-    shortcuts: new ElectronShortcutRepository(adapters.processMain),
+    shortcuts: BrowserShortcutRepository.factory(adapters.processMain),
     screen: new ElectronScreenRepository(adapters.processMain),
   }
 
