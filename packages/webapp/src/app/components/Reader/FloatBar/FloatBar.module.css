@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  padding-bottom: 2rem;
   opacity: 0;
   transition: opacity 200ms;
 }
