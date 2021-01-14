@@ -14,13 +14,14 @@ export class UnrarExtract {
 
   private get executablePath() {
     const platform = this.config.platform
+    const appPath = this.config.paths.app
     switch (platform) {
       case 'win32':
-        return path.join(process.cwd(), 'bin', 'win32', 'unrar.exe')
+        return path.join(appPath, 'bin', 'win32', 'unrar.exe')
       case 'linux':
-        return path.join(process.cwd(), 'bin', 'linux', 'unrar')
+        return path.join(appPath, 'bin', 'linux', 'unrar')
       case 'darwin':
-        return path.join(process.cwd(), 'bin', 'darwin', 'unrar')
+        return path.join(appPath, 'bin', 'darwin', 'unrar')
       default:
         throw new Error(
           `this package is incompatible with platform ${platform}`
@@ -46,7 +47,7 @@ export class UnrarExtract {
   async unrar() {
     return new Promise<void>((resolve, reject) => {
       let errMsg = ''
-      console.log(this.executablePath)
+
       const proc = spawn(
         this.executablePath,
         [command, this.path, this.folder],
