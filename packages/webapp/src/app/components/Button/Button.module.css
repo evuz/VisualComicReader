@@ -7,7 +7,6 @@
   background-color: rgb(var(--button-bg));
   padding: 0 1.5rem;
   font-size: 1rem;
-  font-weight: 700;
   border-radius: 0.3125rem;
   transition: all 0.15s ease 0s;
   white-space: nowrap;
