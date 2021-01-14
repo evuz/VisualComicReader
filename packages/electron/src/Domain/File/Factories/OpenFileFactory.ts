@@ -5,7 +5,7 @@ import { DEPS_SYMBOL } from 'depsin'
 import { Symbols } from '../../symbols'
 import { CreateTmpFolder } from '../Utils/CreateTmpFolder'
 import { IConfig } from '../../Config/models/Config'
-import { RarExtract } from '../Utils/RarExtract'
+import { UnrarExtract } from '../Utils/UnrarExtract'
 
 interface Executer {
   run(): Promise<any>
@@ -22,7 +22,7 @@ export class OpenFileFactory {
       case '.cbz':
         return new ZipExtract(path, CreateTmpFolder.factory(this.config))
       case '.cbr':
-        return new RarExtract(path, CreateTmpFolder.factory(this.config))
+        return new UnrarExtract(path, this.config, CreateTmpFolder.factory(this.config))
       default:
         throw Error(`Extension ${extension} is not supported`)
     }

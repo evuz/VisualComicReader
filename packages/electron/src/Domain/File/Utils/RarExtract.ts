@@ -17,7 +17,7 @@ export class RarExtract {
   }
 
   async unrar() {
-    return new Promise<{ tmpFolder: string }>((resolve) => {
+    return new Promise<void>((resolve) => {
       const extractor = unrar.createExtractorFromFile(this.path, this.folder)
       const extracted = extractor.extractAll()
       if (extracted[0].state === 'SUCCESS') resolve()
