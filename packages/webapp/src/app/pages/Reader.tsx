@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import LayoutComponent from '../components/Layout'
+import { Layout } from '../components/Layout/Layout'
 import { ControlNavContainer } from '../containers/ControlNav'
 import { LateralPanelContainer } from '../containers/LateralPanel'
 import { ReaderContainer } from '../containers/Reader'
@@ -20,12 +20,12 @@ export const ReaderPage: FC = () => {
   }, [comic, replace])
 
   return (
-    <LayoutComponent
+    <Layout
       controlNav={<ControlNavContainer />}
       lateralPanel={<LateralPanelContainer />}
       fullScreen={windowState.isFullscreen}
     >
       <ReaderContainer />
-    </LayoutComponent>
+    </Layout>
   )
 }

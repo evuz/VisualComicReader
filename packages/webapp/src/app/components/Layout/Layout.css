@@ -1,0 +1,29 @@
+.Layout ::-webkit-scrollbar-track {
+  opacity: 0;
+}
+
+.Layout ::-webkit-scrollbar {
+  width: 5px;
+  opacity: 0;
+}
+
+.Layout ::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--accents-4), 0.4);
+}
+
+.Layout__container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 25px;
+  left: 125px;
+  background: rgb(var(--background));
+}
+
+.Layout__fullscreen .Layout__container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
