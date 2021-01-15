@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import styles from './Loading.module.css'
+import './Loading.css'
 
 type Props = {
   active: boolean
@@ -12,8 +12,8 @@ export const Loading: FC<Props> = ({ active }) => {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.Loading}>
+    <div className="Loading__wrapper">
+      <div className="Loading">
         <div></div>
         <div></div>
       </div>

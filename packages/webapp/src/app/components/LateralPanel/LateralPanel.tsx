@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from 'react'
 
 import { MiniaturePage } from './MiniaturePage/MiniaturePage'
 
-import styles from './LateralPanel.module.css'
+import './LateralPanel.css'
 
 type Props = {
   files: string[]
@@ -21,7 +21,7 @@ export const LateralPanel: FC<Props> = ({ files, onClickPage, activePage }) => {
     }
 
     function showElement([entry]: IntersectionObserverEntry[]) {
-      if (!ref.current || entry.isIntersecting) {
+      if (!ref.current || entry.isIntersecting) {
         return;
       }
 
@@ -46,7 +46,7 @@ export const LateralPanel: FC<Props> = ({ files, onClickPage, activePage }) => {
   ))
 
   return (
-    <div className={styles.LateralPanel} ref={ref}>
+    <div className="LateralPanel" ref={ref}>
       {miniatures}
     </div>
   )

@@ -8,7 +8,7 @@ import { AlignVerticalIcon } from '../../Icons/AlignVertical.icon'
 import { filterClassNames } from '../../../utils/filterClassNames'
 import { ButtonBar } from './ButtonBar'
 
-import styles from './FloatBar.module.css'
+import './FloatBar.css'
 
 type Props = {
   onPreviousPage: () => void
@@ -24,8 +24,8 @@ export const BottomBar: FC<Props> = ({
   onFullHeight,
 }) => {
   return (
-    <nav className={filterClassNames([styles.BottomBar, styles.FloatBar])}>
-      <div className={filterClassNames([styles.container, styles['is-row']])}>
+    <nav className={filterClassNames(['BottomBar', 'FloatBar'])}>
+      <div className={filterClassNames(['BottomBar__container', 'FloatBar__row'])}>
         <ButtonBar onClick={onPreviousPage}>
           <ChevronLeftIcon size={2} />
         </ButtonBar>

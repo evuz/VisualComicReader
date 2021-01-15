@@ -36,11 +36,11 @@
   border-color: rgb(var(--button-active-border-color));
 }
 
-.is-border {
+.Button.is-border {
   border: 1px solid rgb(var(--button-border-color));
 }
 
-.is-ghost {
+.Button.is-ghost {
   --button-bg: var(--background);
   --button-color: var(--accents-5);
   --button-border-color: var(--accents-2);
@@ -52,7 +52,7 @@
   --button-active-border-color: var(--foreground);
 }
 
-.is-disabled {
+.Button.is-disabled {
   cursor: not-allowed;
 
   --button-bg: var(--accents-1);
@@ -66,11 +66,11 @@
   --button-active-border-color: var(--accents-2);
 }
 
-.is-square {
+.Button.is-square {
   width: 3rem;
   padding: 0;
 }
 
-.is-rounded {
+.Button.is-rounded {
   border-radius: 3rem;
 }

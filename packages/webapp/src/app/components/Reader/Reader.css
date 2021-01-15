@@ -6,21 +6,21 @@
   justify-content: center;
 }
 
-.Reader .double-page {
+.Reader__double-page {
   display: flex;
 }
 
-.double-page .is-left {
+.Reader__double-page .Reader__left {
   height: 100%;
   margin-right: 0;
 }
 
-.double-page .is-right {
+.Reader__double-page .Reader__right {
   height: 100%;
   margin-left: 0;
 }
 
-.is-img {
+.Reader__img {
   display: block;
   margin: 0 auto;
 }

@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { filterClassNames } from '../../utils/filterClassNames'
 
-import styles from './Button.module.css'
+import './Button.css'
 
 type Props = {
   disabled?: boolean
@@ -24,12 +24,12 @@ export const Button: FC<Props> = ({
   rounded = false,
   onClick,
 }) => {
-  const colorClass = disabled ? styles['is-disabled'] : styles[`is-${color}`]
+  const colorClass = disabled ? 'is-disabled' : `is-${color}`
   const classNames = filterClassNames({
-    [styles.Button]: true,
-    [styles['is-border']]: !noBorder,
-    [styles['is-rounded']]: rounded,
-    [styles['is-square']]: rounded || square,
+    'Button': true,
+    'is-border': !noBorder,
+    'is-rounded': rounded,
+    'is-square': rounded || square,
     [colorClass]: true,
   })
 

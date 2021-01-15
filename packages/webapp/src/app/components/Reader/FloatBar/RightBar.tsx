@@ -2,7 +2,7 @@ import * as React from 'react'
 import type { FC } from 'react'
 import { filterClassNames } from '../../../utils/filterClassNames'
 
-import styles from './FloatBar.module.css'
+import './FloatBar.css'
 import { ButtonBar } from './ButtonBar'
 import { ZoomInIcon } from '../../Icons/ZoomIn.icon'
 import { ZoomOutIcon } from '../../Icons/ZoomOut.icon'
@@ -14,8 +14,8 @@ type Props = {
 
 export const RightBar: FC<Props> = ({ onZoomOut, onZoomIn }) => {
   return (
-    <nav className={filterClassNames([styles.RightBar, styles.FloatBar])}>
-      <div className={styles.container}>
+    <nav className={filterClassNames(['RightBar', 'FloatBar'])}>
+      <div className='RightBar__container'>
         <ButtonBar rounded onClick={onZoomIn}>
           <ZoomInIcon size={1.5} />
         </ButtonBar>

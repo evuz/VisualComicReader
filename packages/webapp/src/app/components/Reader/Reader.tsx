@@ -3,10 +3,11 @@ import { Comic } from '@vcr/domain'
 
 import { useDragScroll } from '../../hooks/useDragScroll'
 
-import styles from './Reader.module.css'
 import { filterClassNames } from '../../utils/filterClassNames'
 import { BottomBar } from './FloatBar/BottomBar'
 import { RightBar } from './FloatBar/RightBar'
+
+import './Reader.css'
 
 export type ReaderProps = {
   files: Comic['images'] | undefined
@@ -76,22 +77,22 @@ export const Reader: FC<ReaderProps> = ({
   }
 
   return (
-    <div className={styles.Reader} ref={setReaderRef}>
+    <div className={'Reader'} ref={setReaderRef}>
       {twoColumns ? (
         <div
-          className={styles['double-page']}
+          className={'Reader__double-page'}
           style={{
             height,
           }}
         >
           <img
-            className={filterClassNames([styles['is-left'], styles['is-img']])}
+            className={filterClassNames(['Reader__left', 'Reader__img'])}
             src={files[page]}
             alt={`Page ${page}`}
             draggable="false"
           />
           <img
-            className={filterClassNames([styles['is-right'], styles['is-img']])}
+            className={filterClassNames(['Reader__right', 'Reader__img'])}
             src={files[page + 1]}
             alt={`Page ${page + 1}`}
             draggable="false"
@@ -99,7 +100,7 @@ export const Reader: FC<ReaderProps> = ({
         </div>
       ) : (
         <img
-          className={styles['is-img']}
+          className={'Reader__img'}
           src={files[page]}
           alt={`Page ${page}`}
           style={{

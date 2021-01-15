@@ -8,7 +8,7 @@
   display: flex;
 }
 
-.ControlNav .ButtonNav {
+.ControlNav__button-nav {
   color: rgba(var(--foreground), .8);
   font-size: .75rem;
   font-weight: 300;
@@ -19,11 +19,11 @@
   cursor: pointer;
 }
 
-.ControlNav .ButtonNav:hover {
+.ControlNav__button-nav:hover {
   background-color: rgba(var(--accents-6), .2);
 }
 
-.ControlNav .ButtonNav:active {
+.ControlNav__button-nav:active {
   color: rgba(var(--foreground), .6);
   background-color: rgba(var(--accents-6), .4);
 }

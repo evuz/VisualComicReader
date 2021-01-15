@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { filterClassNames } from '../../../utils/filterClassNames'
 
-import styles from './MiniaturePage.module.css'
+import './MiniaturePage.css'
 
 type Props = {
   onClick: (numberPage: number) => void
@@ -17,8 +17,8 @@ export const MiniaturePage: FC<Props> = ({
   page,
 }) => {
   const className = filterClassNames({
-    [styles.Miniature]: true,
-    [styles.active]: active,
+    'Miniature': true,
+    'is-active': active,
   })
   return (
     <div
@@ -26,8 +26,8 @@ export const MiniaturePage: FC<Props> = ({
       role="presentation"
       className={className}
     >
-      <div className={styles.overlay}>
-        <div className={styles.number}>{numberPage + 1}</div>
+      <div className='Miniature__overlay'>
+        <div className='Miniature__number'>{numberPage + 1}</div>
       </div>
       <img width="100%" src={page} alt="" />
     </div>

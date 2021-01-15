@@ -13,13 +13,17 @@
   opacity: 1;
 }
 
+.FloatBar__row {
+  display: flex;
+}
+
 .BottomBar {
   bottom: 0;
   left: 0;
   right: 0;
 }
 
-.BottomBar .container {
+.BottomBar__container {
   background: rgba(var(--background));
   border-radius: 2rem;
   overflow: hidden;
@@ -31,10 +35,6 @@
   top: 0;
 }
 
-.RightBar .container > *:not(:last-child) {
+.RightBar__container > *:not(:last-child) {
   margin-bottom: 1rem;
-}
-
-.FloatBar .is-row {
-  display: flex;
 }

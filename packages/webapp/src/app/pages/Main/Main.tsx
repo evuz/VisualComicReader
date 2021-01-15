@@ -4,7 +4,7 @@ import { Button } from '../../components/Button/Button'
 import { useComic } from '../../hooks/useComic'
 import { useLocation } from '../../hooks/useLocation'
 
-import styles from './Main.module.css'
+import './Main.css'
 
 export const MainPage: FC = () => {
   const { replace } = useLocation()
@@ -21,7 +21,7 @@ export const MainPage: FC = () => {
   }, [comic, replace])
 
   return (
-    <div className={styles.Page}>
+    <div className="Page">
       <Button color="ghost" onClick={selectComic}>
         Open Comic
       </Button>
