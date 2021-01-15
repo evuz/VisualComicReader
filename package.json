@@ -8,7 +8,9 @@
     ],
     "nohoist": [
       "**/electron",
-      "**/electron/**"
+      "**/electron/**",
+      "**/commander",
+      "**/commander/**"
     ]
   },
   "scripts": {

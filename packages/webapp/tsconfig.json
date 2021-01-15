@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "allowJs": false,
+    "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,7 +20,6 @@
     "jsx": "react",
     "strict": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["./src"],
+  "exclude": ["node_modules", "**/__tests__/*", "**/*.test.*", "**/*.spec.*"]
 }

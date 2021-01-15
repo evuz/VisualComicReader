@@ -12,7 +12,7 @@ import { RegisterShortcutListener } from './Shortcuts/Listeners/RegisterShortcut
 import { BrowserShortcutRepository } from './Shortcuts/Repositories/BrowserShortcutRepository'
 
 export function factory() {
-  const ipc = window.require ? window.require('electron').ipcRenderer : null
+  const ipc = (<any>window).require ? (<any>window).require('electron').ipcRenderer : null
 
   const processMain = new ElectronProcessMain(ipc)
 
