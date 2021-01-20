@@ -6,7 +6,9 @@
   "scripts": {
     "start": "vite",
     "build": "npm run ts:check & vite build",
-    "ts:check": "tsc --noEmit"
+    "ts:check": "tsc --noEmit",
+    "test": "jest --silent",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@vcr/domain": "0.0.1",
@@ -17,11 +19,30 @@
     "wouter": "^2.6.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@types/jest": "^26.0.20",
     "@types/react": "^16.9.27",
     "@types/react-dom": "^16.9.5",
     "@vitejs/plugin-react-refresh": "^1.1.1",
+    "jest": "^26.6.3",
     "sass": "1.29.0",
+    "ts-jest": "^26.4.4",
     "typescript": "~3.8.3",
     "vite": "^2.0.0-beta.29"
+  },
+  "jest": {
+    "roots": ["<rootDir>/src"],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/jest-setup.ts"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleNameMapper":{
+      "\\.(css|scss)$": "<rootDir>/src/__mocks__/style.mock.ts"
+    },
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }
