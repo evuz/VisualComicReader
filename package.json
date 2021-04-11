@@ -14,14 +14,13 @@
     ]
   },
   "scripts": {
-    "script:copy-renderer": "vcr-scripts copy-renderer",
     "app:start": "yarn workspace @vcr/webapp start",
     "app:build": "yarn workspace @vcr/webapp build",
     "electron:start": "yarn workspace @vcr/electron start",
-    "electron:build": "yarn workspace @vcr/electron make",
+    "electron:build": "yarn workspace @vcr/electron build",
     "domain:start": "yarn workspace @vcr/domain start",
     "domain:build": "yarn workspace @vcr/domain build",
-    "build": "run-s domain:build app:build script:copy-renderer electron:build"
+    "build": "run-s domain:build electron:build"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.0.1",
