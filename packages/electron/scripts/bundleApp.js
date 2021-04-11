@@ -16,8 +16,10 @@ async function copyIcons() {
   return fse.copy(src, dest)
 }
 
-exports.bundleApp = async function build() {
-  const spinner = ora('Generating the application bundle').start()
+exports.bundleApp = async function build({ silent = false } = {}) {
+  const spinner = !silent
+    ? ora('Generating the application bundle').start()
+    : null
   try {
     const result = await esbuild.build({
       entryPoints: [ENTRY_POINT],
@@ -28,10 +30,10 @@ exports.bundleApp = async function build() {
       external: ['electron'],
     })
     await copyIcons()
-    spinner.succeed()
+    spinner && spinner.succeed()
     return result
   } catch (error) {
-    spinner.fail()
+    spinner && spinner.fail()
     console.error(chalk.bold.red(error))
     process.exit(1)
   }
