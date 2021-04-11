@@ -13,7 +13,7 @@ export class ProdApp extends App {
         nodeIntegration: true,
       },
     })
-    this.window.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'))
+    this.window.loadFile(path.join(__dirname, 'renderer', 'index.html'))
     return this.window
   }
 }

@@ -6,16 +6,13 @@ const utils = require('util')
 const ora = require('ora')
 const chalk = require('chalk')
 
-const paths = require('./paths')
+const { paths } = require('./paths')
 
-const DIST_FOLDER = 'build'
-const RENDERER_FOLDER = 'renderer'
+const DIST_PATH = paths.webapp.dist
+const RENDERER_PATH = path.resolve(paths.electron.dist, 'renderer')
 
-const DIST_PATH = path.resolve(__dirname, paths.webapp, DIST_FOLDER)
-const RENDERER_PATH = path.resolve(__dirname, paths.electron, RENDERER_FOLDER)
-
-module.exports = async function copyRenderer() {
-  const spinner = ora('Copying..').start()
+exports.copyRenderer = async function copyRenderer() {
+  const spinner = ora('Copying webapp').start()
 
   try {
     await utils.promisify(fs.stat)(DIST_PATH)

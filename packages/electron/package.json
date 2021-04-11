@@ -4,23 +4,49 @@
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "dist/index.js",
-  "scripts": {
-    "start": "npm run build && cross-env NODE_ENV=development electron-forge start",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "tsc --noEmit --watch",
-    "build": "esbuild src/index.ts --bundle --platform=node --target=node10.23 --external:electron --outfile=dist/index.js",
-    "package": "electron-forge package",
-    "make": "npm run build && electron-forge make",
-    "test": "jest --silent",
-    "test:watch": "jest --watch",
-    "lint": "eslint --ext .ts ."
-  },
-  "keywords": [],
   "author": {
     "name": "Jesus Gomez",
     "email": "jesgombel@outlook.es"
   },
   "license": "MIT",
+  "scripts": {
+    "start": "npm run build && cross-env NODE_ENV=development electron-forge start",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node10.23 --external:electron --outfile=dist/index.js",
+    "make": "node scripts/build.js",
+    "test": "jest --silent",
+    "test:watch": "jest --watch",
+    "lint": "eslint --ext .ts ."
+  },
+  "dependencies": {
+    "depsin": "^2.1.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "extract-zip": "^2.0.1",
+    "node-unrar-js": "^0.8.1",
+    "rxjs": "^6.6.3"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "6.0.0-beta.50",
+    "@electron-forge/maker-deb": "6.0.0-beta.50",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.50",
+    "@electron-forge/maker-flatpak": "6.0.0-beta.50",
+    "@electron-forge/maker-rpm": "6.0.0-beta.50",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.50",
+    "@electron-forge/maker-zip": "6.0.0-beta.50",
+    "@types/jest": "^25.1.2",
+    "@types/node": "^12.12.55",
+    "@types/vfile-message": "^2.0.0",
+    "chalk": "^4.1.0",
+    "cross-env": "^7.0.2",
+    "electron": "8.2.0",
+    "esbuild": "^0.8.18",
+    "fs-extra": "^9.1.0",
+    "jest": "^25.1.0",
+    "ora": "^5.4.0",
+    "ts-jest": "^25.2.0",
+    "typescript": "^3.8.3"
+  },
   "config": {
     "forge": {
       "packagerConfig": {
@@ -51,31 +77,5 @@
         }
       ]
     }
-  },
-  "dependencies": {
-    "depsin": "^2.1.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "extract-zip": "^2.0.1",
-    "node-unrar-js": "^0.8.1",
-    "rxjs": "^6.6.3"
-  },
-  "devDependencies": {
-    "@electron-forge/cli": "6.0.0-beta.50",
-    "@electron-forge/maker-deb": "6.0.0-beta.50",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.50",
-    "@electron-forge/maker-flatpak": "6.0.0-beta.50",
-    "@electron-forge/maker-rpm": "6.0.0-beta.50",
-    "@electron-forge/maker-squirrel": "6.0.0-beta.50",
-    "@electron-forge/maker-zip": "6.0.0-beta.50",
-    "@types/jest": "^25.1.2",
-    "@types/node": "^12.12.55",
-    "@types/vfile-message": "^2.0.0",
-    "@vcr/scripts": "0.0.1",
-    "cross-env": "^7.0.2",
-    "electron": "8.2.0",
-    "esbuild": "^0.8.18",
-    "jest": "^25.1.0",
-    "ts-jest": "^25.2.0",
-    "typescript": "^3.8.3"
   }
 }
