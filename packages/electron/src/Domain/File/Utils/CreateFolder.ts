@@ -12,7 +12,7 @@ export class CreateFolder implements ICreateFolder {
       throw Error('Folder already exist')
     }
 
-    return utils.promisify(fs.mkdir)(folderPath, { recursive: true })
+    await utils.promisify(fs.mkdir)(folderPath, { recursive: true })
   }
 
   private async exist(folderPath: string) {
