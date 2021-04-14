@@ -11,6 +11,7 @@ export class ProdApp extends App {
       show: false,
       webPreferences: {
         nodeIntegration: true,
+        contextIsolation: false,
       },
     })
     this.window.loadFile(path.join(__dirname, 'renderer', 'index.html'))

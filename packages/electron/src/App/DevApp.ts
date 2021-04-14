@@ -9,6 +9,7 @@ export class DevApp extends App {
       show: false,
       webPreferences: {
         nodeIntegration: true,
+        contextIsolation: false,
       },
     })
     this.runStaticServer()

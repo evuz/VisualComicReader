@@ -57,13 +57,11 @@ export class UnrarExtract {
       proc.stderr.on('data', (chunk) => {
         const data = chunk.toString()
         errMsg += data
-        console.log('Error', data)
       })
 
       proc.stdout.on('data', () => {})
 
       proc.on('exit', (code) => {
-        console.log(code)
         if (code !== 0 || errMsg) {
           const error = new Error(errMsg)
           return reject(error)
