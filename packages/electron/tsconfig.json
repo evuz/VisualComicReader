@@ -9,6 +9,7 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "paths": {
       "*": ["node_modules/*"]

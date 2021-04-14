@@ -1,6 +1,6 @@
 import { File } from '@vcr/domain'
 import { CreateTmpFolder } from './CreateTmpFolder'
-import * as unzip from 'extract-zip'
+import unzip from 'extract-zip'
 
 export class ZipExtract {
   constructor(private path: File, private createTmpFolder: CreateTmpFolder) {}
