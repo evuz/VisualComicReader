@@ -10,6 +10,10 @@ export class SelectComicService implements Service {
 
   async execute() {
     const file = await this.comicRepository.selectComic()
+    if (!file) {
+      return null
+    }
+
     const comic = this.openComicSrv.execute(file)
     return comic
   }

@@ -27,7 +27,9 @@ export const ComicState: React.FC = ({ children }) => {
       .getUseCase('selectComic')
       .execute()
       .then((comic) => {
-        setComic(comic)
+        if (comic) {
+          setComic(comic)
+        }
       })
   }, [domain])
 
