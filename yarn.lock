@@ -5861,10 +5861,10 @@ node-releases@^1.1.71:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.71.tgz#cb1334b179896b1c89ecfdd4b725fb7bbdfc7dbb"
   integrity sha512-zR6HoT6LrLCRBwukmrVbHv0EpEQjksO6GmFcZQQuCAy139BEsoVKPYnf3jongYW83fAa1torLGYwxxky/p28sg==
 
-node-unrar-js@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/node-unrar-js/-/node-unrar-js-1.0.2.tgz#9630c7b52daa2dce42dc782b4e3dec35013e1b46"
-  integrity sha512-bgS0FOI97WJqyHXpLe9t0EkupeuNgjEEJo5WrbLWBeb/v/5rP+GjvjQj85vqa80qnjC8YqC1NDjV9AW/WMJJzA==
+node-unrar-js@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/node-unrar-js/-/node-unrar-js-0.8.1.tgz#35188ef7aaebab8542fddd237d4040f1f3fee6ee"
+  integrity sha1-NRiO96rrq4VC/d0jfUBA8fP+5u4=
 
 nopt@^4.0.1:
   version "4.0.3"

@@ -23,7 +23,7 @@
     "depsin": "^2.1.0",
     "electron-squirrel-startup": "^1.0.0",
     "extract-zip": "^2.0.1",
-    "node-unrar-js": "^1.0.2",
+    "node-unrar-js": "^0.8.1",
     "rxjs": "^6.6.7"
   },
   "devDependencies": {
