@@ -1,7 +1,7 @@
 import {
   globalShortcut,
   BrowserWindow,
-  GlobalShortcut as ElectronGlobalShortcut,
+  GlobalShortcut as ElectronGlobalShortcut
 } from 'electron'
 import { KeysListenerAdapter } from '@vcr/domain'
 import { Observable } from 'rxjs'
@@ -9,20 +9,20 @@ import { Observable } from 'rxjs'
 const MOD_KEY = 'CmdOrCtrl'
 
 export class GlobalShortcut implements KeysListenerAdapter {
-  static factory(browserWindow: BrowserWindow) {
+  static factory (browserWindow: BrowserWindow) {
     return new GlobalShortcut(browserWindow, globalShortcut)
   }
 
   private shortcuts: { [key: string]: () => void } = {}
 
-  constructor(
+  constructor (
     private browserWindow: BrowserWindow,
     private globalShortcut: ElectronGlobalShortcut
   ) {
     this.handleFocus()
   }
 
-  register(keys: string) {
+  register (keys: string) {
     keys = keys.replace('$mod', MOD_KEY)
     return new Observable<void>((obs) => {
       const fn = function () {
@@ -39,7 +39,7 @@ export class GlobalShortcut implements KeysListenerAdapter {
     })
   }
 
-  private handleFocus() {
+  private handleFocus () {
     this.browserWindow.on('blur', () => {
       this.globalShortcut.unregisterAll()
     })

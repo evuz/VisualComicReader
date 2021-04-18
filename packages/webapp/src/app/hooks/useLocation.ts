@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 
 import { useLocation as useWouterLocation } from 'wouter'
 
-export function useLocation() {
+export function useLocation () {
   const [location, setLocation] = useWouterLocation()
 
   const push = useCallback((to: string) => setLocation(to), [setLocation])

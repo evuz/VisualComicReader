@@ -2,27 +2,27 @@ import {
   IpcMessages,
   ProcessMainAdapter,
   FileManagerAdapter,
-  File,
+  File
 } from '@vcr/domain'
 
 export class ElectronFileManager implements FileManagerAdapter {
-  constructor(private electron: ProcessMainAdapter) {}
+  constructor (private electron: ProcessMainAdapter) {}
 
-  async selectFile(types: string[]) {
+  async selectFile (types: string[]) {
     const { payload } = await this.electron.request(IpcMessages.SelectFile, {
-      payload: types,
+      payload: types
     })
     return payload
   }
 
-  async selectDirectory() {
+  async selectDirectory () {
     const { payload } = await this.electron.request(IpcMessages.SelectDirectory)
     return payload
   }
 
-  async openFile(file: File) {
+  async openFile (file: File) {
     const { payload } = await this.electron.request(IpcMessages.OpenFile, {
-      payload: file,
+      payload: file
     })
     return payload
   }

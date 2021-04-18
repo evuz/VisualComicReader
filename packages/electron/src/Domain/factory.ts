@@ -31,18 +31,18 @@ import { RemoveFolder } from './File/Utils/RemoveFolder'
 import { ReadFolder } from './File/Utils/ReadFolder'
 import {
   DevNormalizeAssetSrc,
-  NormalizeAssetSrc,
+  NormalizeAssetSrc
 } from './File/Utils/NormalizeAssetSrc'
 
-export function factory(browserWindow: BrowserWindow) {
+export function factory (browserWindow: BrowserWindow) {
   // Config
   const config: IConfig = {
     platform: process.platform,
-    paths: getPaths(),
+    paths: getPaths()
   }
 
   const utils = {
-    normalizeAssetSrc: NormalizeAssetSrc,
+    normalizeAssetSrc: NormalizeAssetSrc
   }
 
   const adapters = {
@@ -53,7 +53,7 @@ export function factory(browserWindow: BrowserWindow) {
     dialog: new ElectronDialog(browserWindow),
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
-    fileManager: DialogFileManager.factory(new OpenFileFactory(config)),
+    fileManager: DialogFileManager.factory(new OpenFileFactory(config))
   }
 
   if (process.env.NODE_ENV === 'development') {
@@ -82,7 +82,7 @@ export function factory(browserWindow: BrowserWindow) {
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
       [Symbols.ToggleFullscreenListener]: { asClass: ToggleFullscreenListener },
       [Symbols.ShowInfoShortcutsListener]: {
-        asClass: ShowInfoShortcutListener,
+        asClass: ShowInfoShortcutListener
       },
       // Use cases
       [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutsUseCase },
@@ -94,7 +94,7 @@ export function factory(browserWindow: BrowserWindow) {
       // Utils
       [Symbols.RemoveFolder]: { asClass: RemoveFolder },
       [Symbols.ReadFolder]: { asClass: ReadFolder },
-      [Symbols.NormalizeAssetSrc]: { asClass: utils.normalizeAssetSrc },
+      [Symbols.NormalizeAssetSrc]: { asClass: utils.normalizeAssetSrc }
     },
     { lifetime: 'singleton' }
   )
@@ -108,7 +108,7 @@ export function factory(browserWindow: BrowserWindow) {
     openFile: container.get<OpenFileListener>(Symbols.OpenFileListener),
     toggleFullscreen: container.get<ToggleFullscreenListener>(
       Symbols.ToggleFullscreenListener
-    ),
+    )
   }
 
   // UseCases
@@ -124,7 +124,7 @@ export function factory(browserWindow: BrowserWindow) {
     ),
     selectFile: container.get<SelectFileUseCase>(Symbols.SelectFileUseCase),
     openComic: container.get<OpenComicUseCase>(Symbols.OpenComicUseCase),
-    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolder),
+    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolder)
   }
 
   return new Domain({ useCases, listeners, config })

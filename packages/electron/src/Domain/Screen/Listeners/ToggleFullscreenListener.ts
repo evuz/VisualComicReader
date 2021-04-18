@@ -6,9 +6,9 @@ import { ScreenRepository } from '../Repositories/ScreenRepository'
 export class ToggleFullscreenListener implements Listener {
   static [DEPS_SYMBOL] = [Symbols.ScreenRepository]
 
-  constructor(private repository: ScreenRepository) {}
+  constructor (private repository: ScreenRepository) {}
 
-  execute() {
+  execute () {
     return this.repository.onToggleFullscreen()
   }
 }

@@ -6,7 +6,7 @@ export const ChevronRightIcon: Icon = ({
   size = 1,
   width,
   height,
-  color = 'currentColor',
+  color = 'currentColor'
 }) => {
   return (
     <svg
@@ -16,7 +16,7 @@ export const ChevronRightIcon: Icon = ({
       height={generateSizeProperty(size, height, width)}
       style={{
         msTransform: 'rotate(360deg)',
-        WebkitTransform: 'rotate(360deg)',
+        WebkitTransform: 'rotate(360deg)'
       }}
       viewBox="0 0 24 24"
       transform="rotate(360)"

@@ -3,7 +3,7 @@ import {
   FileManagerAdapter,
   IpcMessages,
   ProcessMainAdapter,
-  Service,
+  Service
 } from '@vcr/domain'
 import * as path from 'path'
 import { DEPS_SYMBOL } from 'depsin'
@@ -19,17 +19,17 @@ export class OpenComicService implements Service {
     Symbols.FileManager,
     Symbols.ProcessMain,
     Symbols.ReadFolder,
-    Symbols.NormalizeAssetSrc,
+    Symbols.NormalizeAssetSrc
   ]
 
-  constructor(
+  constructor (
     private fileManager: FileManagerAdapter,
     private processMain: ProcessMainAdapter,
     private readFolder: ReadFolder,
     private normalizeSrc: NormalizeAssetSrc
   ) {}
 
-  async execute(comicPath: string): Promise<Comic> {
+  async execute (comicPath: string): Promise<Comic> {
     this.processMain.emit(IpcMessages.Fetching, { payload: true })
 
     const folder = await this.fileManager.openFile(comicPath)
@@ -40,11 +40,11 @@ export class OpenComicService implements Service {
     return new Comic({
       images: images.map(this.normalizeSrc.execute),
       name: this.getComicName(comicPath),
-      pages: images.length,
+      pages: images.length
     })
   }
 
-  private async getImages(folder: string): Promise<string[]> {
+  private async getImages (folder: string): Promise<string[]> {
     const files = await this.readFolder.execute(folder)
     const images = await Promise.all(
       files.map(async (file) => {
@@ -69,7 +69,7 @@ export class OpenComicService implements Service {
     }, []) as string[]
   }
 
-  private getComicName(selection: string) {
+  private getComicName (selection: string) {
     const { name } = path.parse(selection)
     return name
   }

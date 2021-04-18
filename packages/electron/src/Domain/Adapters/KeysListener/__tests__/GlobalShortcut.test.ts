@@ -1,16 +1,16 @@
 import { GlobalShortcut } from '../GlobalShortcut'
 
-function browserWindowsFactory(): any {
+function browserWindowsFactory (): any {
   const store = new Map<string, Function>()
   return {
     on: jest.fn().mockImplementation((code: string, fn) => {
       store.set(code, fn)
     }),
-    store,
+    store
   }
 }
 
-function globalShortcutFactory(): any {
+function globalShortcutFactory (): any {
   const store = new Map<string, Function>()
   return {
     register: jest.fn().mockImplementation((code: string, fn) => {
@@ -18,7 +18,7 @@ function globalShortcutFactory(): any {
     }),
     unregister: jest.fn(),
     unregisterAll: jest.fn(),
-    store,
+    store
   }
 }
 

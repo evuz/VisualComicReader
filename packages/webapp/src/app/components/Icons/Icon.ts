@@ -9,7 +9,7 @@ export type IconProps = {
 
 export type Icon = FC<IconProps>
 
-export function generateSizeProperty(
+export function generateSizeProperty (
   defaultValue: number,
   size?: number,
   dep?: number

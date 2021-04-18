@@ -5,13 +5,13 @@ import { IConfig } from '../../Config/models/Config'
 import { CreateFolder, ICreateFolder } from './CreateFolder'
 
 export class CreateTmpFolder {
-  static factory(config: IConfig) {
+  static factory (config: IConfig) {
     return new CreateTmpFolder(config, new CreateFolder())
   }
 
-  constructor(private config: IConfig, private createFolder: ICreateFolder) {}
+  constructor (private config: IConfig, private createFolder: ICreateFolder) {}
 
-  async run(filePath: string) {
+  async run (filePath: string) {
     const hashPath = crypto.createHash('md5').update(filePath).digest('hex')
     const tmpPath = path.join(this.config.paths.tmp, hashPath)
 
@@ -25,7 +25,7 @@ export class CreateTmpFolder {
 
     return {
       folder: tmpPath,
-      isNew,
+      isNew
     }
   }
 }

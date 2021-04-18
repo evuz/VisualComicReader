@@ -5,9 +5,9 @@ import * as unrar from 'node-unrar-js'
 export class RarExtract {
   private folder: string
 
-  constructor(private path: File, private createTmpFolder: CreateTmpFolder) {}
+  constructor (private path: File, private createTmpFolder: CreateTmpFolder) {}
 
-  async run() {
+  async run () {
     const { folder, isNew } = await this.createTmpFolder.run(this.path)
     this.folder = folder
     if (isNew) {
@@ -16,7 +16,7 @@ export class RarExtract {
     return folder
   }
 
-  async unrar() {
+  async unrar () {
     return new Promise<void>((resolve) => {
       const extractor = unrar.createExtractorFromFile(this.path, this.folder)
       const extracted = extractor.extractAll()

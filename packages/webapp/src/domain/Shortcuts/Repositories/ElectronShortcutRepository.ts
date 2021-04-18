@@ -5,14 +5,14 @@ import { ShortcutRepository } from './ShortcutRepository'
 import { Observable } from 'rxjs'
 
 export class ElectronShortcutRepository implements ShortcutRepository {
-  constructor(private processMain: ProcessMainAdapter) {}
+  constructor (private processMain: ProcessMainAdapter) {}
 
-  register(key: string): Observable<any> {
+  register (key: string): Observable<any> {
     const id = uuid()
 
     this.processMain.emit(IpcMessages.RegisterShortcut, {
       payload: { key },
-      id,
+      id
     })
 
     return this.processMain
@@ -20,7 +20,7 @@ export class ElectronShortcutRepository implements ShortcutRepository {
       .pipe(filter(({ id: messageId }) => messageId === id))
   }
 
-  showInfo() {
+  showInfo () {
     return this.processMain.emit(IpcMessages.ShowInfoShortcut)
   }
 }

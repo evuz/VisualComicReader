@@ -2,9 +2,9 @@ import { UseCase } from '@vcr/domain'
 import { ScreenRepository } from '../Repositories/ScreenRepository'
 
 export class ToggleFullscrenUseCase implements UseCase {
-  constructor(private service: ScreenRepository) {}
+  constructor (private service: ScreenRepository) {}
 
-  execute() {
+  execute () {
     return this.service.toggleFullscreen()
   }
 }

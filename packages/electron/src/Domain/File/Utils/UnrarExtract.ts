@@ -6,13 +6,13 @@ import { IConfig } from '../../Config/models/Config'
 
 const command = 'e'
 const stdioOpts = {
-  stdio: [0, 'pipe', 'pipe'] as StdioOptions,
+  stdio: [0, 'pipe', 'pipe'] as StdioOptions
 }
 
 export class UnrarExtract {
   private folder: string
 
-  private get executablePath() {
+  private get executablePath () {
     const platform = this.config.platform
     const appPath = this.config.paths.app
     switch (platform) {
@@ -29,13 +29,13 @@ export class UnrarExtract {
     }
   }
 
-  constructor(
+  constructor (
     private path: File,
     private config: IConfig,
     private createTmpFolder: CreateTmpFolder
   ) {}
 
-  async run() {
+  async run () {
     const { folder, isNew } = await this.createTmpFolder.run(this.path)
     this.folder = folder
     if (isNew) {
@@ -44,7 +44,7 @@ export class UnrarExtract {
     return folder
   }
 
-  async unrar() {
+  async unrar () {
     return new Promise<void>((resolve, reject) => {
       let errMsg = ''
 

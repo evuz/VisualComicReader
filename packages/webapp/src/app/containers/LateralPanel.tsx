@@ -10,7 +10,7 @@ export const LateralPanelContainer: FC = () => {
 
   return (
     <LateralPanel
-      files={comic?.images || []}
+      files={comic?.images || []}
       activePage={page}
       onClickPage={selectPage}
     />

@@ -30,18 +30,18 @@ type ImgSize = {
   percentSize: number
 }
 
-function imgSize({ fullHeight, fullWidth, percentSize }: ImgSize) {
+function imgSize ({ fullHeight, fullWidth, percentSize }: ImgSize) {
   if (fullHeight) {
     return {
       height: `${percentSize}%`,
-      width: 'auto',
+      width: 'auto'
     }
   }
 
   if (fullWidth) {
     return {
       height: 'auto',
-      width: `${percentSize}%`,
+      width: `${percentSize}%`
     }
   }
 
@@ -60,7 +60,7 @@ export const Reader: FC<ReaderProps> = ({
   onFullWidth,
   onFullHeight,
   onZoomOut,
-  onZoomIn,
+  onZoomIn
 }) => {
   const [readerRef, setReaderRef] = useDragScroll<HTMLDivElement>()
   const { height, width } = imgSize({ fullHeight, fullWidth, percentSize })
@@ -78,11 +78,12 @@ export const Reader: FC<ReaderProps> = ({
 
   return (
     <div className={'Reader'} ref={setReaderRef}>
-      {twoColumns ? (
+      {twoColumns
+        ? (
         <div
           className={'Reader__double-page'}
           style={{
-            height,
+            height
           }}
         >
           <img
@@ -98,18 +99,19 @@ export const Reader: FC<ReaderProps> = ({
             draggable="false"
           />
         </div>
-      ) : (
+          )
+        : (
         <img
           className={'Reader__img'}
           src={files[page]}
           alt={`Page ${page}`}
           style={{
             height,
-            width,
+            width
           }}
           draggable="false"
         />
-      )}
+          )}
       <BottomBar
         onPreviousPage={onPreviousPage}
         onNextPage={onNextPage}

@@ -4,13 +4,13 @@ import * as path from 'path'
 import { App } from './App'
 
 export class DevApp extends App {
-  protected load() {
+  protected load () {
     this.window = new BrowserWindow({
       show: false,
       webPreferences: {
         nodeIntegration: true,
-        contextIsolation: false,
-      },
+        contextIsolation: false
+      }
     })
     this.runStaticServer()
     this.window.loadURL('http://localhost:3000')
@@ -18,7 +18,7 @@ export class DevApp extends App {
     return this.window
   }
 
-  private async runStaticServer() {
+  private async runStaticServer () {
     await this.app.whenReady()
 
     protocol.registerFileProtocol('local', (request, fn) => {

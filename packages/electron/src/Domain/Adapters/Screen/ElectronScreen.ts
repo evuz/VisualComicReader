@@ -2,17 +2,17 @@ import { BrowserWindow } from 'electron'
 import { ScreenAdapter } from './ScreenAdapter'
 
 export class ElectronScreen implements ScreenAdapter {
-  get state() {
+  get state () {
     return this.window.isFullScreen()
   }
 
-  constructor(private window: BrowserWindow) {}
+  constructor (private window: BrowserWindow) {}
 
-  toggleFullscreen() {
+  toggleFullscreen () {
     this.setFullscreen(!this.state)
   }
 
-  setFullscreen(enable: boolean) {
+  setFullscreen (enable: boolean) {
     this.window.setFullScreen(enable)
   }
 }

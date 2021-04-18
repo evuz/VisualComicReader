@@ -8,12 +8,12 @@ import { IConfig } from '../../Config/models/Config'
 export class ShowInfoShortcutsService implements Service {
   static [DEPS_SYMBOL] = [Symbols.ShortcutsRepository, Symbols.Config]
 
-  constructor(
+  constructor (
     private repository: ShortcutsRepository,
     private config: IConfig
   ) {}
 
-  execute() {
+  execute () {
     const ctrlOrCmd = this.config.platform === 'darwin' ? 'Cmd' : 'Ctrl'
 
     return this.repository.showInfo({
@@ -27,7 +27,7 @@ export class ShowInfoShortcutsService implements Service {
         ${ctrlOrCmd} + Up: Zoom In \n
         Left: Previous page \n
         Right: Next page \n
-      `,
+      `
     })
   }
 }

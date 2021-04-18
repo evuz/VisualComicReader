@@ -5,14 +5,14 @@ import { useDragScroll } from '../useDragScroll'
 
 type Position = { x: number; y: number }
 const initialPosition: Position = { x: 0, y: 0 }
-function move(target: HTMLElement, delta: Position, init = initialPosition) {
+function move (target: HTMLElement, delta: Position, init = initialPosition) {
   const { scrollTop: startX, scrollLeft: startY } = target
 
   fireEvent.mouseDown(target, { clientX: init.x, clientY: init.y })
 
   fireEvent.mouseMove(target, {
     clientX: startX + delta.x,
-    clientY: startY + delta.y,
+    clientY: startY + delta.y
   })
 
   fireEvent.mouseUp(target)

@@ -14,9 +14,9 @@ interface Executer {
 export class OpenFileFactory {
   static [DEPS_SYMBOL] = [Symbols.Config]
 
-  constructor(private config: IConfig) {}
+  constructor (private config: IConfig) {}
 
-  get(path: File): Executer {
+  get (path: File): Executer {
     const extension = paths.extname(path)
     switch (extension) {
       case '.cbz':

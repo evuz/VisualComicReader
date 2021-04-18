@@ -1,4 +1,4 @@
-export function uuid(len: number = 16): string {
+export function uuid (len: number = 16): string {
   const buf = []
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   const charlen = chars.length

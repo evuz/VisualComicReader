@@ -6,9 +6,9 @@ import { ElectronScreenRepository } from '../Repositories/ElectronScreenReposito
 export class ToggleFullscreenUsecase implements UseCase {
   static [DEPS_SYMBOL] = [Symbols.ScreenRepository]
 
-  constructor(private repository: ElectronScreenRepository) {}
+  constructor (private repository: ElectronScreenRepository) {}
 
-  execute() {
+  execute () {
     return this.repository.toggleFullscreen()
   }
 }

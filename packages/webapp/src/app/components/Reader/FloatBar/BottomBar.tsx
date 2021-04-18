@@ -21,7 +21,7 @@ export const BottomBar: FC<Props> = ({
   onPreviousPage,
   onNextPage,
   onFullWidth,
-  onFullHeight,
+  onFullHeight
 }) => {
   return (
     <nav className={filterClassNames(['BottomBar', 'FloatBar'])}>

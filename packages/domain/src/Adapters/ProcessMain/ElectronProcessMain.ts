@@ -5,18 +5,18 @@ import {
   IpcMessages,
   IpcArgs,
   ProcessMainAdapter,
-  IpcRequest,
+  IpcRequest
 } from './ProcessMainAdapter'
 import { uuid } from '../../Utils/uuid'
 
 export class ElectronProcessMain implements ProcessMainAdapter {
-  constructor(private ipc: any) {}
+  constructor (private ipc: any) {}
 
-  public emit(message: IpcMessages, args?: IpcArgs) {
+  public emit (message: IpcMessages, args?: IpcArgs) {
     this.ipc.send(message, args)
   }
 
-  public listen(message: IpcMessages) {
+  public listen (message: IpcMessages) {
     return new Observable<IpcRequest>((obs) => {
       const fn = (_, args: IpcArgs) => {
         const response = (payload: IpcArgs['payload']) => {
@@ -29,7 +29,7 @@ export class ElectronProcessMain implements ProcessMainAdapter {
     })
   }
 
-  public request(messsage: IpcMessages, args?: IpcArgs) {
+  public request (messsage: IpcMessages, args?: IpcArgs) {
     const id = uuid(6)
     const promise = this.listen(messsage)
       .pipe(

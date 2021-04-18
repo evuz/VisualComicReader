@@ -1,4 +1,4 @@
-export function createSingleton<T>(fn: () => T) {
+export function createSingleton<T> (fn: () => T) {
   let instance: T
   return function () {
     if (!instance) {

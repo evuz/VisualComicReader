@@ -16,20 +16,20 @@ export const LateralPanel: FC<Props> = ({ files, onClickPage, activePage }) => {
   // TODO: extract to a hook
   useEffect(() => {
     const element = ref.current?.children[activePage] as HTMLElement
-    if(!element) {
+    if (!element) {
       return element
     }
 
-    function showElement([entry]: IntersectionObserverEntry[]) {
+    function showElement ([entry]: IntersectionObserverEntry[]) {
       if (!ref.current || entry.isIntersecting) {
-        return;
+        return
       }
 
-      const block = element.offsetTop < ref.current.scrollTop ? 'start' : 'end';
-      element?.scrollIntoView({behavior: 'smooth', block })
+      const block = element.offsetTop < ref.current.scrollTop ? 'start' : 'end'
+      element?.scrollIntoView({ behavior: 'smooth', block })
     }
 
-    const observer = new IntersectionObserver(showElement, {rootMargin: '-100px'})
+    const observer = new IntersectionObserver(showElement, { rootMargin: '-100px' })
     observer.observe(element)
 
     return () => observer.disconnect()

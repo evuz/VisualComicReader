@@ -9,10 +9,10 @@ export type State = {
 const defaultState: State = {
   clicked: false,
   cursorX: 0,
-  cursorY: 0,
+  cursorY: 0
 }
 
-export function useDragScroll<T extends HTMLElement = HTMLElement>() {
+export function useDragScroll<T extends HTMLElement = HTMLElement> () {
   const targetRef = useRef<T | null>(null)
   const stateRef = useRef<State>(defaultState)
 

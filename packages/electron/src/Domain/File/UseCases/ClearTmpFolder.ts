@@ -7,9 +7,9 @@ import { RemoveFolder } from '../Utils/RemoveFolder'
 export class ClearTmpFolder implements UseCase {
   static [DEPS_SYMBOL] = [Symbols.Config, Symbols.RemoveFolder]
 
-  constructor(private config: IConfig, private removeFolder: RemoveFolder) {}
+  constructor (private config: IConfig, private removeFolder: RemoveFolder) {}
 
-  execute() {
+  execute () {
     return this.removeFolder.execute(this.config.paths.tmp)
   }
 }

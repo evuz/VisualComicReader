@@ -14,9 +14,9 @@ type IWindowStateContext = {
 const defaultValue: IWindowStateContext = {
   windowState: {
     isFetching: false,
-    isFullscreen: false,
+    isFullscreen: false
   },
-  toggleFullscreen: () => {},
+  toggleFullscreen: () => {}
 }
 
 export const WindowStateContext = createContext<IWindowStateContext>(
@@ -54,7 +54,7 @@ export const WindowState: React.FC = ({ children }) => {
 
   const context: IWindowStateContext = {
     windowState: windowState,
-    toggleFullscreen,
+    toggleFullscreen
   }
 
   return (

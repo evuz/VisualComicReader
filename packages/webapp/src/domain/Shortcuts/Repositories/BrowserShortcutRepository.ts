@@ -5,32 +5,32 @@ import { ShortcutRepository } from './ShortcutRepository'
 import { Observable } from 'rxjs'
 
 const REPLACES = [
-  {exp: /Left/gi, value: 'ArrowLeft'}, {exp: /Right/gi, value:'ArrowRight'}, {exp: /Up/gi, value: 'ArrowUp'}, {exp: /Down/gi, value: 'ArrowDown'}]
+  { exp: /Left/gi, value: 'ArrowLeft' }, { exp: /Right/gi, value: 'ArrowRight' }, { exp: /Up/gi, value: 'ArrowUp' }, { exp: /Down/gi, value: 'ArrowDown' }]
 
 export class BrowserShortcutRepository implements ShortcutRepository {
-  static factory(processMain: ProcessMainAdapter) {
+  static factory (processMain: ProcessMainAdapter) {
     return new BrowserShortcutRepository(processMain, window)
   }
 
-  constructor(
+  constructor (
     private processMain: ProcessMainAdapter,
     private window: Window
   ) {}
 
-  register(key: string): Observable<any> {
-    key = REPLACES.reduce((acc, {exp, value}) => {
+  register (key: string): Observable<any> {
+    key = REPLACES.reduce((acc, { exp, value }) => {
       return acc.replace(exp, value)
-    },key)
+    }, key)
 
     return new Observable((obs) => {
       tinikeys(this.window, {
-        [key]: () => obs.next(),
+        [key]: () => obs.next()
       })
       return () => obs.complete()
     })
   }
 
-  showInfo() {
+  showInfo () {
     return this.processMain.emit(IpcMessages.ShowInfoShortcut)
   }
 }

@@ -4,7 +4,7 @@ describe('filterClassNames', () => {
   test('should return string', () => {
     const classnames = filterClassNames({
       Test: true,
-      Function: true,
+      Function: true
     })
 
     expect(typeof classnames).toBe('string')
@@ -13,25 +13,25 @@ describe('filterClassNames', () => {
   test('should filter class which value to be false', () => {
     let classnames = filterClassNames({
       Test: true,
-      Function: false,
+      Function: false
     })
     expect(classnames).toBe('Test')
 
     classnames = filterClassNames({
       Test: false,
-      Function: true,
+      Function: true
     })
     expect(classnames).toBe('Function')
 
     classnames = filterClassNames({
       Test: true,
-      Function: true,
+      Function: true
     })
     expect(classnames).toBe('Test Function')
 
     classnames = filterClassNames({
       Test: false,
-      Function: false,
+      Function: false
     })
     expect(classnames).toBe('')
   })
@@ -48,7 +48,7 @@ describe('filterClassNames', () => {
   })
 
   test('should throw error classnames is not an object', () => {
-    function error(param: any) {
+    function error (param: any) {
       return () => filterClassNames(param)
     }
 

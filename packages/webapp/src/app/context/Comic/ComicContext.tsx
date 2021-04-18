@@ -14,7 +14,7 @@ type IComicContext = {
 const defaultValue: IComicContext = {
   comic: null,
   selectComic: () => {},
-  clearComic: () => {},
+  clearComic: () => {}
 }
 export const ComicContext = createContext<IComicContext>(defaultValue)
 
@@ -40,7 +40,7 @@ export const ComicState: React.FC = ({ children }) => {
   const context: IComicContext = {
     comic,
     selectComic,
-    clearComic,
+    clearComic
   }
 
   return (

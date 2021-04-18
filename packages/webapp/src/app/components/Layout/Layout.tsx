@@ -12,7 +12,7 @@ export const Layout: FC<Props> = ({
   children,
   lateralPanel,
   controlNav,
-  fullScreen,
+  fullScreen
 }) => (
   <div className={fullScreen ? 'Layout__fullscreen' : 'Layout'}>
     {controlNav}

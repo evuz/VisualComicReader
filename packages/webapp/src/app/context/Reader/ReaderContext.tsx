@@ -41,7 +41,7 @@ const defaultValue: IReaderState = {
   page: 0,
   percentSize: 100,
   viewMode: IReaderStateViewMode.Heigth,
-  pageMode: IReaderStatePageMode.Single,
+  pageMode: IReaderStatePageMode.Single
 }
 
 const defaultContext: IReaderContext = {
@@ -58,7 +58,7 @@ const defaultContext: IReaderContext = {
   setWidthMode: () => {},
   isSinglePage: () => true,
   isDoublePage: () => false,
-  togglePageMode: () => {},
+  togglePageMode: () => {}
 }
 export const ReaderContext = createContext<IReaderContext>(defaultContext)
 
@@ -72,7 +72,7 @@ export const ReaderState: React.FC = ({ children }) => {
     setState(defaultValue)
   }, [comic])
 
-  const setStateProperty = useCallback(function <T extends keyof IReaderState>(
+  const setStateProperty = useCallback(function <T extends keyof IReaderState> (
     key: T,
     update: ((prev: IReaderState[T]) => IReaderState[T]) | IReaderState[T]
   ) {
@@ -141,7 +141,7 @@ export const ReaderState: React.FC = ({ children }) => {
     setState((prev) =>
       Object.assign({}, prev, {
         viewMode: IReaderStateViewMode.Heigth,
-        percentSize: defaultValue.percentSize,
+        percentSize: defaultValue.percentSize
       })
     )
   }, [])
@@ -150,7 +150,7 @@ export const ReaderState: React.FC = ({ children }) => {
     setState((prev) =>
       Object.assign({}, prev, {
         viewMode: IReaderStateViewMode.Width,
-        percentSize: defaultValue.percentSize,
+        percentSize: defaultValue.percentSize
       })
     )
   }, [])
@@ -190,7 +190,7 @@ export const ReaderState: React.FC = ({ children }) => {
     setWidthMode,
     isSinglePage,
     isDoublePage,
-    togglePageMode,
+    togglePageMode
   }
 
   return (

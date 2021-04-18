@@ -17,7 +17,7 @@ export const ReaderContainer: FC = () => {
     zoomIn,
     zoomOut,
     setHeightMode,
-    setWidthMode,
+    setWidthMode
   } = useReader()
   const { comic } = useComic()
 

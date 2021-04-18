@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useDomain } from './useDomain'
 
-export function useRegisterShortchuts(shortcut: string, fn: Function) {
+export function useRegisterShortchuts (shortcut: string, fn: Function) {
   const domain = useDomain()
 
   useEffect(() => {

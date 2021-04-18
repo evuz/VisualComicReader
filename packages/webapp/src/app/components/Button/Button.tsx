@@ -22,18 +22,18 @@ export const Button: FC<Props> = ({
   noBorder = false,
   square = false,
   rounded = false,
-  onClick,
+  onClick
 }) => {
   const colorClass = disabled ? 'is-disabled' : `is-${color}`
   const classNames = filterClassNames({
-    'Button': true,
+    Button: true,
     'is-border': !noBorder,
     'is-rounded': rounded,
     'is-square': rounded || square,
-    [colorClass]: true,
+    [colorClass]: true
   })
 
-  function click(ev: React.MouseEvent) {
+  function click (ev: React.MouseEvent) {
     if (disabled) return
 
     onClick(ev)

@@ -7,9 +7,9 @@ import { RegisterShortcutsService } from '../Services/RegisterShortcutsService'
 export class RegisterShortcutsUseCase implements UseCase {
   static [DEPS_SYMBOL] = [Symbols.RegisterShortcutsService]
 
-  constructor(private service: RegisterShortcutsService) {}
+  constructor (private service: RegisterShortcutsService) {}
 
-  execute() {
+  execute () {
     return this.service.execute()
   }
 }

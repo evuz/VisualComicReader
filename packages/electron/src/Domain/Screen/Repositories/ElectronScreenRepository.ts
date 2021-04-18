@@ -8,16 +8,16 @@ import { ScreenRepository } from './ScreenRepository'
 export class ElectronScreenRepository implements ScreenRepository {
   static [DEPS_SYMBOL] = [Symbols.Screen, Symbols.ProcessMain]
 
-  constructor(
+  constructor (
     private screen: ScreenAdapter,
     private processMain: ProcessMainAdapter
   ) {}
 
-  toggleFullscreen() {
+  toggleFullscreen () {
     return Promise.resolve(this.screen.toggleFullscreen())
   }
 
-  onToggleFullscreen(): Observable<any> {
+  onToggleFullscreen (): Observable<any> {
     return this.processMain.listen(IpcMessages.ToggleFullscreen)
   }
 }

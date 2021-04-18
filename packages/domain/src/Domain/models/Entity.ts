@@ -1,22 +1,23 @@
-function mapToPlainObject(obj) {
+function mapToPlainObject (obj) {
   return Object.keys(obj).reduce((acc, key) => {
     acc[key] = obj[key]
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     if (acc[key] instanceof Entity) acc[key] = acc[key].toJSON()
     if (acc[key] instanceof Object) acc[key] = mapToPlainObject(acc[key])
     return acc
   }, <any>(Array.isArray(obj) ? [] : {}))
 }
 
-function readonlyObject(obj = {}) {
+function readonlyObject (obj = {}) {
   const handler = {
-    set() {
+    set () {
       throw Error('You cant modify a readonly object')
     },
-    get(obj, prop) {
+    get (obj, prop) {
       const el = obj[prop]
       if (el instanceof Object) return readonlyObject(el)
       return el
-    },
+    }
   }
   return new Proxy(obj, handler)
 }
@@ -24,7 +25,7 @@ function readonlyObject(obj = {}) {
 export abstract class Entity<T> {
   private __properties: string[]
 
-  constructor(obj: T) {
+  constructor (obj: T) {
     if (!obj) {
       throw Error('Cannot initialize an Entity as null')
     }
@@ -36,11 +37,11 @@ export abstract class Entity<T> {
       value: keys,
       writable: false,
       enumerable: false,
-      configurable: false,
+      configurable: false
     })
   }
 
-  toJSON(readonly = true): T {
+  toJSON (readonly = true): T {
     const obj = mapToPlainObject(
       this.__properties.reduce((obj, key) => {
         obj[key] = this[key]

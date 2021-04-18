@@ -6,9 +6,9 @@ import { Symbols } from '../../symbols'
 export class ShowInfoShortcutListener implements Listener {
   static [DEPS_SYMBOL] = [Symbols.ShortcutsRepository]
 
-  constructor(private repository: ShortcutsRepository) {}
+  constructor (private repository: ShortcutsRepository) {}
 
-  execute() {
+  execute () {
     return this.repository.onShowInfo()
   }
 }

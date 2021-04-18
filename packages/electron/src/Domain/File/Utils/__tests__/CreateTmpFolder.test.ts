@@ -7,8 +7,8 @@ const config: IConfig = {
   platform: 'linux',
   paths: {
     app: __dirname,
-    tmp: path.join(__dirname, 'tmp'),
-  },
+    tmp: path.join(__dirname, 'tmp')
+  }
 }
 
 let folderError = false
@@ -18,7 +18,7 @@ const createFolder: any = {
       .fn()
       .mockImplementation(() =>
         folderError ? Promise.reject(Error()) : Promise.resolve(null)
-      ),
+      )
 }
 
 describe('CreateTmpFolder', () => {
@@ -33,7 +33,7 @@ describe('CreateTmpFolder', () => {
     const tmpPath = await instance.run(path.join('/home/vcr/my-comic'))
     expect(tmpPath).toEqual({
       folder: path.join(config.paths.tmp, '4dddbc20416503abe3530f57ae68c60d'),
-      isNew: true,
+      isNew: true
     })
   })
 })

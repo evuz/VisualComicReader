@@ -30,5 +30,5 @@ export const Symbols = {
   // Utils
   RemoveFolder: 'RemoveFolder',
   ReadFolder: 'ReadFolder',
-  NormalizeAssetSrc: 'NormalizeAssetSrc',
+  NormalizeAssetSrc: 'NormalizeAssetSrc'
 }

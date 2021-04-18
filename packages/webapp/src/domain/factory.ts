@@ -11,37 +11,37 @@ import { ToggleFullscrenUseCase } from './Screen/UseCases/ToggleFullscreenUseCas
 import { RegisterShortcutListener } from './Shortcuts/Listeners/RegisterShortcutListener'
 import { BrowserShortcutRepository } from './Shortcuts/Repositories/BrowserShortcutRepository'
 
-export function factory() {
+export function factory () {
   const ipc = (<any>window).require ? (<any>window).require('electron').ipcRenderer : null
 
   const processMain = new ElectronProcessMain(ipc)
 
   const adapters = {
     processMain,
-    fileManager: new ElectronFileManager(processMain),
+    fileManager: new ElectronFileManager(processMain)
   }
 
   const repositories = {
     comic: new ElectronComicRepository(adapters.fileManager),
     shortcuts: BrowserShortcutRepository.factory(adapters.processMain),
-    screen: new ElectronScreenRepository(adapters.processMain),
+    screen: new ElectronScreenRepository(adapters.processMain)
   }
 
   const openComicSrv = new OpenComicService(repositories.comic)
 
   const services = {
     openComic: openComicSrv,
-    selectComic: new SelectComicService(repositories.comic, openComicSrv),
+    selectComic: new SelectComicService(repositories.comic, openComicSrv)
   }
 
   const listeners = {
     registerShortcut: new RegisterShortcutListener(repositories.shortcuts),
-    fetching: new FetchingListener(repositories.screen),
+    fetching: new FetchingListener(repositories.screen)
   }
 
   const useCases = {
     selectComic: new SelectComicUseCase(services.selectComic),
-    toggleFullscreen: new ToggleFullscrenUseCase(repositories.screen),
+    toggleFullscreen: new ToggleFullscrenUseCase(repositories.screen)
   }
 
   return new Domain({ useCases, listeners })

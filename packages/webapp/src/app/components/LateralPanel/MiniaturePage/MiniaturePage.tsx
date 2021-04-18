@@ -14,11 +14,11 @@ export const MiniaturePage: FC<Props> = ({
   onClick,
   numberPage,
   active,
-  page,
+  page
 }) => {
   const className = filterClassNames({
-    'Miniature': true,
-    'is-active': active,
+    Miniature: true,
+    'is-active': active
   })
   return (
     <div

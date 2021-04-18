@@ -7,9 +7,9 @@ import { SelectFileService } from '../Services/SelectFileService'
 export class SelectFileUseCase implements UseCase {
   static [DEPS_SYMBOL] = [Symbols.SelectFileService]
 
-  constructor(private service: SelectFileService) {}
+  constructor (private service: SelectFileService) {}
 
-  execute(extensions: string[]) {
+  execute (extensions: string[]) {
     return this.service.execute(extensions)
   }
 }

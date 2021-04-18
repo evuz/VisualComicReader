@@ -50,8 +50,8 @@ describe('Button', () => {
       </Button>
     )
     const element = getByText(/Click me!/i)
-    expect(element).toHaveClass(`is-square`)
-    expect(element).toHaveClass(`is-rounded`)
+    expect(element).toHaveClass('is-square')
+    expect(element).toHaveClass('is-rounded')
   })
 
   test('should be square', () => {

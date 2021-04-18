@@ -7,9 +7,9 @@ import { Symbols } from '../../symbols'
 export class ShowInfoShortcutsUseCase implements UseCase {
   static [DEPS_SYMBOL] = [Symbols.ShowInfoShortcutsService]
 
-  constructor(private service: ShowInfoShortcutsService) {}
+  constructor (private service: ShowInfoShortcutsService) {}
 
-  execute() {
+  execute () {
     return this.service.execute()
   }
 }

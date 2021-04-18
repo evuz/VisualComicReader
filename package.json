@@ -14,6 +14,8 @@
     ]
   },
   "scripts": {
+    "lint": "eslint --cache \"packages/**/src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --cache --fix \"packages/**/src/**/*.{ts,tsx}\"",
     "app:start": "yarn workspace @vcr/webapp start",
     "app:build": "yarn workspace @vcr/webapp build",
     "electron:start": "yarn workspace @vcr/electron start",
@@ -41,8 +43,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js}": "eslint --cache --fix"
   }
 }

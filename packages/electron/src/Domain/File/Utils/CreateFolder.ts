@@ -6,7 +6,7 @@ export interface ICreateFolder {
 }
 
 export class CreateFolder implements ICreateFolder {
-  async execute(folderPath: string) {
+  async execute (folderPath: string) {
     const exist = await this.exist(folderPath)
     if (exist) {
       throw Error('Folder already exist')
@@ -15,7 +15,7 @@ export class CreateFolder implements ICreateFolder {
     await utils.promisify(fs.mkdir)(folderPath, { recursive: true })
   }
 
-  private async exist(folderPath: string) {
+  private async exist (folderPath: string) {
     try {
       await utils.promisify(fs.access)(folderPath)
       return true

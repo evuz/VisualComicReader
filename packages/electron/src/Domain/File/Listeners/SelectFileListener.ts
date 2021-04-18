@@ -6,9 +6,9 @@ import { Symbols } from '../../symbols'
 export class SelectFileListener implements UseCase {
   static [DEPS_SYMBOL] = [Symbols.ProcessMain]
 
-  constructor(private processMain: ProcessMainAdapter) {}
+  constructor (private processMain: ProcessMainAdapter) {}
 
-  execute() {
+  execute () {
     return this.processMain.listen(IpcMessages.SelectFile)
   }
 }
