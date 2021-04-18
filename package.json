@@ -14,15 +14,16 @@
     ]
   },
   "scripts": {
-    "lint": "eslint --cache \"packages/**/src/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint --cache --fix \"packages/**/src/**/*.{ts,tsx}\"",
+    "prepare": "husky install",
+    "lint": "eslint \"packages/**/src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --fix \"packages/**/src/**/*.{ts,tsx}\"",
+    "build": "run-s domain:build electron:build",
     "app:start": "yarn workspace @vcr/webapp start",
     "app:build": "yarn workspace @vcr/webapp build",
     "electron:start": "yarn workspace @vcr/electron start",
     "electron:build": "yarn workspace @vcr/electron build",
     "domain:start": "yarn workspace @vcr/domain start",
-    "domain:build": "yarn workspace @vcr/domain build",
-    "build": "run-s domain:build electron:build"
+    "domain:build": "yarn workspace @vcr/domain build"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",
@@ -35,13 +36,11 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-standard": "^5.0.0",
-    "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "husky": "^6.0.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "lint-staged": {
+    "*.{ts,tsx,js}": "eslint --fix"
   }
 }
