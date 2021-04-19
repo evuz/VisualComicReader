@@ -1,5 +1,11 @@
 // Entities
 export * from './Comic/Entities/Comic'
+export * from './Library/Entities/ComicLibrary'
+export * from './Library/Entities/FolderLibrary'
+export * from './Library/Entities/Library'
+
+// Enum
+export * from './Library/Enum/FileLibraryEnum'
 
 // Domain
 export * from './Domain/Domain'
