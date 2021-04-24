@@ -5,21 +5,21 @@ const ora = require('ora')
 const { bundleApp } = require('./bundleApp')
 const { paths } = require('./paths')
 
-async function runApp() {
+async function runApp () {
   return api.start({ dir: paths.electron.root })
 }
 
 process.env.NODE_ENV = 'development'
 
-function exit() {
+function exit () {
   process.exit(0)
 }
 
-async function main() {
+async function main () {
   const spinner = ora()
   let electronProcess = null
 
-  async function run(message) {
+  async function run (message) {
     spinner.start(message)
 
     await bundleApp({ silent: true })

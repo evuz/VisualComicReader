@@ -9,13 +9,13 @@ const paths = {
   electron: {
     root: electronPath,
     dist: path.resolve(electronPath, 'dist'),
-    src: path.resolve(electronPath, 'src'),
+    src: path.resolve(electronPath, 'src')
   },
   webapp: {
     root: webappPath,
     dist: path.resolve(webappPath, 'build'),
-    src: path.resolve(webappPath, 'src'),
-  },
+    src: path.resolve(webappPath, 'src')
+  }
 }
 
 exports.paths = paths

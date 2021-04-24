@@ -11,7 +11,7 @@ const { paths } = require('./paths')
 const DIST_PATH = paths.webapp.dist
 const RENDERER_PATH = path.resolve(paths.electron.dist, 'renderer')
 
-exports.copyRenderer = async function copyRenderer() {
+exports.copyRenderer = async function copyRenderer () {
   const spinner = ora('Copying webapp').start()
 
   try {

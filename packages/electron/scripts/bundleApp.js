@@ -10,13 +10,13 @@ const ENTRY_POINT = path.resolve(paths.electron.src, 'index.ts')
 const OUTPATH = paths.electron.dist
 const OUTFILE = path.join(OUTPATH, 'index.js')
 
-async function copyIcons() {
+async function copyIcons () {
   const src = path.resolve(paths.electron.root, 'icons')
   const dest = path.resolve(paths.electron.dist, 'icons')
   return fse.copy(src, dest)
 }
 
-exports.bundleApp = async function build({ silent = false } = {}) {
+exports.bundleApp = async function build ({ silent = false } = {}) {
   const spinner = !silent
     ? ora('Generating the application bundle').start()
     : null
@@ -27,7 +27,7 @@ exports.bundleApp = async function build({ silent = false } = {}) {
       bundle: true,
       platform: 'node',
       target: 'node10.23',
-      external: ['electron'],
+      external: ['electron']
     })
     await copyIcons()
     spinner && spinner.succeed()

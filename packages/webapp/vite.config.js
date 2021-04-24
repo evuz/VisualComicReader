@@ -5,9 +5,9 @@ export default defineConfig({
   base: './',
   plugins: [reactRefresh()],
   optimizeDeps: {
-    include: ['rxjs/operators'],
+    include: ['rxjs/operators']
   },
   build: {
-    outDir: 'build',
-  },
+    outDir: 'build'
+  }
 })

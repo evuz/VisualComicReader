@@ -19,10 +19,10 @@ const properties = [
   'license',
   ['dependencies', {}],
   ['devDependencies', { electron: pkg.devDependencies.electron }],
-  'config',
+  'config'
 ]
 
-function createPackageJson() {
+function createPackageJson () {
   return properties.reduce((acc, prop) => {
     const property = Array.isArray(prop) ? prop : [prop, pkg[prop]]
 
@@ -31,7 +31,7 @@ function createPackageJson() {
   }, {})
 }
 
-function writePackageJson(packageJson) {
+function writePackageJson (packageJson) {
   return fsWriteFile(
     path.resolve(paths.electron.dist, 'package.json'),
     packageJson

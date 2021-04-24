@@ -8,7 +8,7 @@ exports.make = async function () {
   try {
     await api.make({
       dir: paths.electron.dist,
-      interactive: true,
+      interactive: true
     })
   } catch (error) {
     console.error(chalk.bold.red(error))
