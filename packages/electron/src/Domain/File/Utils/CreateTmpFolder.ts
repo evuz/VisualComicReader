@@ -2,14 +2,10 @@ import * as path from 'path'
 import * as crypto from 'crypto'
 
 import { IConfig } from '../../Config/models/Config'
-import { CreateFolder, ICreateFolder } from './CreateFolder'
+import { CreateFolder } from './CreateFolder'
 
 export class CreateTmpFolder {
-  static factory (config: IConfig) {
-    return new CreateTmpFolder(config, new CreateFolder())
-  }
-
-  constructor (private config: IConfig, private createFolder: ICreateFolder) {}
+  constructor (private config: IConfig, private createFolder: CreateFolder) {}
 
   async run (filePath: string) {
     const hashPath = crypto.createHash('md5').update(filePath).digest('hex')

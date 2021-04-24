@@ -47,7 +47,7 @@ export class OpenComicService implements Service {
   private async getImages (folder: string): Promise<string[]> {
     const files = await this.readFolder.execute(folder)
     const images = await Promise.all(
-      files.map(async (file) => {
+      files.map(async (file: any) => {
         const filePath = path.join(folder, file.name)
         if (file.isDirectory()) {
           return this.getImages(filePath)
@@ -61,7 +61,7 @@ export class OpenComicService implements Service {
       })
     )
 
-    return images.reduce((acc, image) => {
+    return images.reduce((acc: any, image) => {
       if (!image) {
         return acc
       }

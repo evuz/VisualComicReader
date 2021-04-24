@@ -14,6 +14,7 @@ export * from './Adapters/ProcessMain/ProcessMainAdapter'
 export * from './Adapters/ProcessMain/ElectronProcessMain'
 export * from './Adapters/KeysListener/KeysListenerAdapter'
 export * from './Adapters/FileManager/FileManagerAdapter'
+export * from './Adapters/FileSystem/FileSystemAdapter'
 
 // Utils
 export * from './Utils/uuid'

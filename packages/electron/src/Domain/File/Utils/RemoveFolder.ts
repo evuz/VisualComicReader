@@ -1,8 +1,14 @@
-import * as fs from 'fs'
-import * as utils from 'util'
+import { FileSystemAdapter } from '@vcr/domain'
+import { DEPS_SYMBOL } from 'depsin'
+
+import { Symbols } from '../../symbols'
 
 export class RemoveFolder {
+  static [DEPS_SYMBOL] = [Symbols.FileSystem]
+
+  constructor (private fs: FileSystemAdapter) {}
+
   execute (folder: string) {
-    return utils.promisify(fs.rmdir)(folder, { recursive: true })
+    return this.fs.rmDir(folder)
   }
 }

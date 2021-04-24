@@ -1,26 +1,19 @@
-import * as fs from 'fs'
-import * as utils from 'util'
+import { FileSystemAdapter } from '@vcr/domain'
+import { DEPS_SYMBOL } from 'depsin'
 
-export interface ICreateFolder {
-  execute(path: string): Promise<void>
-}
+import { Symbols } from '../../symbols'
 
-export class CreateFolder implements ICreateFolder {
+export class CreateFolder {
+  static [DEPS_SYMBOL] = [Symbols.FileSystem]
+
+  constructor (private fileSystem: FileSystemAdapter) {}
+
   async execute (folderPath: string) {
-    const exist = await this.exist(folderPath)
+    const exist = await this.fileSystem.exist(folderPath)
     if (exist) {
       throw Error('Folder already exist')
     }
 
-    await utils.promisify(fs.mkdir)(folderPath, { recursive: true })
-  }
-
-  private async exist (folderPath: string) {
-    try {
-      await utils.promisify(fs.access)(folderPath)
-      return true
-    } catch (error) {
-      return false
-    }
+    await this.fileSystem.mkDir(folderPath)
   }
 }

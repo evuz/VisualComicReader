@@ -6,6 +6,7 @@ export const Symbols = {
   ProcessMain: 'ProcessMain',
   KeysListener: 'KeysListener',
   FileManager: 'FileManager',
+  FileSystem: 'FileSystem',
   // Repositories
   ComicRepository: 'ComicRepository',
   ShortcutsRepository: 'ShortcutsRepository',

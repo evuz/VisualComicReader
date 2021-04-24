@@ -14,15 +14,15 @@ interface Executer {
 export class OpenFileFactory {
   static [DEPS_SYMBOL] = [Symbols.Config]
 
-  constructor (private config: IConfig) {}
+  constructor (private config: IConfig, private createTmpFolder: CreateTmpFolder) {}
 
   get (path: File): Executer {
     const extension = paths.extname(path)
     switch (extension) {
       case '.cbz':
-        return new ZipExtract(path, CreateTmpFolder.factory(this.config))
+        return new ZipExtract(path, this.createTmpFolder)
       case '.cbr':
-        return new UnrarExtract(path, this.config, CreateTmpFolder.factory(this.config))
+        return new UnrarExtract(path, this.config, this.createTmpFolder)
       default:
         throw Error(`Extension ${extension} is not supported`)
     }

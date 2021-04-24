@@ -33,6 +33,9 @@ import {
   DevNormalizeAssetSrc,
   NormalizeAssetSrc
 } from './File/Utils/NormalizeAssetSrc'
+import { NodeFileSystem } from './Adapters/FileSystem/NodeFileSystem'
+import { CreateTmpFolder } from './File/Utils/CreateTmpFolder'
+import { CreateFolder } from './File/Utils/CreateFolder'
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
@@ -45,6 +48,9 @@ export function factory (browserWindow: BrowserWindow) {
     normalizeAssetSrc: NormalizeAssetSrc
   }
 
+  const filesSystemAdapter = new NodeFileSystem()
+  const createFolder = new CreateFolder(filesSystemAdapter)
+  const createTmpFolder = new CreateTmpFolder(config, createFolder)
   const adapters = {
     processMain: new ElectronMainProcessComunication(
       ipcMain,
@@ -53,7 +59,7 @@ export function factory (browserWindow: BrowserWindow) {
     dialog: new ElectronDialog(browserWindow),
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
-    fileManager: DialogFileManager.factory(new OpenFileFactory(config))
+    fileManager: DialogFileManager.factory(new OpenFileFactory(config, createTmpFolder))
   }
 
   if (process.env.NODE_ENV === 'development') {
@@ -69,6 +75,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.Screen]: { asValue: adapters.screen },
       [Symbols.KeysListener]: { asValue: adapters.keysListener },
       [Symbols.FileManager]: { asValue: adapters.fileManager },
+      [Symbols.FileSystem]: { asValue: filesSystemAdapter },
       // Repositories
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
       [Symbols.ScreenRepository]: { asClass: ElectronScreenRepository },
