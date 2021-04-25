@@ -7,7 +7,8 @@ const config: IConfig = {
   platform: 'linux',
   paths: {
     app: __dirname,
-    tmp: path.join(__dirname, 'tmp')
+    tmp: path.join(__dirname, 'tmp'),
+    config: ''
   }
 }
 

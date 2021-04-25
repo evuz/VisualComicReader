@@ -71,11 +71,24 @@ export abstract class App {
       })
 
     domain
+      .getListener('selectDirectory')
+      .execute()
+      .subscribe(async ({ response }) => {
+        const directory = await domain.getUseCase('selectDirectory').execute()
+        response(directory)
+      })
+
+    domain
       .getListener('openFile')
       .execute()
       .subscribe(async ({ payload, response }) => {
         const comic = await domain.getUseCase('openComic').execute(payload)
         response(comic)
       })
+
+    domain
+      .getListener('updateConfiguration')
+      .execute()
+      .subscribe()
   }
 }

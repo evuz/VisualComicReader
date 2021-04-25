@@ -3,5 +3,6 @@ export type IConfig = {
   paths: {
     tmp: string
     app: string
+    config: string
   }
 }

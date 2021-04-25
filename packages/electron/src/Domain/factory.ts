@@ -36,6 +36,13 @@ import {
 import { NodeFileSystem } from './Adapters/FileSystem/NodeFileSystem'
 import { CreateTmpFolder } from './File/Utils/CreateTmpFolder'
 import { CreateFolder } from './File/Utils/CreateFolder'
+import { SelectDirectoryListener } from './File/Listeners/SelectDirectoryListener'
+import { SelectDirectoryService } from './File/Services/SelectDirectoryService'
+import { SelectDirectoryUseCase } from './File/UseCases/SelectDirectoryUseCase'
+import { UpdateConfigurationListener } from './Configuration/Listeners/UpdateConfigurationListener'
+import { UpdateConfigurationService } from './Configuration/Services/UpdateConfigurationService'
+import { ReadConfigurationFileService } from './Configuration/Services/ReadConfigurationFileService'
+import { WriteConfigurationFileService } from './Configuration/Services/WriteConfigurationFileService'
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
@@ -83,10 +90,16 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
       [Symbols.SelectFileService]: { asClass: SelectFileService },
+      [Symbols.SelectDirectoryService]: { asClass: SelectDirectoryService },
+      [Symbols.UpdateConfigurationService]: { asClass: UpdateConfigurationService },
       [Symbols.OpenComicService]: { asClass: OpenComicService },
+      [Symbols.ReadConfigurationFileService]: { asClass: ReadConfigurationFileService },
+      [Symbols.WriteConfigurationFileService]: { asClass: WriteConfigurationFileService },
       // Listeners
       [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
+      [Symbols.SelectDirectoryListener]: { asClass: SelectDirectoryListener },
+      [Symbols.UpdateConfigurationListener]: { asClass: UpdateConfigurationListener },
       [Symbols.ToggleFullscreenListener]: { asClass: ToggleFullscreenListener },
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener
@@ -96,6 +109,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.RegisterShortcutsUseCase]: { asClass: RegisterShortcutsUseCase },
       [Symbols.ToggleFullscreenUseCase]: { asClass: ToggleFullscreenUsecase },
       [Symbols.SelectFileUseCase]: { asClass: SelectFileUseCase },
+      [Symbols.SelectDirectoryUseCase]: { asClass: SelectDirectoryUseCase },
       [Symbols.OpenComicUseCase]: { asClass: OpenComicUseCase },
       [Symbols.ClearTmpFolder]: { asClass: ClearTmpFolder },
       // Utils
@@ -109,10 +123,12 @@ export function factory (browserWindow: BrowserWindow) {
   // Listeners
   const listeners = {
     selectFile: container.get<SelectFileListener>(Symbols.SelectFileListener),
+    selectDirectory: container.get<SelectDirectoryListener>(Symbols.SelectDirectoryListener),
     showInfoShortcuts: container.get<ShowInfoShortcutListener>(
       Symbols.ShowInfoShortcutsListener
     ),
     openFile: container.get<OpenFileListener>(Symbols.OpenFileListener),
+    updateConfiguration: container.get<UpdateConfigurationListener>(Symbols.UpdateConfigurationListener),
     toggleFullscreen: container.get<ToggleFullscreenListener>(
       Symbols.ToggleFullscreenListener
     )
@@ -130,6 +146,7 @@ export function factory (browserWindow: BrowserWindow) {
       Symbols.ToggleFullscreenUseCase
     ),
     selectFile: container.get<SelectFileUseCase>(Symbols.SelectFileUseCase),
+    selectDirectory: container.get<SelectDirectoryUseCase>(Symbols.SelectDirectoryUseCase),
     openComic: container.get<OpenComicUseCase>(Symbols.OpenComicUseCase),
     clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolder)
   }

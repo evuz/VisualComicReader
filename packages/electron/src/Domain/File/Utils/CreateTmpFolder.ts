@@ -4,6 +4,7 @@ import * as crypto from 'crypto'
 import { IConfig } from '../../Config/models/Config'
 import { CreateFolder } from './CreateFolder'
 
+// TODO: move folder Comics and rename to CreateComicTmpFolder
 export class CreateTmpFolder {
   constructor (private config: IConfig, private createFolder: CreateFolder) {}
 

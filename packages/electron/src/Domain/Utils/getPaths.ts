@@ -5,6 +5,7 @@ import { IConfig } from '../Config/models/Config'
 function getDevelopPath () {
   return {
     app: app.getAppPath(),
+    config: path.join(app.getAppPath(), '.tmp', 'config.json'),
     tmp: path.join(app.getAppPath(), '.tmp')
   }
 }
@@ -16,6 +17,7 @@ export function getPaths (): IConfig['paths'] {
 
   return {
     app: app.getAppPath(),
+    config: path.join(app.getAppPath(), 'config.json'),
     tmp: path.join(app.getPath('temp'), app.getName())
   }
 }
