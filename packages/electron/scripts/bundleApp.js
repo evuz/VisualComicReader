@@ -1,7 +1,6 @@
 const esbuild = require('esbuild')
 const path = require('path')
 const ora = require('ora')
-const fse = require('fs-extra')
 const chalk = require('chalk')
 
 const { paths } = require('./paths')
@@ -9,12 +8,6 @@ const { paths } = require('./paths')
 const ENTRY_POINT = path.resolve(paths.electron.src, 'index.ts')
 const OUTPATH = paths.electron.dist
 const OUTFILE = path.join(OUTPATH, 'index.js')
-
-async function copyIcons () {
-  const src = path.resolve(paths.electron.root, 'icons')
-  const dest = path.resolve(paths.electron.dist, 'icons')
-  return fse.copy(src, dest)
-}
 
 exports.bundleApp = async function build ({ silent = false } = {}) {
   const spinner = !silent
@@ -29,7 +22,6 @@ exports.bundleApp = async function build ({ silent = false } = {}) {
       target: 'node10.23',
       external: ['electron']
     })
-    await copyIcons()
     spinner && spinner.succeed()
     return result
   } catch (error) {
