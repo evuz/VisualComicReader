@@ -27,7 +27,7 @@ exports.bundleApp = async function build ({ silent = false } = {}) {
       bundle: true,
       platform: 'node',
       target: 'node10.23',
-      external: ['electron']
+      external: ['electron', 'fsevents']
     })
     await copyIcons()
     spinner && spinner.succeed()

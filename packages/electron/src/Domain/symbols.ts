@@ -11,6 +11,7 @@ export const Symbols = {
   ComicRepository: 'ComicRepository',
   ShortcutsRepository: 'ShortcutsRepository',
   ScreenRepository: 'ScreenRepository',
+  ConfigurationRepository: 'ConfigurationRepository',
   // Services
   ShowInfoShortcutsService: 'ShowInfoShortcutsService',
   RegisterShortcutsService: 'RegisterShortcutsService',
@@ -27,6 +28,7 @@ export const Symbols = {
   ShowInfoShortcutsListener: 'ShowInfoShortcutsListener',
   ToggleFullscreenListener: 'ToggleFullscreenListener',
   UpdateConfigurationListener: 'UpdateConfigurationListener',
+  ConfigurationChangeListener: 'ConfigurationChangeListener',
   // UseCases
   ShowInfoShortcutsUseCase: 'ShowInfoShortcutsUseCase',
   RegisterShortcutsUseCase: 'RegisterShortcutsUseCase',

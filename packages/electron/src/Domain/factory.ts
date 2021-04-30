@@ -43,6 +43,8 @@ import { UpdateConfigurationListener } from './Configuration/Listeners/UpdateCon
 import { UpdateConfigurationService } from './Configuration/Services/UpdateConfigurationService'
 import { ReadConfigurationFileService } from './Configuration/Services/ReadConfigurationFileService'
 import { WriteConfigurationFileService } from './Configuration/Services/WriteConfigurationFileService'
+import { ConfigurationChangeListener } from './Configuration/Listeners/ConfigurationChangeListener'
+import { NodeConfigurationRepository } from './Configuration/Repositories/NodeConfigurationRepository'
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
@@ -86,6 +88,7 @@ export function factory (browserWindow: BrowserWindow) {
       // Repositories
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
       [Symbols.ScreenRepository]: { asClass: ElectronScreenRepository },
+      [Symbols.ConfigurationRepository]: { asClass: NodeConfigurationRepository },
       // Services
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
@@ -100,6 +103,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
       [Symbols.SelectDirectoryListener]: { asClass: SelectDirectoryListener },
       [Symbols.UpdateConfigurationListener]: { asClass: UpdateConfigurationListener },
+      [Symbols.ConfigurationChangeListener]: { asClass: ConfigurationChangeListener },
       [Symbols.ToggleFullscreenListener]: { asClass: ToggleFullscreenListener },
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener
@@ -129,6 +133,7 @@ export function factory (browserWindow: BrowserWindow) {
     ),
     openFile: container.get<OpenFileListener>(Symbols.OpenFileListener),
     updateConfiguration: container.get<UpdateConfigurationListener>(Symbols.UpdateConfigurationListener),
+    configurationChange: container.get<ConfigurationChangeListener>(Symbols.ConfigurationChangeListener),
     toggleFullscreen: container.get<ToggleFullscreenListener>(
       Symbols.ToggleFullscreenListener
     )

@@ -90,5 +90,12 @@ export abstract class App {
       .getListener('updateConfiguration')
       .execute()
       .subscribe()
+
+    domain
+      .getListener('configurationChange')
+      .execute()
+      .subscribe(v => {
+        console.log(v)
+      })
   }
 }
