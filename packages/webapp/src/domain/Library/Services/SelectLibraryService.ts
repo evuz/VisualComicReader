@@ -1,10 +1,13 @@
 import { Service } from '@vcr/domain'
 
-import { UpdateConfigurationService } from '../../Configuration/Services/UpdateConfigurationService'
+import { UpdateSettingsService } from '../../Settings/Services/UpdateSettingsService'
 import { LibraryRepository } from '../Repositories/LibraryRepository'
 
 export class SelectLibraryService implements Service {
-  constructor (private libraryRepository: LibraryRepository, private updateConfiguration: UpdateConfigurationService) {}
+  constructor (
+    private libraryRepository: LibraryRepository,
+    private updateSettings: UpdateSettingsService
+  ) {}
 
   async execute () {
     const directory = await this.libraryRepository.selectLibrary()
@@ -12,7 +15,7 @@ export class SelectLibraryService implements Service {
       return
     }
 
-    await this.updateConfiguration.execute({ libraryPath: directory })
+    await this.updateSettings.execute({ libraryPath: directory })
     return directory
   }
 }

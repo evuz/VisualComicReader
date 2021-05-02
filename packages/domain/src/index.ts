@@ -3,7 +3,7 @@ export * from './Comic/Entities/Comic'
 export * from './Library/Entities/ComicLibrary'
 export * from './Library/Entities/FolderLibrary'
 export * from './Library/Entities/Library'
-export * from './Configuration/Entities/Configuration'
+export * from './Settings/Entities/Settings'
 
 // Enum
 export * from './Library/Enum/FileLibraryEnum'

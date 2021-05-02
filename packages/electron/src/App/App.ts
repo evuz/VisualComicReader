@@ -87,12 +87,12 @@ export abstract class App {
       })
 
     domain
-      .getListener('updateConfiguration')
+      .getListener('updateSettings')
       .execute()
       .subscribe()
 
     domain
-      .getListener('configurationChange')
+      .getListener('watchSettings')
       .execute()
       .subscribe(v => {
         console.log(v)

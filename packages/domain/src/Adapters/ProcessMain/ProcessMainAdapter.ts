@@ -8,7 +8,7 @@ export enum IpcMessages {
   ToggleFullscreen = 'toggle-fullscreen',
   ShowInfoShortcut = 'show-info-shortcut',
   RegisterShortcut = 'register-shortcut',
-  UpdateConfiguration = 'update-configuration',
+  UpdateSettings = 'update-settings',
   Fetching = 'fetching',
 }
 

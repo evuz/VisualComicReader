@@ -5,8 +5,8 @@ import { ElectronComicRepository } from './Comic/Repositories/ElectronComicRepos
 import { OpenComicService } from './Comic/Services/OpenComicService'
 import { SelectComicService } from './Comic/Services/SelectComicService'
 import { SelectComicUseCase } from './Comic/UseCases/SelectComicUseCase'
-import { ElectronConfigurationRepository } from './Configuration/Repositories/ElectronConfigurationRepository'
-import { UpdateConfigurationService } from './Configuration/Services/UpdateConfigurationService'
+import { ElectronSettingsRepository } from './Settings/Repositories/ElectronSettingsRepository'
+import { UpdateSettingsService } from './Settings/Services/UpdateSettingsService'
 import { LibraryListener } from './Library/Listeners/LibraryListener'
 import { ElectronLibraryRepository } from './Library/Repositories/ElectronLibraryRepository'
 import { SelectLibraryService } from './Library/Services/SelectLibraryService'
@@ -32,16 +32,16 @@ export function factory () {
     library: new ElectronLibraryRepository(adapters.fileManager, processMain),
     shortcuts: BrowserShortcutRepository.factory(adapters.processMain),
     screen: new ElectronScreenRepository(adapters.processMain),
-    configuration: new ElectronConfigurationRepository(processMain)
+    settings: new ElectronSettingsRepository(processMain)
   }
 
   const openComicSrv = new OpenComicService(repositories.comic)
-  const updateConfigurationSrv = new UpdateConfigurationService(repositories.configuration)
+  const updateSettingsSrv = new UpdateSettingsService(repositories.settings)
 
   const services = {
     openComic: openComicSrv,
     selectComic: new SelectComicService(repositories.comic, openComicSrv),
-    selectLibrary: new SelectLibraryService(repositories.library, updateConfigurationSrv)
+    selectLibrary: new SelectLibraryService(repositories.library, updateSettingsSrv)
   }
 
   const listeners = {

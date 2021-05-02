@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["vite/client", "jest", "@testing-library/jest-dom"],
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
