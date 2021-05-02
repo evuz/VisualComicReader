@@ -1,6 +1,6 @@
 import { ipcMain, BrowserWindow } from 'electron'
 import { createContainer } from 'depsin'
-import { Domain } from '@vcr/domain'
+import { Config, Domain } from '@vcr/domain'
 
 import { SelectFileListener } from './File/Listeners/SelectFileListener'
 import { ShowInfoShortcutListener } from './Shortcuts/Listeners/ShowInfoShortcutListener'
@@ -13,7 +13,7 @@ import { GlobalShortcut } from './Adapters/KeysListener/GlobalShortcut'
 import { RegisterShortcutsService } from './Shortcuts/Services/RegisterShortcutsService'
 import { RegisterShortcutsUseCase } from './Shortcuts/UseCase/RegisterShortcutsUseCase'
 import { ElectronMainProcessComunication } from './Adapters/ProcessComunication/ElectronMainProcessComunication'
-import { IConfiguration } from './Configuration/Entities/Configuration'
+import { Configuration } from './Configuration/Entities/Configuration'
 import { ElectronScreen } from './Adapters/Screen/ElectronScreen'
 import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRepository'
 import { ToggleFullscreenUsecase } from './Screen/UseCases/ToggleFullscreenUseCase'
@@ -48,10 +48,10 @@ import { NodeSettingsRepository } from './Settings/Repositories/NodeSettingsRepo
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
-  const config: IConfiguration = {
+  const config: Configuration = new Config({
     platform: process.platform,
     paths: getPaths()
-  }
+  })
 
   const utils = {
     normalizeAssetSrc: NormalizeAssetSrc

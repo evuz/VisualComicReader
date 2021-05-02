@@ -2,7 +2,7 @@ import { File } from '@vcr/domain'
 import * as path from 'path'
 import { spawn, StdioOptions } from 'child_process'
 import { CreateTmpFolder } from './CreateTmpFolder'
-import { IConfiguration } from '../../Configuration/Entities/Configuration'
+import { Configuration } from '../../Configuration/Entities/Configuration'
 
 const command = 'e'
 const stdioOpts = {
@@ -13,8 +13,8 @@ export class UnrarExtract {
   private folder: string
 
   private get executablePath () {
-    const platform = this.config.platform
-    const appPath = this.config.paths.app
+    const platform = this.config.get('platform')
+    const appPath = this.config.get('paths').app
     switch (platform) {
       case 'win32':
         return path.join(appPath, 'bin', 'win32', 'unrar.exe')
@@ -31,7 +31,7 @@ export class UnrarExtract {
 
   constructor (
     private path: File,
-    private config: IConfiguration,
+    private config: Configuration,
     private createTmpFolder: CreateTmpFolder
   ) {}
 

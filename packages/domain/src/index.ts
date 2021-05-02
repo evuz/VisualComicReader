@@ -26,3 +26,4 @@ export * from './Adapters/FileSystem/FileSystemAdapter'
 // Utils
 export * from './Utils/uuid'
 export * from './Utils/singleton'
+export * from './Utils/Config'

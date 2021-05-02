@@ -3,18 +3,18 @@ import { ShortcutsRepository } from '../Repositories/ShortcutsRepository'
 import { DEPS_SYMBOL } from 'depsin'
 
 import { Symbols } from '../../symbols'
-import { IConfiguration } from '../../Configuration/Entities/Configuration'
+import { Configuration } from '../../Configuration/Entities/Configuration'
 
 export class ShowInfoShortcutsService implements Service {
   static [DEPS_SYMBOL] = [Symbols.ShortcutsRepository, Symbols.Config]
 
   constructor (
     private repository: ShortcutsRepository,
-    private config: IConfiguration
+    private config: Configuration
   ) {}
 
   execute () {
-    const ctrlOrCmd = this.config.platform === 'darwin' ? 'Cmd' : 'Ctrl'
+    const ctrlOrCmd = this.config.get('platform') === 'darwin' ? 'Cmd' : 'Ctrl'
 
     return this.repository.showInfo({
       type: 'none',

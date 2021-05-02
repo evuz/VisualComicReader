@@ -1,3 +1,4 @@
+import { Config } from '@vcr/domain'
 import * as path from 'path'
 
 import { IConfiguration } from '../../../Configuration/Entities/Configuration'
@@ -27,7 +28,7 @@ describe('CreateTmpFolder', () => {
 
   beforeEach(() => {
     folderError = false
-    instance = new CreateTmpFolder(config, createFolder)
+    instance = new CreateTmpFolder(new Config(config), createFolder)
   })
 
   test('should create folder', async () => {

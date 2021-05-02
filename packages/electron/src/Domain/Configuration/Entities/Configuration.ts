@@ -1,3 +1,5 @@
+import { Config } from '@vcr/domain'
+
 export type IConfiguration = {
   platform: typeof process.platform
   paths: {
@@ -6,3 +8,5 @@ export type IConfiguration = {
     config: string
   }
 }
+
+export type Configuration = Config<IConfiguration>
