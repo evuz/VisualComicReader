@@ -103,7 +103,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
       [Symbols.SelectDirectoryListener]: { asClass: SelectDirectoryListener },
       [Symbols.UpdateSettingsListener]: { asClass: UpdateSettingsListener },
-      [Symbols.SettingsChangeListener]: { asClass: WatchSettingsListener },
+      [Symbols.WatchSettingsListener]: { asClass: WatchSettingsListener },
       [Symbols.ToggleFullscreenListener]: { asClass: ToggleFullscreenListener },
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener
@@ -115,7 +115,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.SelectFileUseCase]: { asClass: SelectFileUseCase },
       [Symbols.SelectDirectoryUseCase]: { asClass: SelectDirectoryUseCase },
       [Symbols.OpenComicUseCase]: { asClass: OpenComicUseCase },
-      [Symbols.ClearTmpFolder]: { asClass: ClearTmpFolder },
+      [Symbols.ClearTmpFolderUseCase]: { asClass: ClearTmpFolder },
       // Utils
       [Symbols.RemoveFolder]: { asClass: RemoveFolder },
       [Symbols.ReadFolder]: { asClass: ReadFolder },
@@ -133,7 +133,7 @@ export function factory (browserWindow: BrowserWindow) {
     ),
     openFile: container.get<OpenFileListener>(Symbols.OpenFileListener),
     updateSettings: container.get<UpdateSettingsListener>(Symbols.UpdateSettingsListener),
-    watchSettings: container.get<WatchSettingsListener>(Symbols.SettingsChangeListener),
+    watchSettings: container.get<WatchSettingsListener>(Symbols.WatchSettingsListener),
     toggleFullscreen: container.get<ToggleFullscreenListener>(
       Symbols.ToggleFullscreenListener
     )
@@ -153,7 +153,7 @@ export function factory (browserWindow: BrowserWindow) {
     selectFile: container.get<SelectFileUseCase>(Symbols.SelectFileUseCase),
     selectDirectory: container.get<SelectDirectoryUseCase>(Symbols.SelectDirectoryUseCase),
     openComic: container.get<OpenComicUseCase>(Symbols.OpenComicUseCase),
-    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolder)
+    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolderUseCase)
   }
 
   return new Domain({ useCases, listeners, config })
