@@ -5,3 +5,5 @@ export type ISettings = {
 }
 
 export type Settings = Config<ISettings>
+
+export const defaultSettings: ISettings = {}

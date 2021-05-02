@@ -9,7 +9,7 @@ import { ReadSettingsService } from '../Services/ReadSettingsService'
 import { SettingsRepository } from './SettingsRepository'
 
 export class NodeSettingsRepository implements SettingsRepository {
-  static [DEPS_SYMBOL] = [Symbols.Config, Symbols.ReadSettingsFileService]
+  static [DEPS_SYMBOL] = [Symbols.Config, Symbols.ReadSettingsService]
 
   private subject = new Subject<ISettings>()
 

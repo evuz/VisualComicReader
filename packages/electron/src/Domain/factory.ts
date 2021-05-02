@@ -1,6 +1,6 @@
 import { ipcMain, BrowserWindow } from 'electron'
 import { createContainer } from 'depsin'
-import { Config, Domain } from '@vcr/domain'
+import { Config, Domain, Settings, defaultSettings } from '@vcr/domain'
 
 import { SelectFileListener } from './File/Listeners/SelectFileListener'
 import { ShowInfoShortcutListener } from './Shortcuts/Listeners/ShowInfoShortcutListener'
@@ -45,13 +45,16 @@ import { ReadSettingsService } from './Settings/Services/ReadSettingsService'
 import { WriteSettingsService } from './Settings/Services/WriteSettingsService'
 import { WatchSettingsListener } from './Settings/Listeners/WatchSettingsListener'
 import { NodeSettingsRepository } from './Settings/Repositories/NodeSettingsRepository'
+import { InitDomain } from './Utils/InitDomain'
+import { InitSettingsService } from './Settings/Services/InitSettingsService'
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
-  const config: Configuration = new Config({
+  const configuration: Configuration = new Config({
     platform: process.platform,
     paths: getPaths()
   })
+  const settings: Settings = new Config(defaultSettings)
 
   const utils = {
     normalizeAssetSrc: NormalizeAssetSrc
@@ -59,7 +62,7 @@ export function factory (browserWindow: BrowserWindow) {
 
   const filesSystemAdapter = new NodeFileSystem()
   const createFolder = new CreateFolder(filesSystemAdapter)
-  const createTmpFolder = new CreateTmpFolder(config, createFolder)
+  const createTmpFolder = new CreateTmpFolder(configuration, createFolder)
   const adapters = {
     processMain: new ElectronMainProcessComunication(
       ipcMain,
@@ -68,7 +71,7 @@ export function factory (browserWindow: BrowserWindow) {
     dialog: new ElectronDialog(browserWindow),
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
-    fileManager: DialogFileManager.factory(new OpenFileFactory(config, createTmpFolder))
+    fileManager: DialogFileManager.factory(new OpenFileFactory(configuration, createTmpFolder))
   }
 
   if (process.env.NODE_ENV === 'development') {
@@ -77,7 +80,8 @@ export function factory (browserWindow: BrowserWindow) {
 
   const container = createContainer(
     {
-      [Symbols.Config]: { asValue: config },
+      [Symbols.Config]: { asValue: configuration },
+      [Symbols.Settings]: { asValue: settings },
       // Adapters
       [Symbols.ProcessMain]: { asValue: adapters.processMain },
       [Symbols.Dialog]: { asValue: adapters.dialog },
@@ -96,8 +100,9 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.SelectDirectoryService]: { asClass: SelectDirectoryService },
       [Symbols.UpdateSettingsService]: { asClass: UpdateSettingsService },
       [Symbols.OpenComicService]: { asClass: OpenComicService },
-      [Symbols.ReadSettingsFileService]: { asClass: ReadSettingsService },
-      [Symbols.WriteSettingsFileService]: { asClass: WriteSettingsService },
+      [Symbols.ReadSettingsService]: { asClass: ReadSettingsService },
+      [Symbols.WriteSettingsService]: { asClass: WriteSettingsService },
+      [Symbols.InitSettingsService]: { asClass: InitSettingsService },
       // Listeners
       [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
@@ -117,6 +122,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.OpenComicUseCase]: { asClass: OpenComicUseCase },
       [Symbols.ClearTmpFolderUseCase]: { asClass: ClearTmpFolder },
       // Utils
+      [Symbols.Init]: { asClass: InitDomain },
       [Symbols.RemoveFolder]: { asClass: RemoveFolder },
       [Symbols.ReadFolder]: { asClass: ReadFolder },
       [Symbols.NormalizeAssetSrc]: { asClass: utils.normalizeAssetSrc }
@@ -153,8 +159,9 @@ export function factory (browserWindow: BrowserWindow) {
     selectFile: container.get<SelectFileUseCase>(Symbols.SelectFileUseCase),
     selectDirectory: container.get<SelectDirectoryUseCase>(Symbols.SelectDirectoryUseCase),
     openComic: container.get<OpenComicUseCase>(Symbols.OpenComicUseCase),
-    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolderUseCase)
+    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolderUseCase),
+    init: container.get<InitDomain>(Symbols.Init)
   }
 
-  return new Domain({ useCases, listeners, config })
+  return new Domain({ useCases, listeners, config: configuration })
 }

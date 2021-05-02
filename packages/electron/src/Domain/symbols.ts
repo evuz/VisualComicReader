@@ -47,8 +47,9 @@ const settings = {
   },
   services: {
     UpdateSettingsService: 'UpdateSettingsService',
-    ReadSettingsFileService: 'ReadSettingsFileService',
-    WriteSettingsFileService: 'WriteSettingsFileService'
+    ReadSettingsService: 'ReadSettingsService',
+    WriteSettingsService: 'WriteSettingsService',
+    InitSettingsService: 'InitSettingsService'
   },
   listeners: {
     UpdateSettingsListener: 'UpdateSettingsListener',
@@ -71,7 +72,8 @@ const screen = {
 const file = {
   services: {
     SelectFileService: 'SelectFileService',
-    SelectDirectoryService: 'SelectDirectoryService'
+    SelectDirectoryService: 'SelectDirectoryService',
+    InitSettings: 'InitSettings'
   },
   listeners: {
     SelectFileListener: 'SelectFileListener',
@@ -86,6 +88,7 @@ const file = {
 }
 
 const utils = {
+  Init: 'Init',
   RemoveFolder: 'RemoveFolder',
   ReadFolder: 'ReadFolder',
   NormalizeAssetSrc: 'NormalizeAssetSrc'

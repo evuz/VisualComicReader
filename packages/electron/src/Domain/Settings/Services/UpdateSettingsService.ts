@@ -6,16 +6,16 @@ import { ReadSettingsService } from './ReadSettingsService'
 import { WriteSettingsService } from './WriteSettingsService'
 
 export class UpdateSettingsService {
-  static [DEPS_SYMBOL] = [Symbols.ReadSettingsFileService, Symbols.WriteSettingsFileService];
+  static [DEPS_SYMBOL] = [Symbols.ReadSettingsService, Symbols.WriteSettingsService];
 
   constructor (
-    private readConfigFile: ReadSettingsService,
-    private writeConfigFile: WriteSettingsService
+    private readSettings: ReadSettingsService,
+    private writeSettings: WriteSettingsService
   ) {}
 
   async execute (update: Partial<ISettings>) {
-    const appConfig = this.readConfigFile.execute()
+    const appConfig = this.readSettings.execute()
     const newConfig = Object.assign(appConfig, update)
-    this.writeConfigFile.execute(newConfig)
+    this.writeSettings.execute(newConfig)
   }
 }

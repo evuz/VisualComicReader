@@ -17,9 +17,8 @@ export abstract class App {
   private show () {
     this.load()
     this.domain = createDomain(this.window)
-    this.ipcListen()
-    this.domain().getUseCase('clearTmpFolder').execute()
-    this.domain().getUseCase('registerShortcuts').execute()
+    this.domain().getUseCase('init').execute()
+
     this.window.once('ready-to-show', () => this.window.show())
   }
 
@@ -43,59 +42,5 @@ export abstract class App {
     if (BrowserWindow.getAllWindows().length === 0) {
       this.show()
     }
-  }
-
-  private ipcListen () {
-    const domain = this.domain()
-
-    domain
-      .getListener('toggleFullscreen')
-      .execute()
-      .subscribe(() => {
-        domain.getUseCase('toggleFullscreen').execute()
-      })
-
-    domain
-      .getListener('showInfoShortcuts')
-      .execute()
-      .subscribe(() => {
-        domain.getUseCase('showInfoShortcuts').execute()
-      })
-
-    domain
-      .getListener('selectFile')
-      .execute()
-      .subscribe(async ({ payload, response }) => {
-        const file = await domain.getUseCase('selectFile').execute(payload)
-        response(file)
-      })
-
-    domain
-      .getListener('selectDirectory')
-      .execute()
-      .subscribe(async ({ response }) => {
-        const directory = await domain.getUseCase('selectDirectory').execute()
-        response(directory)
-      })
-
-    domain
-      .getListener('openFile')
-      .execute()
-      .subscribe(async ({ payload, response }) => {
-        const comic = await domain.getUseCase('openComic').execute(payload)
-        response(comic)
-      })
-
-    domain
-      .getListener('updateSettings')
-      .execute()
-      .subscribe()
-
-    domain
-      .getListener('watchSettings')
-      .execute()
-      .subscribe(v => {
-        console.log(v)
-      })
   }
 }

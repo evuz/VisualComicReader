@@ -4,6 +4,7 @@ import { Configuration } from '../../Configuration/Entities/Configuration'
 import { Symbols } from '../../symbols'
 import { RemoveFolder } from '../Utils/RemoveFolder'
 
+// TODO: move to service instead UseCase
 export class ClearTmpFolder implements UseCase {
   static [DEPS_SYMBOL] = [Symbols.Config, Symbols.RemoveFolder]
 
