@@ -2,7 +2,7 @@ import { File } from '@vcr/domain'
 import * as path from 'path'
 import { spawn, StdioOptions } from 'child_process'
 import { CreateTmpFolder } from './CreateTmpFolder'
-import { IConfig } from '../../Config/models/Config'
+import { IConfiguration } from '../../Configuration/Entities/Configuration'
 
 const command = 'e'
 const stdioOpts = {
@@ -31,7 +31,7 @@ export class UnrarExtract {
 
   constructor (
     private path: File,
-    private config: IConfig,
+    private config: IConfiguration,
     private createTmpFolder: CreateTmpFolder
   ) {}
 

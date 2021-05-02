@@ -1,9 +1,9 @@
 import * as path from 'path'
 
-import { IConfig } from '../../../Config/models/Config'
+import { IConfiguration } from '../../../Configuration/Entities/Configuration'
 import { CreateTmpFolder } from '../CreateTmpFolder'
 
-const config: IConfig = {
+const config: IConfiguration = {
   platform: 'linux',
   paths: {
     app: __dirname,

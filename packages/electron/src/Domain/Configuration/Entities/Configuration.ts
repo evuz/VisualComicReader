@@ -1,4 +1,4 @@
-export type IConfig = {
+export type IConfiguration = {
   platform: typeof process.platform
   paths: {
     tmp: string

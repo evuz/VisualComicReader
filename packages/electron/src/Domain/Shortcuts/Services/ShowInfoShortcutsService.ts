@@ -3,14 +3,14 @@ import { ShortcutsRepository } from '../Repositories/ShortcutsRepository'
 import { DEPS_SYMBOL } from 'depsin'
 
 import { Symbols } from '../../symbols'
-import { IConfig } from '../../Config/models/Config'
+import { IConfiguration } from '../../Configuration/Entities/Configuration'
 
 export class ShowInfoShortcutsService implements Service {
   static [DEPS_SYMBOL] = [Symbols.ShortcutsRepository, Symbols.Config]
 
   constructor (
     private repository: ShortcutsRepository,
-    private config: IConfig
+    private config: IConfiguration
   ) {}
 
   execute () {

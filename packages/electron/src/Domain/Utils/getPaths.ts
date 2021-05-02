@@ -1,6 +1,6 @@
 import { app } from 'electron'
 import * as path from 'path'
-import { IConfig } from '../Config/models/Config'
+import { IConfiguration } from '../Configuration/Entities/Configuration'
 
 function getDevelopPath () {
   return {
@@ -10,7 +10,7 @@ function getDevelopPath () {
   }
 }
 
-export function getPaths (): IConfig['paths'] {
+export function getPaths (): IConfiguration['paths'] {
   if (process.env.NODE_ENV === 'development') {
     return getDevelopPath()
   }

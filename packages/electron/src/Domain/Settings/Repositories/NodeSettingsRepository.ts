@@ -3,7 +3,7 @@ import chokidar from 'chokidar'
 import { DEPS_SYMBOL } from 'depsin'
 import { Subject } from 'rxjs'
 
-import { IConfig } from '../../Config/models/Config'
+import { IConfiguration } from '../../Configuration/Entities/Configuration'
 import { Symbols } from '../../symbols'
 import { ReadSettingsService } from '../Services/ReadSettingsService'
 import { SettingsRepository } from './SettingsRepository'
@@ -14,7 +14,7 @@ export class NodeSettingsRepository implements SettingsRepository {
   private subjet = new Subject<ISettings>()
 
   constructor (
-    private config: IConfig,
+    private config: IConfiguration,
     private readSettings: ReadSettingsService
   ) {
     this.runWatcher()

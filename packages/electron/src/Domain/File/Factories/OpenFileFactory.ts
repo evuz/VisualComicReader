@@ -4,7 +4,7 @@ import { ZipExtract } from '../Utils/ZipExtract'
 import { DEPS_SYMBOL } from 'depsin'
 import { Symbols } from '../../symbols'
 import { CreateTmpFolder } from '../Utils/CreateTmpFolder'
-import { IConfig } from '../../Config/models/Config'
+import { IConfiguration } from '../../Configuration/Entities/Configuration'
 import { UnrarExtract } from '../Utils/UnrarExtract'
 
 interface Executer {
@@ -14,7 +14,7 @@ interface Executer {
 export class OpenFileFactory {
   static [DEPS_SYMBOL] = [Symbols.Config]
 
-  constructor (private config: IConfig, private createTmpFolder: CreateTmpFolder) {}
+  constructor (private config: IConfiguration, private createTmpFolder: CreateTmpFolder) {}
 
   get (path: File): Executer {
     const extension = paths.extname(path)

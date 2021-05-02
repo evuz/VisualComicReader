@@ -13,7 +13,7 @@ import { GlobalShortcut } from './Adapters/KeysListener/GlobalShortcut'
 import { RegisterShortcutsService } from './Shortcuts/Services/RegisterShortcutsService'
 import { RegisterShortcutsUseCase } from './Shortcuts/UseCase/RegisterShortcutsUseCase'
 import { ElectronMainProcessComunication } from './Adapters/ProcessComunication/ElectronMainProcessComunication'
-import { IConfig } from './Config/models/Config'
+import { IConfiguration } from './Configuration/Entities/Configuration'
 import { ElectronScreen } from './Adapters/Screen/ElectronScreen'
 import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRepository'
 import { ToggleFullscreenUsecase } from './Screen/UseCases/ToggleFullscreenUseCase'
@@ -48,7 +48,7 @@ import { NodeSettingsRepository } from './Settings/Repositories/NodeSettingsRepo
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
-  const config: IConfig = {
+  const config: IConfiguration = {
     platform: process.platform,
     paths: getPaths()
   }
