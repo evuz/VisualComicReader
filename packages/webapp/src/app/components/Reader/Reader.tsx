@@ -8,6 +8,8 @@ import { BottomBar } from './FloatBar/BottomBar'
 import { RightBar } from './FloatBar/RightBar'
 
 import './Reader.css'
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver'
+import { isScrollable } from '../../utils/isScrollable'
 
 export type ReaderProps = {
   files: Comic['images'] | undefined
@@ -63,6 +65,11 @@ export const Reader: FC<ReaderProps> = ({
   onZoomIn
 }) => {
   const [readerRef, setReaderRef] = useDragScroll<HTMLDivElement>()
+  const { intersectionRef, isIntersecting } = useIntersectionObserver<HTMLDivElement>({
+    distance: '0px',
+    root: readerRef
+  })
+
   const { height, width } = imgSize({ fullHeight, fullWidth, percentSize })
 
   useEffect(() => {
@@ -76,8 +83,12 @@ export const Reader: FC<ReaderProps> = ({
     return null
   }
 
+  const readerClassnames = filterClassNames({
+    Reader: true,
+    'Reader--centered': isIntersecting && !(isScrollable(readerRef.current))
+  })
   return (
-    <div className={'Reader'} ref={setReaderRef}>
+    <div className={readerClassnames} ref={setReaderRef}>
       {twoColumns
         ? (
         <div
@@ -119,6 +130,7 @@ export const Reader: FC<ReaderProps> = ({
         onFullHeight={onFullHeight}
       />
       <RightBar onZoomOut={onZoomOut} onZoomIn={onZoomIn} />
+      <div ref={intersectionRef}/>
     </div>
   )
 }
