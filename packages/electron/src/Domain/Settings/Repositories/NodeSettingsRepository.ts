@@ -26,9 +26,11 @@ export class NodeSettingsRepository implements SettingsRepository {
 
   private runWatcher () {
     const configPath = this.config.get('paths').config
-    chokidar.watch(configPath).on('change', async () => {
-      const config = await this.readSettings.execute()
-      this.subject.next(config)
-    })
+    chokidar.watch(configPath).on('change', () => this.updateConfig())
+  }
+
+  private async updateConfig () {
+    const config = await this.readSettings.execute()
+    this.subject.next(config)
   }
 }

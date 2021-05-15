@@ -5,8 +5,14 @@ export class Config<T extends Object> {
     this.props = Object.assign({}, obj)
   }
 
-  get<U extends keyof T> (key: U): T[U] {
-    if (!this.props[key]) {
+  get (): T
+  get<U extends keyof T> (key: U): T[U]
+  get<U extends keyof T> (key?: U): any {
+    if (!key) {
+      return Object.assign({}, this.props)
+    }
+
+    if (!{}.hasOwnProperty.call(this.props, key)) {
       throw Error(`Config ${key} doesn't exist`)
     }
     return this.props[key]

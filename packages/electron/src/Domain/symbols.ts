@@ -69,6 +69,20 @@ const screen = {
   }
 }
 
+const library = {
+  repositories: {
+    LibraryRepository: 'LibraryRepository'
+  },
+  services: {
+    WatchLibraryService: 'WatchLibraryService',
+    ReadLibraryService: 'ReadLibraryService'
+  },
+  listeners: {
+    LibrarySettingListener: 'LibrarySettingListener',
+    WatchLibraryListener: 'WatchLibraryListener'
+  }
+}
+
 const file = {
   services: {
     SelectFileService: 'SelectFileService',
@@ -110,6 +124,9 @@ export const Symbols = {
   ...screen.repositories,
   ...screen.listeners,
   ...screen.useCases,
+  ...library.repositories,
+  ...library.services,
+  ...library.listeners,
   ...file.services,
   ...file.listeners,
   ...file.useCases,

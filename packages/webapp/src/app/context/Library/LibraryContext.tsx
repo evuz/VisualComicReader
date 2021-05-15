@@ -25,7 +25,7 @@ export const LibraryState: React.FC = ({ children }) => {
   const [library, setLibrary] = useState<ILibraryState>(defaultValue.library)
 
   const selectLibrary = useCallback(() => {
-    domain.getUseCase('selectLibrary').execute()
+    domain.getUseCase('selectLibrary').execute().then(l => console.log(l))
   }, [domain])
 
   const listenLibrary = useCallback(() => {

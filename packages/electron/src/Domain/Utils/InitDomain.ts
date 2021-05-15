@@ -7,6 +7,8 @@ import { SelectFileListener } from '../File/Listeners/SelectFileListener'
 import { SelectDirectoryService } from '../File/Services/SelectDirectoryService'
 import { SelectFileService } from '../File/Services/SelectFileService'
 import { ClearTmpFolder } from '../File/UseCases/ClearTmpFolder'
+import { ReadLibraryService } from '../Library/Services/ReadLibraryService'
+import { WatchLibraryService } from '../Library/Services/WatchLibraryService'
 import { ToggleFullscreenListener } from '../Screen/Listeners/ToggleFullscreenListener'
 import { ToggleFullscreenUsecase } from '../Screen/UseCases/ToggleFullscreenUseCase'
 import { UpdateSettingsListener } from '../Settings/Listeners/UpdateSettingsListener'
@@ -36,7 +38,9 @@ export class InitDomain implements Service {
     Symbols.OpenComicService,
     Symbols.UpdateSettingsListener,
     Symbols.UpdateSettingsService,
-    Symbols.WatchSettingsListener
+    Symbols.WatchSettingsListener,
+    Symbols.WatchLibraryService,
+    Symbols.ReadLibraryService
   ]
 
   constructor (
@@ -55,13 +59,18 @@ export class InitDomain implements Service {
     private openComicService: OpenComicService,
     private updateSettingsListener: UpdateSettingsListener,
     private updateSettingsService: UpdateSettingsService,
-    private watchSettingsListener: WatchSettingsListener
+    private watchSettingsListener: WatchSettingsListener,
+    private watchLibraryService: WatchLibraryService,
+    private readLibrarService: ReadLibraryService
   ) {}
 
   async execute () {
     await this.initSettings.execute()
 
-    await this.clearTmpFolderService.execute()
+    // await this.clearTmpFolderService.execute()
+    const library = await this.readLibrarService.execute()
+    console.log(JSON.stringify(library))
+
     this.registerShortcutsService.execute()
 
     this.toggleFullscreenListener.execute().subscribe(() => {
@@ -95,5 +104,7 @@ export class InitDomain implements Service {
     this.watchSettingsListener.execute().subscribe(v => {
       console.log(v)
     })
+
+    this.watchLibraryService.execute()
   }
 }
