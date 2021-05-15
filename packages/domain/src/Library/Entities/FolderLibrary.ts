@@ -2,11 +2,12 @@ import { Entity } from '../../Domain/models/Entity'
 import { FileLibrary } from '../Enum/FileLibraryEnum'
 import { ComicLibrary } from './ComicLibrary'
 
-export interface IFolderLibrary {
- type: FileLibrary.Folder
+interface IFolderLibrary {
  name: string
- content: FolderLibrary | ComicLibrary[]
+ content: Array<FolderLibrary | ComicLibrary>
 }
 
 export interface FolderLibrary extends IFolderLibrary {}
-export class FolderLibrary extends Entity<IFolderLibrary> {}
+export class FolderLibrary extends Entity<IFolderLibrary> {
+  type = FileLibrary.Folder
+}
