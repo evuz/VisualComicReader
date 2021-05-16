@@ -1,4 +1,3 @@
 import { factory } from './factory'
 
-export const domain = factory()
-export type AppDomain = typeof domain
+export type AppDomain = ReturnType<typeof factory>
