@@ -7,6 +7,7 @@ import { SelectFileListener } from '../File/Listeners/SelectFileListener'
 import { SelectDirectoryService } from '../File/Services/SelectDirectoryService'
 import { SelectFileService } from '../File/Services/SelectFileService'
 import { ClearTmpFolder } from '../File/UseCases/ClearTmpFolder'
+import { WatchLibraryService } from '../Library/Services/WatchLibraryService'
 import { ToggleFullscreenListener } from '../Screen/Listeners/ToggleFullscreenListener'
 import { ToggleFullscreenUsecase } from '../Screen/UseCases/ToggleFullscreenUseCase'
 import { UpdateSettingsListener } from '../Settings/Listeners/UpdateSettingsListener'
@@ -36,7 +37,8 @@ export class InitDomain implements Service {
     Symbols.OpenComicService,
     Symbols.UpdateSettingsListener,
     Symbols.UpdateSettingsService,
-    Symbols.WatchSettingsService
+    Symbols.WatchSettingsService,
+    Symbols.WatchLibraryService
   ]
 
   constructor (
@@ -55,13 +57,15 @@ export class InitDomain implements Service {
     private openComicService: OpenComicService,
     private updateSettingsListener: UpdateSettingsListener,
     private updateSettingsService: UpdateSettingsService,
-    private watchSettingsService: WatchSettingsService
+    private watchSettingsService: WatchSettingsService,
+    private watchLibraryService: WatchLibraryService
   ) {}
 
   async execute () {
     await this.initSettings.execute()
 
     await this.clearTmpFolderService.execute()
+
     this.registerShortcutsService.execute()
 
     this.toggleFullscreenListener.execute().subscribe(() => {
@@ -93,5 +97,6 @@ export class InitDomain implements Service {
     })
 
     this.watchSettingsService.execute()
+    this.watchLibraryService.execute()
   }
 }

@@ -47,6 +47,11 @@ import { WatchSettingsListener } from './Settings/Listeners/WatchSettingsListene
 import { NodeSettingsRepository } from './Settings/Repositories/NodeSettingsRepository'
 import { InitDomain } from './Utils/InitDomain'
 import { InitSettingsService } from './Settings/Services/InitSettingsService'
+import { NodeLibraryRepository } from './Library/Repositories/NodeLibraryRepository'
+import { WatchLibraryService } from './Library/Services/WatchLibraryService'
+import { LibrarySettingListener } from './Library/Listeners/LibrarySettingListener'
+import { WatchLibraryListener } from './Library/Listeners/WatchLibraryListener'
+import { ReadLibraryService } from './Library/Services/ReadLibraryService'
 import { WatchSettingsService } from './Settings/Services/WatchSettingsService'
 
 export function factory (browserWindow: BrowserWindow) {
@@ -94,6 +99,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
       [Symbols.ScreenRepository]: { asClass: ElectronScreenRepository },
       [Symbols.SettingsRepository]: { asClass: NodeSettingsRepository },
+      [Symbols.LibraryRepository]: { asClass: NodeLibraryRepository },
       // Services
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
@@ -105,6 +111,8 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.WriteSettingsService]: { asClass: WriteSettingsService },
       [Symbols.InitSettingsService]: { asClass: InitSettingsService },
       [Symbols.WatchSettingsService]: { asClass: WatchSettingsService },
+      [Symbols.WatchLibraryService]: { asClass: WatchLibraryService },
+      [Symbols.ReadLibraryService]: { asClass: ReadLibraryService },
       // Listeners
       [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
@@ -115,6 +123,8 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener
       },
+      [Symbols.LibrarySettingListener]: { asClass: LibrarySettingListener },
+      [Symbols.WatchLibraryListener]: { asClass: WatchLibraryListener },
       // Use cases
       [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutsUseCase },
       [Symbols.RegisterShortcutsUseCase]: { asClass: RegisterShortcutsUseCase },
@@ -149,19 +159,6 @@ export function factory (browserWindow: BrowserWindow) {
 
   // UseCases
   const useCases = {
-    showInfoShortcuts: container.get<ShowInfoShortcutsUseCase>(
-      Symbols.ShowInfoShortcutsUseCase
-    ),
-    registerShortcuts: container.get<RegisterShortcutsUseCase>(
-      Symbols.RegisterShortcutsUseCase
-    ),
-    toggleFullscreen: container.get<ToggleFullscreenUsecase>(
-      Symbols.ToggleFullscreenUseCase
-    ),
-    selectFile: container.get<SelectFileUseCase>(Symbols.SelectFileUseCase),
-    selectDirectory: container.get<SelectDirectoryUseCase>(Symbols.SelectDirectoryUseCase),
-    openComic: container.get<OpenComicUseCase>(Symbols.OpenComicUseCase),
-    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolderUseCase),
     init: container.get<InitDomain>(Symbols.Init)
   }
 
