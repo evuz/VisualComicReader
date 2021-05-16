@@ -5,8 +5,8 @@ import { IConfiguration } from '../Configuration/Entities/Configuration'
 function getDevelopPath () {
   return {
     app: app.getAppPath(),
-    config: path.join(app.getAppPath(), '.tmp', 'config.json'),
-    tmp: path.join(app.getAppPath(), '.tmp')
+    config: path.join(app.getAppPath(), '.appData', 'config.json'),
+    tmp: path.join(app.getAppPath(), '.appData', 'tmp')
   }
 }
 
