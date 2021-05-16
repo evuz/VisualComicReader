@@ -5,6 +5,7 @@ import { startWith, switchMap } from 'rxjs/operators'
 import { Symbols } from '../../symbols'
 import { LibrarySettingListener } from '../Listeners/LibrarySettingListener'
 import { WatchLibraryListener } from '../Listeners/WatchLibraryListener'
+import { LibraryStoreService } from './LibraryStoreService'
 import { ReadLibraryService } from './ReadLibraryService'
 
 export class WatchLibraryService implements Service {
@@ -12,14 +13,16 @@ export class WatchLibraryService implements Service {
     Symbols.LibrarySettingListener,
     Symbols.ProcessMain,
     Symbols.WatchLibraryListener,
-    Symbols.ReadLibraryService
+    Symbols.ReadLibraryService,
+    Symbols.LibraryStoreService
   ]
 
   constructor (
     private librarySettingListener: LibrarySettingListener,
     private processMain: ProcessMainAdapter,
     private watchLibraryListener: WatchLibraryListener,
-    private readLibraryService: ReadLibraryService
+    private readLibraryService: ReadLibraryService,
+    private libraryStore: LibraryStoreService
   ) {}
 
   execute () {
@@ -32,6 +35,7 @@ export class WatchLibraryService implements Service {
         })
       ).subscribe(async () => {
         const library = await this.readLibraryService.execute()
+        this.libraryStore.set(library)
         this.processMain.emit(IpcMessages.Library, { payload: library })
       })
     return Promise.resolve()

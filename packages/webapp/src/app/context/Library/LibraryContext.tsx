@@ -30,6 +30,7 @@ export const LibraryState: React.FC = ({ children }) => {
     const obs = domain.getListener('library')
       .execute()
       .subscribe(library => {
+        console.log(library)
         setLibrary(library)
       })
     return () => obs.unsubscribe()

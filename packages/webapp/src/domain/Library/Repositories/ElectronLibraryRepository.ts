@@ -1,6 +1,7 @@
 import { FileManagerAdapter, IpcMessages, Library, ProcessMainAdapter } from '@vcr/domain'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { from, merge, Observable } from 'rxjs'
+import { filter, map } from 'rxjs/operators'
+
 import { LibraryRepository } from './LibraryRepository'
 
 export class ElectronLibraryRepository implements LibraryRepository {
@@ -11,6 +12,8 @@ export class ElectronLibraryRepository implements LibraryRepository {
   }
 
   listenLibraryChanges (): Observable<Library> {
-    return this.electron.listen(IpcMessages.Library).pipe(map(({ payload }) => payload))
+    const initialLibrary$ = from(this.electron.request(IpcMessages.Library))
+    const library$ = this.electron.listen(IpcMessages.Library).pipe(filter(({ id }) => !id))
+    return merge(initialLibrary$, library$).pipe(map(({ payload }) => payload))
   }
 }

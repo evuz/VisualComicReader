@@ -7,6 +7,7 @@ import { SelectFileListener } from '../File/Listeners/SelectFileListener'
 import { SelectDirectoryService } from '../File/Services/SelectDirectoryService'
 import { SelectFileService } from '../File/Services/SelectFileService'
 import { ClearTmpFolder } from '../File/UseCases/ClearTmpFolder'
+import { RequestLibraryService } from '../Library/Services/RequestLibraryService'
 import { WatchLibraryService } from '../Library/Services/WatchLibraryService'
 import { ToggleFullscreenListener } from '../Screen/Listeners/ToggleFullscreenListener'
 import { ToggleFullscreenUsecase } from '../Screen/UseCases/ToggleFullscreenUseCase'
@@ -38,7 +39,8 @@ export class InitDomain implements Service {
     Symbols.UpdateSettingsListener,
     Symbols.UpdateSettingsService,
     Symbols.WatchSettingsService,
-    Symbols.WatchLibraryService
+    Symbols.WatchLibraryService,
+    Symbols.RequestLibraryService
   ]
 
   constructor (
@@ -58,15 +60,14 @@ export class InitDomain implements Service {
     private updateSettingsListener: UpdateSettingsListener,
     private updateSettingsService: UpdateSettingsService,
     private watchSettingsService: WatchSettingsService,
-    private watchLibraryService: WatchLibraryService
+    private watchLibraryService: WatchLibraryService,
+    private requestLibraryService: RequestLibraryService
   ) {}
 
   async execute () {
     await this.initSettings.execute()
 
     await this.clearTmpFolderService.execute()
-
-    this.registerShortcutsService.execute()
 
     this.toggleFullscreenListener.execute().subscribe(() => {
       this.toggleFullscreenUseCase.execute()
@@ -96,7 +97,11 @@ export class InitDomain implements Service {
       response(null)
     })
 
-    this.watchSettingsService.execute()
-    this.watchLibraryService.execute()
+    Promise.all([
+      this.watchSettingsService.execute(),
+      this.watchLibraryService.execute(),
+      this.registerShortcutsService.execute(),
+      this.requestLibraryService.execute()
+    ])
   }
 }

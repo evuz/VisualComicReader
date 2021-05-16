@@ -53,6 +53,9 @@ import { LibrarySettingListener } from './Library/Listeners/LibrarySettingListen
 import { WatchLibraryListener } from './Library/Listeners/WatchLibraryListener'
 import { ReadLibraryService } from './Library/Services/ReadLibraryService'
 import { WatchSettingsService } from './Settings/Services/WatchSettingsService'
+import { RequestLibraryListener } from './Library/Listeners/RequestLibraryListener'
+import { RequestLibraryService } from './Library/Services/RequestLibraryService'
+import { LibraryStoreService } from './Library/Services/LibraryStoreService'
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
@@ -113,6 +116,8 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.WatchSettingsService]: { asClass: WatchSettingsService },
       [Symbols.WatchLibraryService]: { asClass: WatchLibraryService },
       [Symbols.ReadLibraryService]: { asClass: ReadLibraryService },
+      [Symbols.RequestLibraryService]: { asClass: RequestLibraryService },
+      [Symbols.LibraryStoreService]: { asClass: LibraryStoreService },
       // Listeners
       [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
@@ -125,6 +130,7 @@ export function factory (browserWindow: BrowserWindow) {
       },
       [Symbols.LibrarySettingListener]: { asClass: LibrarySettingListener },
       [Symbols.WatchLibraryListener]: { asClass: WatchLibraryListener },
+      [Symbols.RequestLibraryListener]: { asClass: RequestLibraryListener },
       // Use cases
       [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutsUseCase },
       [Symbols.RegisterShortcutsUseCase]: { asClass: RegisterShortcutsUseCase },

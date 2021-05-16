@@ -76,11 +76,14 @@ const library = {
   },
   services: {
     WatchLibraryService: 'WatchLibraryService',
-    ReadLibraryService: 'ReadLibraryService'
+    ReadLibraryService: 'ReadLibraryService',
+    RequestLibraryService: 'RequestLibraryService',
+    LibraryStoreService: 'LibraryStoreService'
   },
   listeners: {
     LibrarySettingListener: 'LibrarySettingListener',
-    WatchLibraryListener: 'WatchLibraryListener'
+    WatchLibraryListener: 'WatchLibraryListener',
+    RequestLibraryListener: 'RequestLibraryListener'
   }
 }
 
