@@ -1,4 +1,4 @@
-import { FileSystemAdapter, Service, ISettings } from '@vcr/domain'
+import { FileSystemAdapter, Service, ISettings, defaultSettings } from '@vcr/domain'
 import { DEPS_SYMBOL } from 'depsin'
 
 import { Configuration } from '../../Configuration/Entities/Configuration'
@@ -13,7 +13,7 @@ export class ReadSettingsService implements Service {
     const paths = this.config.get('paths')
     const exist = await this.fs.exist(paths.config)
     if (!exist) {
-      return {}
+      return defaultSettings
     }
 
     return this.fs.readJson(paths.config)

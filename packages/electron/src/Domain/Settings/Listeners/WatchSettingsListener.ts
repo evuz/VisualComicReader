@@ -7,10 +7,11 @@ import { SettingsRepository } from '../Repositories/SettingsRepository'
 export class WatchSettingsListener implements Listener {
   static [DEPS_SYMBOL] = [Symbols.SettingsRepository]
 
-  constructor (private settingsRepository: SettingsRepository) {}
+  constructor (
+    private settingsRepository: SettingsRepository
+  ) {}
 
   execute () {
-    return this.settingsRepository
-      .watchSettings()
+    return this.settingsRepository.watchSettings()
   }
 }

@@ -47,6 +47,7 @@ import { WatchSettingsListener } from './Settings/Listeners/WatchSettingsListene
 import { NodeSettingsRepository } from './Settings/Repositories/NodeSettingsRepository'
 import { InitDomain } from './Utils/InitDomain'
 import { InitSettingsService } from './Settings/Services/InitSettingsService'
+import { WatchSettingsService } from './Settings/Services/WatchSettingsService'
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
@@ -103,6 +104,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.ReadSettingsService]: { asClass: ReadSettingsService },
       [Symbols.WriteSettingsService]: { asClass: WriteSettingsService },
       [Symbols.InitSettingsService]: { asClass: InitSettingsService },
+      [Symbols.WatchSettingsService]: { asClass: WatchSettingsService },
       // Listeners
       [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },

@@ -1,4 +1,4 @@
-import { ISettings, Service, Settings } from '@vcr/domain'
+import { Service, Settings } from '@vcr/domain'
 import { DEPS_SYMBOL } from 'depsin'
 
 import { ReadSettingsService } from '../Services/ReadSettingsService'
@@ -14,9 +14,6 @@ export class InitSettingsService implements Service {
 
   async execute (): Promise<void> {
     const config = await this.readConfiguration.execute()
-    Object.keys(config).forEach((key) => {
-      type Key = keyof ISettings
-      this.settings.set(key as Key, config[key as Key])
-    })
+    this.settings.set(config)
   }
 }

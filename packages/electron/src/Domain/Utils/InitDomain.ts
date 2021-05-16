@@ -10,9 +10,9 @@ import { ClearTmpFolder } from '../File/UseCases/ClearTmpFolder'
 import { ToggleFullscreenListener } from '../Screen/Listeners/ToggleFullscreenListener'
 import { ToggleFullscreenUsecase } from '../Screen/UseCases/ToggleFullscreenUseCase'
 import { UpdateSettingsListener } from '../Settings/Listeners/UpdateSettingsListener'
-import { WatchSettingsListener } from '../Settings/Listeners/WatchSettingsListener'
 import { InitSettingsService } from '../Settings/Services/InitSettingsService'
 import { UpdateSettingsService } from '../Settings/Services/UpdateSettingsService'
+import { WatchSettingsService } from '../Settings/Services/WatchSettingsService'
 import { ShowInfoShortcutListener } from '../Shortcuts/Listeners/ShowInfoShortcutListener'
 import { RegisterShortcutsService } from '../Shortcuts/Services/RegisterShortcutsService'
 import { ShowInfoShortcutsService } from '../Shortcuts/Services/ShowInfoShortcutsService'
@@ -36,7 +36,7 @@ export class InitDomain implements Service {
     Symbols.OpenComicService,
     Symbols.UpdateSettingsListener,
     Symbols.UpdateSettingsService,
-    Symbols.WatchSettingsListener
+    Symbols.WatchSettingsService
   ]
 
   constructor (
@@ -55,7 +55,7 @@ export class InitDomain implements Service {
     private openComicService: OpenComicService,
     private updateSettingsListener: UpdateSettingsListener,
     private updateSettingsService: UpdateSettingsService,
-    private watchSettingsListener: WatchSettingsListener
+    private watchSettingsService: WatchSettingsService
   ) {}
 
   async execute () {
@@ -92,8 +92,6 @@ export class InitDomain implements Service {
       response(null)
     })
 
-    this.watchSettingsListener.execute().subscribe(v => {
-      console.log(v)
-    })
+    this.watchSettingsService.execute()
   }
 }

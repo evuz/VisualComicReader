@@ -49,7 +49,8 @@ const settings = {
     UpdateSettingsService: 'UpdateSettingsService',
     ReadSettingsService: 'ReadSettingsService',
     WriteSettingsService: 'WriteSettingsService',
-    InitSettingsService: 'InitSettingsService'
+    InitSettingsService: 'InitSettingsService',
+    WatchSettingsService: 'WatchSettingsService'
   },
   listeners: {
     UpdateSettingsListener: 'UpdateSettingsListener',

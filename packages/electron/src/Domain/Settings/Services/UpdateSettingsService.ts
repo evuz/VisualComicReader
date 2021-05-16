@@ -1,20 +1,19 @@
 import { DEPS_SYMBOL } from 'depsin'
-import { ISettings } from '@vcr/domain'
+import { ISettings, Settings } from '@vcr/domain'
 
 import { Symbols } from '../../symbols'
-import { ReadSettingsService } from './ReadSettingsService'
 import { WriteSettingsService } from './WriteSettingsService'
 
 export class UpdateSettingsService {
-  static [DEPS_SYMBOL] = [Symbols.ReadSettingsService, Symbols.WriteSettingsService];
+  static [DEPS_SYMBOL] = [Symbols.WriteSettingsService, Symbols.Settings];
 
   constructor (
-    private readSettings: ReadSettingsService,
-    private writeSettings: WriteSettingsService
+    private writeSettings: WriteSettingsService,
+    private settings: Settings
   ) {}
 
   async execute (update: Partial<ISettings>) {
-    const appConfig = this.readSettings.execute()
+    const appConfig = this.settings.get()
     const newConfig = Object.assign(appConfig, update)
     this.writeSettings.execute(newConfig)
   }
