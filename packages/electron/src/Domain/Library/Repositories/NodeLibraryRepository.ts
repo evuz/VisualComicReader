@@ -1,6 +1,7 @@
 import { ComicLibrary, FolderLibrary, Library, Settings } from '@vcr/domain'
 import * as path from 'path'
-import fse from 'fs-extra'
+import fs from 'fs'
+import utils from 'util'
 import { DEPS_SYMBOL } from 'depsin'
 import { FSWatcher } from 'chokidar'
 import { Subject } from 'rxjs'
@@ -42,7 +43,7 @@ export class NodeLibraryRepository implements LibraryRepository {
 
   async readDir (dirPath: string): Promise<Library> {
     const directory: Library = []
-    const dir = await fse.readdir(dirPath, { withFileTypes: true })
+    const dir = await utils.promisify(fs.readdir)(dirPath, { withFileTypes: true })
 
     for (let index = 0; index < dir.length; index++) {
       const dirent = dir[index]
