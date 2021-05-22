@@ -10,7 +10,7 @@ import './Main.css'
 export const MainPage: FC = () => {
   const { replace } = useLocation()
   const { comic, selectComic, clearComic } = useComic()
-  const { selectLibrary } = useLibrary()
+  const { selectLibrary, hasLibrary } = useLibrary()
 
   useEffect(() => {
     clearComic()
@@ -21,9 +21,16 @@ export const MainPage: FC = () => {
       replace('/reader')
     }
   }, [comic, replace])
+  console.log(hasLibrary)
+  useEffect(() => {
+    console.log('effect', hasLibrary)
+    if (hasLibrary) {
+      replace('/library')
+    }
+  }, [hasLibrary, replace])
 
   return (
-    <div className="Page">
+    <div className="MainPage">
       <Button color="ghost" onClick={selectComic}>
         Open Comic
       </Button>

@@ -23,14 +23,13 @@ export const LibraryState: React.FC = ({ children }) => {
   const [library, setLibrary] = useState<ILibraryState>(defaultValue.library)
 
   const selectLibrary = useCallback(() => {
-    domain.getUseCase('selectLibrary').execute().then(l => console.log(l))
+    domain.getUseCase('selectLibrary').execute()
   }, [domain])
 
   useEffect(() => {
     const obs = domain.getListener('library')
       .execute()
       .subscribe(library => {
-        console.log(library)
         setLibrary(library)
       })
     return () => obs.unsubscribe()
