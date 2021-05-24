@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { FolderLibrary } from '@vcr/domain'
 
 import { LibraryFolderItem } from '../components/LibraryItem/LibraryFolderItem'
@@ -8,5 +8,9 @@ type Props = {
 }
 
 export const LibraryFolderItemContainer: FC<Props> = ({ folder }) => {
-  return <LibraryFolderItem folder={folder}/>
+  const handleClick = useCallback((value: FolderLibrary) => {
+    console.log(value)
+  }, [])
+
+  return <LibraryFolderItem onClick={handleClick} folder={folder} />
 }

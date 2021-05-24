@@ -6,3 +6,10 @@
   flex-direction: column;
   align-items: center;
 }
+
+.LibraryPage--container {
+  margin: 0 auto;
+  width: auto;
+  min-width: 30rem;
+  max-width: 60rem;
+}

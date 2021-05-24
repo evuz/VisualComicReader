@@ -18,7 +18,9 @@ export const LibraryPage: FC = () => {
 
   return (
     <div className="LibraryPage">
-      {library?.map((item) => <LibraryItemContainer key={item.name} item={item} />) }
+      <div className="LibraryPage--container">
+        {library?.map((item) => <LibraryItemContainer key={item.name} item={item} />) }
+      </div>
     </div>
   )
 }
