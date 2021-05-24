@@ -21,9 +21,8 @@ export const MainPage: FC = () => {
       replace('/reader')
     }
   }, [comic, replace])
-  console.log(hasLibrary)
+
   useEffect(() => {
-    console.log('effect', hasLibrary)
     if (hasLibrary) {
       replace('/library')
     }

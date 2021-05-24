@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { ComicLibrary, FileLibrary, FolderLibrary } from '@vcr/domain'
+
 import { LibraryComicItemContainer } from './LibraryComicItem'
+import { LibraryFolderItemContainer } from './LibraryFolderItem'
 
 type Props = {
   item: ComicLibrary | FolderLibrary
@@ -11,7 +13,7 @@ export const LibraryItemContainer: FC<Props> = ({ item }) => {
     case FileLibrary.Comic:
       return <LibraryComicItemContainer comic={item as ComicLibrary} />
     case FileLibrary.Folder:
-      return <LibraryComicItemContainer comic={item as ComicLibrary} />
+      return <LibraryFolderItemContainer folder={item as FolderLibrary} />
     default:
       throw Error('LibraryItem type not supported')
   }

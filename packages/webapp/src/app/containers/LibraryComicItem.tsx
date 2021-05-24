@@ -1,12 +1,23 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { ComicLibrary } from '@vcr/domain'
+
+import { LibraryComicItem } from '../components/LibraryItem/LibraryComicItem'
+import { useComic } from '../hooks/useComic'
+import { useLocation } from '../hooks/useLocation'
 
 type Props = {
   comic: ComicLibrary
 }
 
 export const LibraryComicItemContainer: FC<Props> = ({ comic }) => {
-  console.log(comic)
+  const { openComic } = useComic()
+  const { push } = useLocation()
 
-  return <div>{comic.name}</div>
+  const handleClick = useCallback((value: ComicLibrary) => {
+    openComic(value.path).then(() => {
+      push('/reader')
+    })
+  }, [openComic, push])
+
+  return <LibraryComicItem onClick={handleClick} comic={comic}/>
 }
