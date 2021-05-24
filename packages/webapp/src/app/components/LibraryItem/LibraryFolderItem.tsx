@@ -11,8 +11,6 @@ type Props = {
 };
 
 export const LibraryFolderItem: FC<Props> = ({ folder, onClick }) => {
-  console.log(folder)
-
   return (
     <LibraryItem
       Icon={FolderIcon}

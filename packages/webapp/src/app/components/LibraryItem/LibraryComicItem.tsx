@@ -10,10 +10,7 @@ type Props = {
 };
 
 export const LibraryComicItem: FC<Props> = ({ comic, onClick }) => {
-  console.log(comic)
-
   return (
     <LibraryItem onClick={() => onClick(comic)} title={comic.name} Icon={BookIcon} />
-
   )
 }

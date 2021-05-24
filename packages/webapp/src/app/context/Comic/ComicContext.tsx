@@ -37,7 +37,6 @@ export const ComicState: React.FC = ({ children }) => {
 
   const openComic = useCallback((path) => {
     return domain.getUseCase('openComic').execute(path).then(comic => {
-      console.log(comic)
       setComic(comic)
     })
   }, [domain])

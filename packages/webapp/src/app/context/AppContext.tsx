@@ -5,6 +5,7 @@ import { DomainState } from './Domain/DomainContext'
 import { WindowState } from './WindowState/WindowStateContext'
 import { ReaderState } from './Reader/ReaderContext'
 import { LibraryState } from './Library/LibraryContext'
+import { LibraryNavigationState } from './Library/LibraryNavigationContext'
 
 export const AppContext: FC = ({ children }) => {
   return (
@@ -12,7 +13,9 @@ export const AppContext: FC = ({ children }) => {
       <ComicState>
         <ReaderState>
           <LibraryState>
-            <WindowState>{children}</WindowState>
+            <LibraryNavigationState>
+              <WindowState>{children}</WindowState>
+            </LibraryNavigationState>
           </LibraryState>
         </ReaderState>
       </ComicState>
