@@ -1,9 +1,12 @@
 import React, { FC, useEffect, useMemo } from 'react'
-import { LibraryItemContainer } from '../../containers/LibraryItem'
 
 import { useLibrary } from '../../hooks/useLibrary'
-import { useLibraryNavigation } from '../../hooks/useLibraryNavigation'
 import { useLocation } from '../../hooks/useLocation'
+import { useLibraryNavigation } from '../../hooks/useLibraryNavigation'
+
+import { LibraryItemContainer } from '../../containers/LibraryItem'
+
+import { LibraryControlNav } from './ControlNav'
 
 import './Library.css'
 
@@ -25,9 +28,12 @@ export const LibraryPage: FC = () => {
 
   return (
     <div className="LibraryPage">
-      <div className="LibraryPage--container">
+      <div className="LibraryPage__container">
         {librarySorted?.map((item) => <LibraryItemContainer key={item.name} item={item} />) }
       </div>
+      <nav className="LibraryPage__footer">
+        <LibraryControlNav />
+      </nav>
     </div>
   )
 }

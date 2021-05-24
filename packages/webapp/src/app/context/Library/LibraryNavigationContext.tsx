@@ -14,7 +14,7 @@ type ILibraryNavigationState = Library | null;
 type ILibraryNavigationContext = {
   library: ILibraryNavigationState;
   stack: FolderLibrary[];
-  navigate: (folder: FolderLibrary) => void;
+  navigate: (folder: FolderLibrary | null) => void;
 };
 
 function noop () {}
@@ -40,7 +40,19 @@ export const LibraryNavigationState: React.FC = ({ children }) => {
   }, [library])
 
   const navigate = useCallback((folder) => {
-    setNavigation(n => n.concat(folder))
+    if (folder === null) {
+      return setNavigation([])
+    }
+
+    setNavigation(folders => {
+      const index = folders.findIndex(f => f === folder)
+
+      if (index === -1) {
+        return folders.concat(folder)
+      }
+
+      return folders.slice(0, index + 1)
+    })
   }, [])
 
   const navigationLength = navigation.length
