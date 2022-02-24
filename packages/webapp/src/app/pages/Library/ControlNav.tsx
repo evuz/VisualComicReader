@@ -7,6 +7,7 @@ import { ButtonNav } from '../../components/ControlNav/ButtonNav'
 import { ControlNav } from '../../components/ControlNav/ControlNav'
 import { useLibraryNavigation } from '../../hooks/useLibraryNavigation'
 import { ChevronRightIcon } from '../../components/Icons/ChevronRight.icon'
+import { useLibrary } from '../../hooks/useLibrary'
 
 type BreadcrumbProps = {
   stack: FolderLibrary[]
@@ -35,12 +36,14 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ stack, onClick }) => {
 
 export const LibraryControlNav: FC = () => {
   const { selectComic } = useComic()
+  const { selectLibrary } = useLibrary()
   const { stack, navigate } = useLibraryNavigation()
 
   return (
     <ControlNav>
       <div className="LibraryControlNav">
         <ButtonNav onClick={selectComic}>Open Comic</ButtonNav>
+        <ButtonNav onClick={selectLibrary}>Change Library</ButtonNav>
         <Breadcrumb onClick={navigate} stack={stack} />
         <span></span>
       </div>
