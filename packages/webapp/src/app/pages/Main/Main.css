@@ -1,8 +1,9 @@
-.Page {
+.MainPage {
   min-width: 100vw;
   min-height: 100vh;
   background-color: rgb(var(--background));
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }

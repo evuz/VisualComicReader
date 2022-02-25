@@ -7,12 +7,14 @@ type IComicState = Comic | null
 
 type IComicContext = {
   comic: IComicState
+  openComic: (comicPath: string) => Promise<void>
   selectComic: () => void
   clearComic: () => void
 }
 
 const defaultValue: IComicContext = {
   comic: null,
+  openComic: () => Promise.resolve(),
   selectComic: () => {},
   clearComic: () => {}
 }
@@ -33,12 +35,19 @@ export const ComicState: React.FC = ({ children }) => {
       })
   }, [domain])
 
+  const openComic = useCallback((path) => {
+    return domain.getUseCase('openComic').execute(path).then(comic => {
+      setComic(comic)
+    })
+  }, [domain])
+
   const clearComic = useCallback(() => {
     setComic(defaultValue.comic)
   }, [])
 
   const context: IComicContext = {
     comic,
+    openComic,
     selectComic,
     clearComic
   }

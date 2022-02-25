@@ -1,35 +1,138 @@
-export const Symbols = {
+const configurations = {
   Config: 'Config',
-  // Adapters
+  Settings: 'Settings'
+}
+
+const adapters = {
   Dialog: 'Dialog',
   Screen: 'Screen',
   ProcessMain: 'ProcessMain',
   KeysListener: 'KeysListener',
   FileManager: 'FileManager',
-  FileSystem: 'FileSystem',
-  // Repositories
-  ComicRepository: 'ComicRepository',
-  ShortcutsRepository: 'ShortcutsRepository',
-  ScreenRepository: 'ScreenRepository',
-  // Services
-  ShowInfoShortcutsService: 'ShowInfoShortcutsService',
-  RegisterShortcutsService: 'RegisterShortcutsService',
-  SelectFileService: 'SelectFileService',
-  OpenComicService: 'OpenFileService',
-  // Listeners
-  SelectFileListener: 'SelectFileListener',
-  OpenFileListener: 'OpenFileListener',
-  ShowInfoShortcutsListener: 'ShowInfoShortcutsListener',
-  ToggleFullscreenListener: 'ToggleFullscreenListener',
-  // UseCases
-  ShowInfoShortcutsUseCase: 'ShowInfoShortcutsUseCase',
-  RegisterShortcutsUseCase: 'RegisterShortcutsUseCase',
-  ToggleFullscreenUseCase: 'ToggleFullscreenUseCase',
-  SelectFileUseCase: 'SelectFileUseCase',
-  OpenComicUseCase: 'OpenFileUseCase',
-  ClearTmpFolder: 'ClearTmpFolder',
-  // Utils
+  FileSystem: 'FileSystem'
+}
+
+const comics = {
+  repositories: {
+    ComicRepository: 'ComicRepository'
+  },
+  services: {
+    OpenComicService: 'OpenFileService'
+  },
+  useCases: {
+    OpenComicUseCase: 'OpenFileUseCase'
+  }
+}
+
+const shortcuts = {
+  repositories: {
+    ShortcutsRepository: 'ShortcutsRepository'
+  },
+  services: {
+    ShowInfoShortcutsService: 'ShowInfoShortcutsService',
+    RegisterShortcutsService: 'RegisterShortcutsService'
+  },
+  listeners: {
+    ShowInfoShortcutsListener: 'ShowInfoShortcutsListener'
+  },
+  useCases: {
+    ShowInfoShortcutsUseCase: 'ShowInfoShortcutsUseCase',
+    RegisterShortcutsUseCase: 'RegisterShortcutsUseCase'
+  }
+}
+
+const settings = {
+  repositories: {
+    SettingsRepository: 'SettingsRepository'
+  },
+  services: {
+    UpdateSettingsService: 'UpdateSettingsService',
+    ReadSettingsService: 'ReadSettingsService',
+    WriteSettingsService: 'WriteSettingsService',
+    InitSettingsService: 'InitSettingsService',
+    WatchSettingsService: 'WatchSettingsService'
+  },
+  listeners: {
+    UpdateSettingsListener: 'UpdateSettingsListener',
+    WatchSettingsListener: 'WatchSettingsListener'
+  }
+}
+
+const screen = {
+  repositories: {
+    ScreenRepository: 'ScreenRepository'
+  },
+  listeners: {
+    ToggleFullscreenListener: 'ToggleFullscreenListener'
+  },
+  useCases: {
+    ToggleFullscreenUseCase: 'ToggleFullscreenUseCase'
+  }
+}
+
+const library = {
+  repositories: {
+    LibraryRepository: 'LibraryRepository'
+  },
+  services: {
+    WatchLibraryService: 'WatchLibraryService',
+    ReadLibraryService: 'ReadLibraryService',
+    RequestLibraryService: 'RequestLibraryService',
+    LibraryStoreService: 'LibraryStoreService'
+  },
+  listeners: {
+    LibrarySettingListener: 'LibrarySettingListener',
+    WatchLibraryListener: 'WatchLibraryListener',
+    RequestLibraryListener: 'RequestLibraryListener'
+  }
+}
+
+const file = {
+  services: {
+    SelectFileService: 'SelectFileService',
+    SelectDirectoryService: 'SelectDirectoryService',
+    InitSettings: 'InitSettings'
+  },
+  listeners: {
+    SelectFileListener: 'SelectFileListener',
+    SelectDirectoryListener: 'SelectDirectoryListener',
+    OpenFileListener: 'OpenFileListener'
+  },
+  useCases: {
+    SelectFileUseCase: 'SelectFileUseCase',
+    SelectDirectoryUseCase: 'SelectDirectoryUseCase',
+    ClearTmpFolderUseCase: 'ClearTmpFolderUseCase'
+  }
+}
+
+const utils = {
+  Init: 'Init',
   RemoveFolder: 'RemoveFolder',
   ReadFolder: 'ReadFolder',
   NormalizeAssetSrc: 'NormalizeAssetSrc'
+}
+
+export const Symbols = {
+  ...configurations,
+  ...adapters,
+  ...comics.repositories,
+  ...comics.services,
+  ...comics.useCases,
+  ...shortcuts.repositories,
+  ...shortcuts.services,
+  ...shortcuts.listeners,
+  ...shortcuts.useCases,
+  ...settings.repositories,
+  ...settings.services,
+  ...settings.listeners,
+  ...screen.repositories,
+  ...screen.listeners,
+  ...screen.useCases,
+  ...library.repositories,
+  ...library.services,
+  ...library.listeners,
+  ...file.services,
+  ...file.listeners,
+  ...file.useCases,
+  ...utils
 }

@@ -3,6 +3,7 @@ import { DEPS_SYMBOL } from 'depsin'
 
 import { Symbols } from '../../symbols'
 
+// TODO: Remove this class and move this logic to NodeFileSystem
 export class CreateFolder {
   static [DEPS_SYMBOL] = [Symbols.FileSystem]
 

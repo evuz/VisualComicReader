@@ -36,6 +36,7 @@ html {
 
 body {
   margin: 0;
+  color: rgb(var(--foreground));
 }
 
 /* Reset Button */

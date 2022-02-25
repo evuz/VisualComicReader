@@ -1,5 +1,12 @@
 // Entities
 export * from './Comic/Entities/Comic'
+export * from './Library/Entities/ComicLibrary'
+export * from './Library/Entities/FolderLibrary'
+export * from './Library/Entities/Library'
+export * from './Settings/Entities/Settings'
+
+// Enum
+export * from './Library/Enum/FileLibraryEnum'
 
 // Domain
 export * from './Domain/Domain'
@@ -19,3 +26,4 @@ export * from './Adapters/FileSystem/FileSystemAdapter'
 // Utils
 export * from './Utils/uuid'
 export * from './Utils/singleton'
+export * from './Utils/Config'

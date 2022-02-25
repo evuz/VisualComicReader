@@ -1,21 +1,23 @@
 import { app } from 'electron'
 import * as path from 'path'
-import { IConfig } from '../Config/models/Config'
+import { IConfiguration } from '../Configuration/Entities/Configuration'
 
 function getDevelopPath () {
   return {
     app: app.getAppPath(),
-    tmp: path.join(app.getAppPath(), '.tmp')
+    config: path.join(app.getAppPath(), '.appData', 'config.json'),
+    tmp: path.join(app.getAppPath(), '.appData', 'tmp')
   }
 }
 
-export function getPaths (): IConfig['paths'] {
+export function getPaths (): IConfiguration['paths'] {
   if (process.env.NODE_ENV === 'development') {
     return getDevelopPath()
   }
 
   return {
     app: app.getAppPath(),
+    config: path.join(app.getAppPath(), 'config.json'),
     tmp: path.join(app.getPath('temp'), app.getName())
   }
 }

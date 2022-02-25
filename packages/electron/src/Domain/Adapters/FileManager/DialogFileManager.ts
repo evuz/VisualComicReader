@@ -12,10 +12,16 @@ export class DialogFileManager implements FileManagerAdapter {
     private openFileFactory: OpenFileFactory
   ) {}
 
-  selectDirectory () {
-    return this.dialog.showOpenDialog({
+  async selectDirectory () {
+    const res = await this.dialog.showOpenDialog({
       properties: ['openDirectory']
     })
+
+    if (res.canceled) {
+      return null
+    }
+
+    return res.filePaths[0]
   }
 
   async selectFile (types: string[]) {
@@ -28,6 +34,11 @@ export class DialogFileManager implements FileManagerAdapter {
         }
       ]
     })
+
+    if (res.canceled) {
+      return null
+    }
+
     return res.filePaths[0]
   }
 

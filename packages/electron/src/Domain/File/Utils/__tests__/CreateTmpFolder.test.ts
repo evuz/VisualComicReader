@@ -1,13 +1,15 @@
+import { Config } from '@vcr/domain'
 import * as path from 'path'
 
-import { IConfig } from '../../../Config/models/Config'
+import { IConfiguration } from '../../../Configuration/Entities/Configuration'
 import { CreateTmpFolder } from '../CreateTmpFolder'
 
-const config: IConfig = {
+const config: IConfiguration = {
   platform: 'linux',
   paths: {
     app: __dirname,
-    tmp: path.join(__dirname, 'tmp')
+    tmp: path.join(__dirname, 'tmp'),
+    config: ''
   }
 }
 
@@ -26,7 +28,7 @@ describe('CreateTmpFolder', () => {
 
   beforeEach(() => {
     folderError = false
-    instance = new CreateTmpFolder(config, createFolder)
+    instance = new CreateTmpFolder(new Config(config), createFolder)
   })
 
   test('should create folder', async () => {

@@ -1,6 +1,6 @@
 import { ipcMain, BrowserWindow } from 'electron'
 import { createContainer } from 'depsin'
-import { Domain } from '@vcr/domain'
+import { Config, Domain, Settings, defaultSettings } from '@vcr/domain'
 
 import { SelectFileListener } from './File/Listeners/SelectFileListener'
 import { ShowInfoShortcutListener } from './Shortcuts/Listeners/ShowInfoShortcutListener'
@@ -13,7 +13,7 @@ import { GlobalShortcut } from './Adapters/KeysListener/GlobalShortcut'
 import { RegisterShortcutsService } from './Shortcuts/Services/RegisterShortcutsService'
 import { RegisterShortcutsUseCase } from './Shortcuts/UseCase/RegisterShortcutsUseCase'
 import { ElectronMainProcessComunication } from './Adapters/ProcessComunication/ElectronMainProcessComunication'
-import { IConfig } from './Config/models/Config'
+import { Configuration } from './Configuration/Entities/Configuration'
 import { ElectronScreen } from './Adapters/Screen/ElectronScreen'
 import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRepository'
 import { ToggleFullscreenUsecase } from './Screen/UseCases/ToggleFullscreenUseCase'
@@ -36,13 +36,34 @@ import {
 import { NodeFileSystem } from './Adapters/FileSystem/NodeFileSystem'
 import { CreateTmpFolder } from './File/Utils/CreateTmpFolder'
 import { CreateFolder } from './File/Utils/CreateFolder'
+import { SelectDirectoryListener } from './File/Listeners/SelectDirectoryListener'
+import { SelectDirectoryService } from './File/Services/SelectDirectoryService'
+import { SelectDirectoryUseCase } from './File/UseCases/SelectDirectoryUseCase'
+import { UpdateSettingsListener } from './Settings/Listeners/UpdateSettingsListener'
+import { UpdateSettingsService } from './Settings/Services/UpdateSettingsService'
+import { ReadSettingsService } from './Settings/Services/ReadSettingsService'
+import { WriteSettingsService } from './Settings/Services/WriteSettingsService'
+import { WatchSettingsListener } from './Settings/Listeners/WatchSettingsListener'
+import { NodeSettingsRepository } from './Settings/Repositories/NodeSettingsRepository'
+import { InitDomain } from './Utils/InitDomain'
+import { InitSettingsService } from './Settings/Services/InitSettingsService'
+import { NodeLibraryRepository } from './Library/Repositories/NodeLibraryRepository'
+import { WatchLibraryService } from './Library/Services/WatchLibraryService'
+import { LibrarySettingListener } from './Library/Listeners/LibrarySettingListener'
+import { WatchLibraryListener } from './Library/Listeners/WatchLibraryListener'
+import { ReadLibraryService } from './Library/Services/ReadLibraryService'
+import { WatchSettingsService } from './Settings/Services/WatchSettingsService'
+import { RequestLibraryListener } from './Library/Listeners/RequestLibraryListener'
+import { RequestLibraryService } from './Library/Services/RequestLibraryService'
+import { LibraryStoreService } from './Library/Services/LibraryStoreService'
 
 export function factory (browserWindow: BrowserWindow) {
   // Config
-  const config: IConfig = {
+  const configuration: Configuration = new Config({
     platform: process.platform,
     paths: getPaths()
-  }
+  })
+  const settings: Settings = new Config(defaultSettings)
 
   const utils = {
     normalizeAssetSrc: NormalizeAssetSrc
@@ -50,7 +71,7 @@ export function factory (browserWindow: BrowserWindow) {
 
   const filesSystemAdapter = new NodeFileSystem()
   const createFolder = new CreateFolder(filesSystemAdapter)
-  const createTmpFolder = new CreateTmpFolder(config, createFolder)
+  const createTmpFolder = new CreateTmpFolder(configuration, createFolder)
   const adapters = {
     processMain: new ElectronMainProcessComunication(
       ipcMain,
@@ -59,7 +80,7 @@ export function factory (browserWindow: BrowserWindow) {
     dialog: new ElectronDialog(browserWindow),
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
-    fileManager: DialogFileManager.factory(new OpenFileFactory(config, createTmpFolder))
+    fileManager: DialogFileManager.factory(new OpenFileFactory(configuration, createTmpFolder))
   }
 
   if (process.env.NODE_ENV === 'development') {
@@ -68,7 +89,8 @@ export function factory (browserWindow: BrowserWindow) {
 
   const container = createContainer(
     {
-      [Symbols.Config]: { asValue: config },
+      [Symbols.Config]: { asValue: configuration },
+      [Symbols.Settings]: { asValue: settings },
       // Adapters
       [Symbols.ProcessMain]: { asValue: adapters.processMain },
       [Symbols.Dialog]: { asValue: adapters.dialog },
@@ -79,26 +101,46 @@ export function factory (browserWindow: BrowserWindow) {
       // Repositories
       [Symbols.ShortcutsRepository]: { asClass: ElectronShortcutsRepository },
       [Symbols.ScreenRepository]: { asClass: ElectronScreenRepository },
+      [Symbols.SettingsRepository]: { asClass: NodeSettingsRepository },
+      [Symbols.LibraryRepository]: { asClass: NodeLibraryRepository },
       // Services
       [Symbols.ShowInfoShortcutsService]: { asClass: ShowInfoShortcutsService },
       [Symbols.RegisterShortcutsService]: { asClass: RegisterShortcutsService },
       [Symbols.SelectFileService]: { asClass: SelectFileService },
+      [Symbols.SelectDirectoryService]: { asClass: SelectDirectoryService },
+      [Symbols.UpdateSettingsService]: { asClass: UpdateSettingsService },
       [Symbols.OpenComicService]: { asClass: OpenComicService },
+      [Symbols.ReadSettingsService]: { asClass: ReadSettingsService },
+      [Symbols.WriteSettingsService]: { asClass: WriteSettingsService },
+      [Symbols.InitSettingsService]: { asClass: InitSettingsService },
+      [Symbols.WatchSettingsService]: { asClass: WatchSettingsService },
+      [Symbols.WatchLibraryService]: { asClass: WatchLibraryService },
+      [Symbols.ReadLibraryService]: { asClass: ReadLibraryService },
+      [Symbols.RequestLibraryService]: { asClass: RequestLibraryService },
+      [Symbols.LibraryStoreService]: { asClass: LibraryStoreService },
       // Listeners
       [Symbols.OpenFileListener]: { asClass: OpenFileListener },
       [Symbols.SelectFileListener]: { asClass: SelectFileListener },
+      [Symbols.SelectDirectoryListener]: { asClass: SelectDirectoryListener },
+      [Symbols.UpdateSettingsListener]: { asClass: UpdateSettingsListener },
+      [Symbols.WatchSettingsListener]: { asClass: WatchSettingsListener },
       [Symbols.ToggleFullscreenListener]: { asClass: ToggleFullscreenListener },
       [Symbols.ShowInfoShortcutsListener]: {
         asClass: ShowInfoShortcutListener
       },
+      [Symbols.LibrarySettingListener]: { asClass: LibrarySettingListener },
+      [Symbols.WatchLibraryListener]: { asClass: WatchLibraryListener },
+      [Symbols.RequestLibraryListener]: { asClass: RequestLibraryListener },
       // Use cases
       [Symbols.ShowInfoShortcutsUseCase]: { asClass: ShowInfoShortcutsUseCase },
       [Symbols.RegisterShortcutsUseCase]: { asClass: RegisterShortcutsUseCase },
       [Symbols.ToggleFullscreenUseCase]: { asClass: ToggleFullscreenUsecase },
       [Symbols.SelectFileUseCase]: { asClass: SelectFileUseCase },
+      [Symbols.SelectDirectoryUseCase]: { asClass: SelectDirectoryUseCase },
       [Symbols.OpenComicUseCase]: { asClass: OpenComicUseCase },
-      [Symbols.ClearTmpFolder]: { asClass: ClearTmpFolder },
+      [Symbols.ClearTmpFolderUseCase]: { asClass: ClearTmpFolder },
       // Utils
+      [Symbols.Init]: { asClass: InitDomain },
       [Symbols.RemoveFolder]: { asClass: RemoveFolder },
       [Symbols.ReadFolder]: { asClass: ReadFolder },
       [Symbols.NormalizeAssetSrc]: { asClass: utils.normalizeAssetSrc }
@@ -109,10 +151,13 @@ export function factory (browserWindow: BrowserWindow) {
   // Listeners
   const listeners = {
     selectFile: container.get<SelectFileListener>(Symbols.SelectFileListener),
+    selectDirectory: container.get<SelectDirectoryListener>(Symbols.SelectDirectoryListener),
     showInfoShortcuts: container.get<ShowInfoShortcutListener>(
       Symbols.ShowInfoShortcutsListener
     ),
     openFile: container.get<OpenFileListener>(Symbols.OpenFileListener),
+    updateSettings: container.get<UpdateSettingsListener>(Symbols.UpdateSettingsListener),
+    watchSettings: container.get<WatchSettingsListener>(Symbols.WatchSettingsListener),
     toggleFullscreen: container.get<ToggleFullscreenListener>(
       Symbols.ToggleFullscreenListener
     )
@@ -120,19 +165,8 @@ export function factory (browserWindow: BrowserWindow) {
 
   // UseCases
   const useCases = {
-    showInfoShortcuts: container.get<ShowInfoShortcutsUseCase>(
-      Symbols.ShowInfoShortcutsUseCase
-    ),
-    registerShortcuts: container.get<RegisterShortcutsUseCase>(
-      Symbols.RegisterShortcutsUseCase
-    ),
-    toggleFullscreen: container.get<ToggleFullscreenUsecase>(
-      Symbols.ToggleFullscreenUseCase
-    ),
-    selectFile: container.get<SelectFileUseCase>(Symbols.SelectFileUseCase),
-    openComic: container.get<OpenComicUseCase>(Symbols.OpenComicUseCase),
-    clearTmpFolder: container.get<ClearTmpFolder>(Symbols.ClearTmpFolder)
+    init: container.get<InitDomain>(Symbols.Init)
   }
 
-  return new Domain({ useCases, listeners, config })
+  return new Domain({ useCases, listeners, config: configuration })
 }

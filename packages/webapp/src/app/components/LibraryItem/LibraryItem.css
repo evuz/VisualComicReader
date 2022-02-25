@@ -1,0 +1,28 @@
+.LibraryItem {
+  display: flex;
+  align-items: center;
+  padding: 0.1rem 0.5rem;
+  gap: 1rem;
+  color: rgb(var(--accents-6));
+  cursor: pointer;
+}
+
+.LibraryItem:hover {
+  background-color: rgb(var(--accents-2));
+}
+
+.LibraryItem:active {
+  background-color: rgb(var(--accents-3));
+}
+
+.LibraryItem--title {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.LibraryItem > i {
+  display: flex;
+  align-items: center;
+}

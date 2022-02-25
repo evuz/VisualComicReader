@@ -3,10 +3,12 @@ import { Observable } from 'rxjs'
 export enum IpcMessages {
   SelectFile = 'select-file',
   OpenFile = 'open-file',
+  Library = 'library',
   SelectDirectory = 'select-directory',
   ToggleFullscreen = 'toggle-fullscreen',
   ShowInfoShortcut = 'show-info-shortcut',
   RegisterShortcut = 'register-shortcut',
+  UpdateSettings = 'update-settings',
   Fetching = 'fetching',
 }
 
