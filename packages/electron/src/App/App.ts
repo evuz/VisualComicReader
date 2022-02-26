@@ -3,7 +3,7 @@ import { App as ElectronApp, BrowserWindow } from 'electron'
 import { Domain, createDomain } from '../Domain'
 
 export abstract class App {
-  protected window: BrowserWindow
+  private window: BrowserWindow
   protected domain: Domain
 
   constructor (protected app: ElectronApp) {
@@ -12,14 +12,13 @@ export abstract class App {
     this.applisten()
   }
 
-  protected abstract load(): BrowserWindow
+  protected abstract load(): Promise<BrowserWindow>
 
-  private show () {
-    this.load()
+  private async show () {
+    this.window = await this.load()
     this.domain = createDomain(this.window)
     this.domain().getUseCase('init').execute()
-
-    this.window.once('ready-to-show', () => this.window.show())
+    this.window.show()
   }
 
   private applisten () {
@@ -29,11 +28,7 @@ export abstract class App {
   }
 
   private close () {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-      this.app.quit()
-    }
+    this.app.quit()
   }
 
   private activate () {

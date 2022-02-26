@@ -4,8 +4,8 @@ import * as path from 'path'
 import { App } from './App'
 
 export class DevApp extends App {
-  protected load () {
-    this.window = new BrowserWindow({
+  protected async load () {
+    const window = new BrowserWindow({
       show: false,
       webPreferences: {
         nodeIntegration: true,
@@ -13,9 +13,10 @@ export class DevApp extends App {
       }
     })
     this.runStaticServer()
-    this.window.loadURL('http://localhost:3000')
-    this.window.webContents.openDevTools()
-    return this.window
+    await window.loadURL('http://localhost:3000')
+    window.webContents.openDevTools()
+
+    return window
   }
 
   private async runStaticServer () {
