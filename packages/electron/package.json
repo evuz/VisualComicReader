@@ -1,7 +1,7 @@
 {
   "name": "@vcr/electron",
   "productName": "VisualComicReader",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "My Electron application description",
   "main": "dist/index.js",
   "author": {
