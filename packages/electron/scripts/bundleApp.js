@@ -6,8 +6,8 @@ const chalk = require('chalk')
 const { paths } = require('./paths')
 
 const ENTRY_POINT = path.resolve(paths.electron.src, 'index.ts')
+const PRELOAD = path.resolve(paths.electron.src, 'preload.ts')
 const OUTPATH = paths.electron.dist
-const OUTFILE = path.join(OUTPATH, 'index.js')
 
 exports.bundleApp = async function build ({ silent = false } = {}) {
   const spinner = !silent
@@ -15,8 +15,8 @@ exports.bundleApp = async function build ({ silent = false } = {}) {
     : null
   try {
     const result = await esbuild.build({
-      entryPoints: [ENTRY_POINT],
-      outfile: OUTFILE,
+      entryPoints: [ENTRY_POINT, PRELOAD],
+      outdir: OUTPATH,
       bundle: true,
       platform: 'node',
       target: 'node10.23',

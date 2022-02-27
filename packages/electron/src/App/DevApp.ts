@@ -5,11 +5,13 @@ import { App } from './App'
 
 export class DevApp extends App {
   protected async load () {
+    console.log(process.cwd())
     const window = new BrowserWindow({
       show: false,
       webPreferences: {
         nodeIntegration: true,
-        contextIsolation: false
+        contextIsolation: false,
+        preload: path.join(__dirname, 'preload.js')
       }
     })
     this.runStaticServer()
