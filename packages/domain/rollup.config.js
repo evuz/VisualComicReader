@@ -3,12 +3,7 @@ import pkg from './package.json'
 
 const external = [
   ...Object.keys({ ...pkg.peerDependencies, ...pkg.dependencies }),
-  'firebase/app',
-  'firebase/auth',
-  'firebase/firestore',
-  'rxjs/operators',
-  'rxfire/firestore',
-  'rxfire/auth',
+  'rxjs/operators'
 ]
 
 export default [
@@ -24,7 +19,7 @@ export default [
     plugins: [typescript()],
     output: [
       { file: pkg.main, format: 'cjs' },
-      { file: pkg.module, format: 'es' },
-    ],
-  },
+      { file: pkg.module, format: 'es' }
+    ]
+  }
 ]
