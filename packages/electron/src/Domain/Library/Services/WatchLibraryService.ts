@@ -1,4 +1,4 @@
-import { IpcMessages, ProcessMainAdapter, Service } from '@vcr/domain'
+import { MessageType, MessagesCommunicationAdapter, Service } from '@vcr/domain'
 import { DEPS_SYMBOL } from 'depsin'
 import { startWith, switchMap } from 'rxjs/operators'
 
@@ -19,7 +19,7 @@ export class WatchLibraryService implements Service {
 
   constructor (
     private librarySettingListener: LibrarySettingListener,
-    private processMain: ProcessMainAdapter,
+    private processMain: MessagesCommunicationAdapter,
     private watchLibraryListener: WatchLibraryListener,
     private readLibraryService: ReadLibraryService,
     private libraryStore: LibraryStoreService
@@ -36,7 +36,7 @@ export class WatchLibraryService implements Service {
       ).subscribe(async () => {
         const library = await this.readLibraryService.execute()
         this.libraryStore.set(library)
-        this.processMain.emit(IpcMessages.Library, { payload: library })
+        this.processMain.emit(MessageType.Library, { payload: library })
       })
     return Promise.resolve()
   }

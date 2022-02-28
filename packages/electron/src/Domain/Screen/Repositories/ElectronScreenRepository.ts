@@ -1,4 +1,4 @@
-import { IpcMessages, ProcessMainAdapter } from '@vcr/domain'
+import { MessageType, MessagesCommunicationAdapter } from '@vcr/domain'
 import { DEPS_SYMBOL } from 'depsin'
 import { Observable } from 'rxjs'
 import { ScreenAdapter } from '../../Adapters/Screen/ScreenAdapter'
@@ -10,7 +10,7 @@ export class ElectronScreenRepository implements ScreenRepository {
 
   constructor (
     private screen: ScreenAdapter,
-    private processMain: ProcessMainAdapter
+    private processMain: MessagesCommunicationAdapter
   ) {}
 
   toggleFullscreen () {
@@ -18,6 +18,6 @@ export class ElectronScreenRepository implements ScreenRepository {
   }
 
   onToggleFullscreen (): Observable<any> {
-    return this.processMain.listen(IpcMessages.ToggleFullscreen)
+    return this.processMain.listen(MessageType.ToggleFullscreen)
   }
 }

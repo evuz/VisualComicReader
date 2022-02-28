@@ -1,4 +1,4 @@
-import { Domain, ElectronProcessMain, WindowChannel, WindowMessageChannel } from '@vcr/domain'
+import { Domain, MessagesCommunicationImpl, WindowChannel, WindowMessageChannel } from '@vcr/domain'
 
 import { ElectronFileManager } from './Adapters/FileManager/ElectronFileManager'
 import { ElectronComicRepository } from './Comic/Repositories/ElectronComicRepository'
@@ -20,19 +20,19 @@ import { OpenComicUseCase } from './Comic/UseCases/OpenComicUseCase'
 
 export function factory () {
   const messageChannel = new WindowMessageChannel(window, WindowChannel.Renderer)
-  const processMain = new ElectronProcessMain(messageChannel)
+  const messagesCommunication = new MessagesCommunicationImpl(messageChannel)
 
   const adapters = {
-    processMain,
-    fileManager: new ElectronFileManager(processMain)
+    messagesCommunication,
+    fileManager: new ElectronFileManager(messagesCommunication)
   }
 
   const repositories = {
     comic: new ElectronComicRepository(adapters.fileManager),
-    library: new ElectronLibraryRepository(adapters.fileManager, processMain),
-    shortcuts: BrowserShortcutRepository.factory(adapters.processMain),
-    screen: new ElectronScreenRepository(adapters.processMain),
-    settings: new ElectronSettingsRepository(processMain)
+    library: new ElectronLibraryRepository(adapters.fileManager, messagesCommunication),
+    shortcuts: BrowserShortcutRepository.factory(adapters.messagesCommunication),
+    screen: new ElectronScreenRepository(adapters.messagesCommunication),
+    settings: new ElectronSettingsRepository(messagesCommunication)
   }
 
   const openComicSrv = new OpenComicService(repositories.comic)

@@ -1,5 +1,5 @@
 import type { IpcMain, WebContents } from 'electron'
-import type { IpcArgs, IpcMessages, MessageChannelAdapter } from '@vcr/domain'
+import type { Message, MessageType, MessageChannelAdapter } from '@vcr/domain'
 import { Observable } from 'rxjs'
 
 import { IpcChannel, IpcMessage } from './IpcMessageChannel'
@@ -13,9 +13,9 @@ export class IpcMainMessageChannel implements MessageChannelAdapter {
     this.webcontents = webcontents
   }
 
-  on (type: IpcMessages): Observable<IpcArgs> {
-    return new Observable<IpcArgs>((obs) => {
-      const fn = (_: unknown, args: IpcArgs) => {
+  on (type: MessageType): Observable<Message> {
+    return new Observable<Message>((obs) => {
+      const fn = (_: unknown, args: Message) => {
         obs.next(args)
       }
       this.ipc.on(type, fn)
@@ -24,7 +24,7 @@ export class IpcMainMessageChannel implements MessageChannelAdapter {
     })
   }
 
-  send (type: IpcMessages, payload: IpcArgs): void {
+  send (type: MessageType, payload: Message): void {
     const message: IpcMessage = {
       type,
       data: payload

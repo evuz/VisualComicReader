@@ -1,4 +1,4 @@
-import { ProcessMainAdapter, IpcMessages } from '@vcr/domain'
+import { MessagesCommunicationAdapter, MessageType } from '@vcr/domain'
 import tinikeys from 'tinykeys'
 
 import { ShortcutRepository } from './ShortcutRepository'
@@ -8,12 +8,12 @@ const REPLACES = [
   { exp: /Left/gi, value: 'ArrowLeft' }, { exp: /Right/gi, value: 'ArrowRight' }, { exp: /Up/gi, value: 'ArrowUp' }, { exp: /Down/gi, value: 'ArrowDown' }]
 
 export class BrowserShortcutRepository implements ShortcutRepository {
-  static factory (processMain: ProcessMainAdapter) {
+  static factory (processMain: MessagesCommunicationAdapter) {
     return new BrowserShortcutRepository(processMain, window)
   }
 
   constructor (
-    private processMain: ProcessMainAdapter,
+    private processMain: MessagesCommunicationAdapter,
     private window: Window
   ) {}
 
@@ -31,6 +31,6 @@ export class BrowserShortcutRepository implements ShortcutRepository {
   }
 
   showInfo () {
-    return this.processMain.emit(IpcMessages.ShowInfoShortcut)
+    return this.processMain.emit(MessageType.ShowInfoShortcut)
   }
 }

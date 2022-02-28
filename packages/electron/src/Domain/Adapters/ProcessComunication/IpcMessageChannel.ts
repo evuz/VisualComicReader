@@ -1,10 +1,10 @@
-import type { IpcArgs, IpcMessages } from '@vcr/domain'
+import type { Message, MessageType } from '@vcr/domain'
 
 export enum IpcChannel {
   Main = 'IpcMainChannel'
 }
 
 export type IpcMessage = {
-  type: IpcMessages,
-  data: IpcArgs
+  type: MessageType,
+  data: Message
 }

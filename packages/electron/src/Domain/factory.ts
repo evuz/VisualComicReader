@@ -1,6 +1,6 @@
 import { ipcMain, BrowserWindow } from 'electron'
 import { createContainer } from 'depsin'
-import { Config, Domain, Settings, defaultSettings, ElectronProcessMain } from '@vcr/domain'
+import { Config, Domain, Settings, defaultSettings, MessagesCommunicationImpl } from '@vcr/domain'
 
 import { SelectFileListener } from './File/Listeners/SelectFileListener'
 import { ShowInfoShortcutListener } from './Shortcuts/Listeners/ShowInfoShortcutListener'
@@ -78,7 +78,7 @@ export function factory (browserWindow: BrowserWindow) {
   )
 
   const adapters = {
-    processMain: new ElectronProcessMain(messageChannel),
+    messagesCommunication: new MessagesCommunicationImpl(messageChannel),
     dialog: new ElectronDialog(browserWindow),
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),
@@ -94,7 +94,7 @@ export function factory (browserWindow: BrowserWindow) {
       [Symbols.Config]: { asValue: configuration },
       [Symbols.Settings]: { asValue: settings },
       // Adapters
-      [Symbols.ProcessMain]: { asValue: adapters.processMain },
+      [Symbols.ProcessMain]: { asValue: adapters.messagesCommunication },
       [Symbols.Dialog]: { asValue: adapters.dialog },
       [Symbols.Screen]: { asValue: adapters.screen },
       [Symbols.KeysListener]: { asValue: adapters.keysListener },

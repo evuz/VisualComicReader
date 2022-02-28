@@ -1,6 +1,6 @@
 import {
-  ProcessMainAdapter,
-  IpcMessages,
+  MessagesCommunicationAdapter,
+  MessageType,
   KeysListenerAdapter
 } from '@vcr/domain'
 import { Observable } from 'rxjs'
@@ -18,13 +18,13 @@ export class ElectronShortcutsRepository implements ShortcutsRepository {
   ]
 
   constructor (
-    private processMain: ProcessMainAdapter,
+    private processMain: MessagesCommunicationAdapter,
     private dialog: DialogAdapter,
     private keysListener: KeysListenerAdapter
   ) {}
 
   onShowInfo (): Observable<any> {
-    return this.processMain.listen(IpcMessages.ShowInfoShortcut)
+    return this.processMain.listen(MessageType.ShowInfoShortcut)
   }
 
   showInfo ({ type, title, message }: IMessageOptions) {
@@ -36,10 +36,10 @@ export class ElectronShortcutsRepository implements ShortcutsRepository {
   }
 
   register () {
-    this.processMain.listen(IpcMessages.RegisterShortcut).subscribe({
+    this.processMain.listen(MessageType.RegisterShortcut).subscribe({
       next: ({ payload, id }) => {
         this.keysListener.register(payload?.key).subscribe(() => {
-          this.processMain.emit(IpcMessages.RegisterShortcut, { id })
+          this.processMain.emit(MessageType.RegisterShortcut, { id })
         })
       }
     })

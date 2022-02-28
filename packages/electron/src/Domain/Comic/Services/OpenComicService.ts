@@ -1,8 +1,8 @@
 import {
   Comic,
   FileManagerAdapter,
-  IpcMessages,
-  ProcessMainAdapter,
+  MessageType,
+  MessagesCommunicationAdapter,
   Service
 } from '@vcr/domain'
 import * as path from 'path'
@@ -24,18 +24,18 @@ export class OpenComicService implements Service {
 
   constructor (
     private fileManager: FileManagerAdapter,
-    private processMain: ProcessMainAdapter,
+    private processMain: MessagesCommunicationAdapter,
     private readFolder: ReadFolder,
     private normalizeSrc: NormalizeAssetSrc
   ) {}
 
   async execute (comicPath: string): Promise<Comic> {
-    this.processMain.emit(IpcMessages.Fetching, { payload: true })
+    this.processMain.emit(MessageType.Fetching, { payload: true })
 
     const folder = await this.fileManager.openFile(comicPath)
     const images = await this.getImages(folder)
 
-    this.processMain.emit(IpcMessages.Fetching, { payload: false })
+    this.processMain.emit(MessageType.Fetching, { payload: false })
 
     return new Comic({
       images: images.map(this.normalizeSrc.execute),

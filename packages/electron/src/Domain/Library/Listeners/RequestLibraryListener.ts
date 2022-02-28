@@ -1,4 +1,4 @@
-import { IpcMessages, Listener, ProcessMainAdapter } from '@vcr/domain'
+import { MessageType, Listener, MessagesCommunicationImpl } from '@vcr/domain'
 import { DEPS_SYMBOL } from 'depsin'
 import { filter } from 'rxjs/operators'
 import { Symbols } from '../../symbols'
@@ -6,11 +6,11 @@ import { Symbols } from '../../symbols'
 export class RequestLibraryListener implements Listener {
   static [DEPS_SYMBOL] = [Symbols.ProcessMain]
 
-  constructor (private processMain: ProcessMainAdapter) {}
+  constructor (private processMain: MessagesCommunicationImpl) {}
 
   execute () {
     return this.processMain
-      .listen(IpcMessages.Library)
+      .listen(MessageType.Library)
       .pipe(filter(({ id }) => Boolean(id)))
   }
 }

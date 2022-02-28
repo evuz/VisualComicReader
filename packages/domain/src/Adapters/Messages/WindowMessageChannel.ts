@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
-import { IpcArgs, IpcMessages, MessageChannelAdapter } from './MessageChannelAdapter'
+import { Message, MessageType, MessageChannelAdapter } from './MessageChannelAdapter'
 
 export enum WindowChannel {
   Main,
@@ -9,8 +9,8 @@ export enum WindowChannel {
 
 type DataMessage = {
   to: WindowChannel
-  type: IpcMessages
-  payload: IpcArgs
+  type: MessageType
+  payload: Message
 }
 
 function toFactory (from: WindowChannel) {
@@ -43,14 +43,14 @@ export class WindowMessageChannel implements MessageChannelAdapter {
     )
   }
 
-  on (type: IpcMessages): Observable<IpcArgs> {
+  on (type: MessageType): Observable<Message> {
     return this.obs$.pipe(
       filter((message) => message.type === type),
       map(message => message.payload)
     )
   }
 
-  send (type: IpcMessages, args: IpcArgs): void {
+  send (type: MessageType, args: Message): void {
     this.window.postMessage({
       to: toFactory(this.id),
       type,

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs'
 
-export enum IpcMessages {
+export enum MessageType {
   SelectFile = 'select-file',
   OpenFile = 'open-file',
   Library = 'library',
@@ -13,12 +13,12 @@ export enum IpcMessages {
 }
 
 // TODO: use T = unknown
-export type IpcArgs<T = any> = {
+export type Message<T = any> = {
   id?: string
   payload?: T
 }
 
 export type MessageChannelAdapter = {
-  on(message: IpcMessages): Observable<IpcArgs>
-  send(message: IpcMessages, args: IpcArgs): void
+  on(type: MessageType): Observable<Message>
+  send(type: MessageType, args: Message): void
 }

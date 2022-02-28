@@ -1,4 +1,4 @@
-import { IpcMessages, ProcessMainAdapter, UseCase } from '@vcr/domain'
+import { MessageType, MessagesCommunicationAdapter, UseCase } from '@vcr/domain'
 import { DEPS_SYMBOL } from 'depsin'
 
 import { Symbols } from '../../symbols'
@@ -6,9 +6,9 @@ import { Symbols } from '../../symbols'
 export class OpenFileListener implements UseCase {
   static [DEPS_SYMBOL] = [Symbols.ProcessMain]
 
-  constructor (private processMain: ProcessMainAdapter) {}
+  constructor (private processMain: MessagesCommunicationAdapter) {}
 
   execute () {
-    return this.processMain.listen(IpcMessages.OpenFile)
+    return this.processMain.listen(MessageType.OpenFile)
   }
 }

@@ -1,4 +1,4 @@
-import { IpcMessages, Listener, ProcessMainAdapter } from '@vcr/domain'
+import { MessageType, Listener, MessagesCommunicationAdapter } from '@vcr/domain'
 import { DEPS_SYMBOL } from 'depsin'
 
 import { Symbols } from '../../symbols'
@@ -7,10 +7,10 @@ export class UpdateSettingsListener implements Listener {
   static [DEPS_SYMBOL] = [Symbols.ProcessMain]
 
   constructor (
-    private processMain: ProcessMainAdapter
+    private processMain: MessagesCommunicationAdapter
   ) {}
 
   execute () {
-    return this.processMain.listen(IpcMessages.UpdateSettings)
+    return this.processMain.listen(MessageType.UpdateSettings)
   }
 }

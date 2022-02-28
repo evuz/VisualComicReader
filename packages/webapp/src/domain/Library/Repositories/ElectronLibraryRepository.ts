@@ -1,19 +1,19 @@
-import { FileManagerAdapter, IpcMessages, Library, ProcessMainAdapter } from '@vcr/domain'
+import { FileManagerAdapter, MessageType, Library, MessagesCommunicationAdapter } from '@vcr/domain'
 import { from, merge, Observable } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 
 import { LibraryRepository } from './LibraryRepository'
 
 export class ElectronLibraryRepository implements LibraryRepository {
-  constructor (private fileManager: FileManagerAdapter, private electron: ProcessMainAdapter) {}
+  constructor (private fileManager: FileManagerAdapter, private electron: MessagesCommunicationAdapter) {}
 
   selectLibrary () {
     return this.fileManager.selectDirectory()
   }
 
   listenLibraryChanges (): Observable<Library> {
-    const initialLibrary$ = from(this.electron.request(IpcMessages.Library))
-    const library$ = this.electron.listen(IpcMessages.Library).pipe(filter(({ id }) => !id))
+    const initialLibrary$ = from(this.electron.request(MessageType.Library))
+    const library$ = this.electron.listen(MessageType.Library).pipe(filter(({ id }) => !id))
     return merge(initialLibrary$, library$).pipe(map(({ payload }) => payload))
   }
 }
