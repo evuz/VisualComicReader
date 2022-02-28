@@ -10,8 +10,7 @@ export class ProdApp extends App {
       width: 800,
       show: false,
       webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false
+        preload: path.join(__dirname, 'preload.js')
       }
     })
     await window.loadFile(path.join(__dirname, 'renderer', 'index.html'))

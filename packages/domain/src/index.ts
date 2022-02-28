@@ -19,6 +19,8 @@ export * from './Domain/models/Paginated'
 // Adapters
 export * from './Adapters/ProcessMain/ProcessMainAdapter'
 export * from './Adapters/ProcessMain/ElectronProcessMain'
+export * from './Adapters/ProcessMain/MessageChannelAdapter'
+export * from './Adapters/ProcessMain/WindowMessageChannel'
 export * from './Adapters/KeysListener/KeysListenerAdapter'
 export * from './Adapters/FileManager/FileManagerAdapter'
 export * from './Adapters/FileSystem/FileSystemAdapter'

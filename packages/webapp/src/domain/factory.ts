@@ -1,4 +1,4 @@
-import { Domain, ElectronProcessMain } from '@vcr/domain'
+import { Domain, ElectronProcessMain, WindowChannel, WindowMessageChannel } from '@vcr/domain'
 
 import { ElectronFileManager } from './Adapters/FileManager/ElectronFileManager'
 import { ElectronComicRepository } from './Comic/Repositories/ElectronComicRepository'
@@ -19,9 +19,8 @@ import { BrowserShortcutRepository } from './Shortcuts/Repositories/BrowserShort
 import { OpenComicUseCase } from './Comic/UseCases/OpenComicUseCase'
 
 export function factory () {
-  const ipc = (<any>window).require ? (<any>window).require('electron').ipcRenderer : null
-
-  const processMain = new ElectronProcessMain(ipc)
+  const messageChannel = new WindowMessageChannel(window, WindowChannel.Renderer)
+  const processMain = new ElectronProcessMain(messageChannel)
 
   const adapters = {
     processMain,

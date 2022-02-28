@@ -8,8 +8,6 @@ export class DevApp extends App {
     const window = new BrowserWindow({
       show: false,
       webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false,
         preload: path.join(__dirname, 'preload.js')
       }
     })

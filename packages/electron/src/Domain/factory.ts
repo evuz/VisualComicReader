@@ -1,6 +1,6 @@
 import { ipcMain, BrowserWindow } from 'electron'
 import { createContainer } from 'depsin'
-import { Config, Domain, Settings, defaultSettings } from '@vcr/domain'
+import { Config, Domain, Settings, defaultSettings, ElectronProcessMain } from '@vcr/domain'
 
 import { SelectFileListener } from './File/Listeners/SelectFileListener'
 import { ShowInfoShortcutListener } from './Shortcuts/Listeners/ShowInfoShortcutListener'
@@ -12,7 +12,7 @@ import { Symbols } from './symbols'
 import { GlobalShortcut } from './Adapters/KeysListener/GlobalShortcut'
 import { RegisterShortcutsService } from './Shortcuts/Services/RegisterShortcutsService'
 import { RegisterShortcutsUseCase } from './Shortcuts/UseCase/RegisterShortcutsUseCase'
-import { ElectronMainProcessComunication } from './Adapters/ProcessComunication/ElectronMainProcessComunication'
+import { IpcMainMessageChannel } from './Adapters/ProcessComunication/IpcMainMessageChannel'
 import { Configuration } from './Configuration/Entities/Configuration'
 import { ElectronScreen } from './Adapters/Screen/ElectronScreen'
 import { ElectronScreenRepository } from './Screen/Repositories/ElectronScreenRepository'
@@ -72,11 +72,13 @@ export function factory (browserWindow: BrowserWindow) {
   const filesSystemAdapter = new NodeFileSystem()
   const createFolder = new CreateFolder(filesSystemAdapter)
   const createTmpFolder = new CreateTmpFolder(configuration, createFolder)
+  const messageChannel = new IpcMainMessageChannel(
+    ipcMain,
+    browserWindow.webContents
+  )
+
   const adapters = {
-    processMain: new ElectronMainProcessComunication(
-      ipcMain,
-      browserWindow.webContents
-    ),
+    processMain: new ElectronProcessMain(messageChannel),
     dialog: new ElectronDialog(browserWindow),
     keysListener: GlobalShortcut.factory(browserWindow),
     screen: new ElectronScreen(browserWindow),

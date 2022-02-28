@@ -1,21 +1,5 @@
 import { Observable } from 'rxjs'
-
-export enum IpcMessages {
-  SelectFile = 'select-file',
-  OpenFile = 'open-file',
-  Library = 'library',
-  SelectDirectory = 'select-directory',
-  ToggleFullscreen = 'toggle-fullscreen',
-  ShowInfoShortcut = 'show-info-shortcut',
-  RegisterShortcut = 'register-shortcut',
-  UpdateSettings = 'update-settings',
-  Fetching = 'fetching',
-}
-
-export type IpcArgs = {
-  id?: string
-  payload?: any
-}
+import { IpcArgs, IpcMessages } from './MessageChannelAdapter'
 
 export type IpcRequest = IpcArgs & {
   response(args: IpcArgs['payload']): void
