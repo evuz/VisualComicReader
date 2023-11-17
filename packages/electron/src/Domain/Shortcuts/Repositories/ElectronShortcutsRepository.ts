@@ -36,7 +36,7 @@ export class ElectronShortcutsRepository implements ShortcutsRepository {
   }
 
   register () {
-    this.processMain.listen(MessageType.RegisterShortcut).subscribe({
+    this.processMain.listen<any>(MessageType.RegisterShortcut).subscribe({
       next: ({ payload, id }) => {
         this.keysListener.register(payload?.key).subscribe(() => {
           this.processMain.emit(MessageType.RegisterShortcut, { id })

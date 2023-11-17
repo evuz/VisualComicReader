@@ -43,10 +43,10 @@ export class WindowMessageChannel implements MessageChannelAdapter {
     )
   }
 
-  on (type: MessageType): Observable<Message> {
+  on<T> (type: MessageType): Observable<Message<T>> {
     return this.obs$.pipe(
       filter((message) => message.type === type),
-      map(message => message.payload)
+      map(message => message.payload as T)
     )
   }
 

@@ -11,9 +11,9 @@ export class IpcRendererMessageChannel implements MessageChannelAdapter {
     this.ipc = ipc
   }
 
-  on (): Observable<Message<IpcMessage>> {
-    return new Observable<Message<IpcMessage>>((obs) => {
-      const fn = (_: unknown, payload: IpcMessage) => {
+  on<T, U = IpcMessage<T>> (): Observable<Message<U>> {
+    return new Observable((obs) => {
+      const fn = (_: unknown, payload: any) => {
         obs.next({ id: payload.data.id, payload })
       }
       this.ipc.on(IpcChannel.Main, fn)

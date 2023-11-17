@@ -29,7 +29,7 @@ export function factory () {
 
   const repositories = {
     comic: new ElectronComicRepository(adapters.fileManager),
-    library: new ElectronLibraryRepository(adapters.fileManager, messagesCommunication),
+    library: new ElectronLibraryRepository(adapters.fileManager, adapters.messagesCommunication),
     shortcuts: BrowserShortcutRepository.factory(adapters.messagesCommunication),
     screen: new ElectronScreenRepository(adapters.messagesCommunication),
     settings: new ElectronSettingsRepository(messagesCommunication)

@@ -4,7 +4,7 @@ export enum IpcChannel {
   Main = 'IpcMainChannel'
 }
 
-export type IpcMessage = {
+export type IpcMessage<T = unknown> = {
   type: MessageType,
-  data: Message
+  data: Message<T>
 }

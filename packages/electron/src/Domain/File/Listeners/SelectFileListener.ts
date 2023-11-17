@@ -9,6 +9,6 @@ export class SelectFileListener implements UseCase {
   constructor (private processMain: MessagesCommunicationAdapter) {}
 
   execute () {
-    return this.processMain.listen(MessageType.SelectFile)
+    return this.processMain.listen<string[]>(MessageType.SelectFile)
   }
 }

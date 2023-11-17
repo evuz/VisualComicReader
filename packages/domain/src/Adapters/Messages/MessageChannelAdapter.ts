@@ -12,13 +12,12 @@ export enum MessageType {
   Fetching = 'fetching',
 }
 
-// TODO: use T = unknown
-export type Message<T = any> = {
+export type Message<T = unknown> = {
   id?: string
   payload?: T
 }
 
 export type MessageChannelAdapter = {
-  on(type: MessageType): Observable<Message>
+  on<T>(type: MessageType): Observable<Message<T>>
   send(type: MessageType, args: Message): void
 }

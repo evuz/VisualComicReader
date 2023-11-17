@@ -13,9 +13,9 @@ export class IpcMainMessageChannel implements MessageChannelAdapter {
     this.webcontents = webcontents
   }
 
-  on (type: MessageType): Observable<Message> {
-    return new Observable<Message>((obs) => {
-      const fn = (_: unknown, args: Message) => {
+  on<T> (type: MessageType): Observable<Message<T>> {
+    return new Observable<Message<T>>((obs) => {
+      const fn = (_: unknown, args: Message<T>) => {
         obs.next(args)
       }
       this.ipc.on(type, fn)

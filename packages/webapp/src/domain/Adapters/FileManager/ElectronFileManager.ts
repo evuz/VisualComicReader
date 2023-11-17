@@ -9,7 +9,7 @@ export class ElectronFileManager implements FileManagerAdapter {
   constructor (private electron: MessagesCommunicationAdapter) {}
 
   async selectFile (types: string[]) {
-    const { payload } = await this.electron.request(MessageType.SelectFile, {
+    const { payload } = await this.electron.request<File>(MessageType.SelectFile, {
       payload: types
     })
     return payload

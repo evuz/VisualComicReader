@@ -9,6 +9,6 @@ export class OpenFileListener implements UseCase {
   constructor (private processMain: MessagesCommunicationAdapter) {}
 
   execute () {
-    return this.processMain.listen(MessageType.OpenFile)
+    return this.processMain.listen<string>(MessageType.OpenFile)
   }
 }

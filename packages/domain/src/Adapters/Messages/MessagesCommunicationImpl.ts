@@ -11,20 +11,20 @@ export class MessagesCommunicationImpl implements MessagesCommunicationAdapter {
     this.channel.send(type, payload)
   }
 
-  public listen (type: MessageType) {
-    return this.channel.on(type).pipe(map((args) => {
-      const response = (payload: Message['payload']) => {
+  public listen<T> (type: MessageType) {
+    return this.channel.on(type).pipe(map((args: Message<T>) => {
+      const response = (payload: Message<T>['payload']) => {
         this.emit(type, { payload, id: args?.id })
       }
       return { ...args, response }
     }))
   }
 
-  public request (type: MessageType, payload?: Message) {
+  public request<T> (type: MessageType, payload?: Message) {
     const id = uuid(6)
-    const promise = this.listen(type)
+    const promise = this.listen<T>(type)
       .pipe(
-        filter((args: Message) => args?.id === id),
+        filter((args) => args?.id === id),
         take(1)
       )
       .toPromise()
